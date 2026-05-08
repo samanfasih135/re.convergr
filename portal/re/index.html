@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convergr RE Portal</title>
+    <link rel="stylesheet" href="/portal/portal.css">
+    <style>
+        .re-hero {
+            display: grid;
+            grid-template-columns: 1.08fr 0.92fr;
+            gap: 1.1rem;
+            align-items: stretch;
+            overflow: hidden;
+            background:
+                radial-gradient(70% 70% at 8% 8%, rgba(91, 45, 142, 0.32) 0%, transparent 70%),
+                radial-gradient(55% 60% at 92% 88%, rgba(173, 78, 215, 0.2) 0%, transparent 75%),
+                rgba(14, 10, 26, 0.88);
+        }
+        .re-hero-copy { padding: 1.8rem 1.6rem; }
+        .re-hero-copy .headline { margin-bottom: .85rem; font-size: clamp(2rem, 4.2vw, 3.4rem); }
+        .re-hero-copy .sub { margin: 0 0 .72rem; max-width: 64ch; }
+        .re-value-list {
+            margin-top: 1rem;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: .7rem;
+        }
+        .re-value {
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(8, 7, 15, 0.54);
+            padding: .72rem .75rem;
+            display: flex;
+            gap: .52rem;
+            align-items: center;
+            font-weight: 700;
+            font-size: .88rem;
+        }
+        .re-value svg { width: 17px; height: 17px; color: #be9eff; flex: 0 0 auto; }
+        .re-hero-image-wrap {
+            position: relative;
+            border-radius: 18px;
+            border: 1px solid rgba(255,255,255,0.13);
+            overflow: hidden;
+            min-height: 360px;
+            align-self: stretch;
+        }
+        .re-hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            filter: saturate(1.04) brightness(.93);
+        }
+        .re-hero-image-wrap::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(105deg, rgba(8,6,14,.52) 0%, rgba(8,6,14,.18) 45%, rgba(8,6,14,.44) 100%);
+            pointer-events: none;
+        }
+        @media (max-width: 1100px) {
+            .re-value-list { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 980px) {
+            .re-hero { grid-template-columns: 1fr; }
+            .re-hero-copy { padding: 1.25rem; }
+            .re-hero-image-wrap { min-height: 280px; }
+        }
+    </style>
+</head>
+<body>
+<div class="ambient"></div>
+<div class="portal-shell">
+    <aside class="sidebar">
+        <p class="brand">Convergr RE Portal</p>
+        <a class="nav-link active" href="/portal/re/index.html">Dashboard</a>
+        <a class="nav-link" href="/portal/re/plans.html">Plans</a>
+        <a class="nav-link" href="/portal/re/onboarding.html">Onboarding</a>
+        <a class="nav-link" href="/portal/re/support.html">Support</a>
+        <a class="nav-link" href="#" data-logout>Logout</a>
+    </aside>
+    <main class="main container" style="max-width:none;width:auto;">
+        <section class="glass card re-hero" style="padding:0.65rem;">
+            <div class="re-hero-copy">
+                <h1 class="headline">More Leads. More Closings. More Commission.</h1>
+                <p class="sub">Convergr connects you with exclusive, pre-verified buyer and seller leads in your target market — so your pipeline never runs dry.</p>
+                <p class="sub">Stop chasing dead ends. Our leads are sourced, filtered, and delivered directly to you — so every conversation starts with potential.</p>
+                <div class="re-value-list">
+                    <div class="re-value">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        <span>Quality Leads</span>
+                    </div>
+                    <div class="re-value">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h6m0 0v6m0-6L10 16l-4-4-3 3"/></svg>
+                        <span>Faster Closings</span>
+                    </div>
+                    <div class="re-value">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-2.667-2-8 1-8 5 0 3 2.5 5 8 5s8-2 8-5c0-4-5.333-7-8-5zm0 0v10"/></svg>
+                        <span>More Profit Per Deal</span>
+                    </div>
+                </div>
+                <a class="btn btn-primary" href="/portal/re/onboarding.html" style="margin-top:1.05rem;">Get Started →</a>
+            </div>
+            <div class="re-hero-image-wrap">
+                <img src="/assets/img/closing.png" alt="Convergr client closing meeting" class="re-hero-image">
+            </div>
+        </section>
+
+        <section class="grid-3" style="margin-top:1rem;">
+            <article class="glass card"><p class="muted">Lead Activity</p><div class="stat-value">42</div><p class="muted">new qualified referrals this month</p></article>
+            <article class="glass card"><p class="muted">Appointments</p><div class="stat-value">18</div><p class="muted">confirmed buyer/seller calls</p></article>
+            <article class="glass card"><p class="muted">Referral ROI</p><div class="stat-value">$38.2k</div><p class="muted">estimated pipeline value</p></article>
+        </section>
+
+        <section class="grid-2" style="margin-top:1rem;">
+            <article class="glass card">
+                <h3 style="margin-top:0;">Performance Snapshot</h3>
+                <div class="muted">Lead Source Mix</div>
+                <div style="margin-top:.8rem;display:grid;gap:.7rem;">
+                    <div>
+                        <div style="display:flex;justify-content:space-between;align-items:center;font-size:.85rem;margin-bottom:.35rem;">
+                            <span class="muted">Paid Ads</span>
+                            <span style="color:#efe9ff;">44%</span>
+                        </div>
+                        <div style="height:8px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden;">
+                            <div style="width:44%;height:100%;background:linear-gradient(90deg,#5B2D8E,#b269ea);"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="display:flex;justify-content:space-between;align-items:center;font-size:.85rem;margin-bottom:.35rem;">
+                            <span class="muted">Organic/SEO</span>
+                            <span style="color:#efe9ff;">31%</span>
+                        </div>
+                        <div style="height:8px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden;">
+                            <div style="width:31%;height:100%;background:linear-gradient(90deg,#6e3aac,#c28cff);"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="display:flex;justify-content:space-between;align-items:center;font-size:.85rem;margin-bottom:.35rem;">
+                            <span class="muted">Referrals</span>
+                            <span style="color:#efe9ff;">25%</span>
+                        </div>
+                        <div style="height:8px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden;">
+                            <div style="width:25%;height:100%;background:linear-gradient(90deg,#7c48ba,#d9a9ff);"></div>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top:1rem;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;">
+                    <div style="padding:.6rem .5rem;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:rgba(13,10,24,.62);text-align:center;">
+                        <div style="font-weight:800;font-size:1rem;">62%</div>
+                        <div class="muted" style="font-size:.75rem;">Contact Rate</div>
+                    </div>
+                    <div style="padding:.6rem .5rem;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:rgba(13,10,24,.62);text-align:center;">
+                        <div style="font-weight:800;font-size:1rem;">38%</div>
+                        <div class="muted" style="font-size:.75rem;">Booked Calls</div>
+                    </div>
+                    <div style="padding:.6rem .5rem;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:rgba(13,10,24,.62);text-align:center;">
+                        <div style="font-weight:800;font-size:1rem;">21%</div>
+                        <div class="muted" style="font-size:.75rem;">Close Ratio</div>
+                    </div>
+                </div>
+            </article>
+            <article class="glass card">
+                <h3 style="margin-top:0;">Recent Activity</h3>
+                <ul class="muted" style="line-height:1.9;padding-left:1.1rem;">
+                    <li>New buyer referral accepted in Downtown ZIP cluster</li>
+                    <li>Appointment confirmed for Saturday consultation</li>
+                    <li>Agent profile ranking improved in local search</li>
+                    <li>Support note: campaign copy refreshed</li>
+                </ul>
+            </article>
+        </section>
+    </main>
+</div>
+<script src="/portal/auth.js"></script>
+<script>
+    requirePortal("re");
+    attachLogout();
+</script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>RE Plans</title><link rel="stylesheet" href="/portal/portal.css">
+<style>
+    .plans-wrap {
+        width: min(1240px, 100%);
+        margin: 0 auto;
+        margin-top: 1.5rem;
+    }
+    .plans-header {
+        text-align: center;
+        margin-bottom: 1.2rem;
+    }
+    .plans-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 360px));
+        justify-content: center;
+        gap: 1.1rem;
+        margin-top: 1.2rem;
+    }
+    .plan-card {
+        border-radius: 26px;
+        padding: 1.45rem 1.25rem;
+        background:
+            radial-gradient(90% 80% at 10% 0%, rgba(116, 64, 170, 0.22) 0%, transparent 70%),
+            rgba(16, 12, 29, 0.78);
+        border: 1px solid rgba(255,255,255,.14);
+        box-shadow: 0 24px 54px rgba(0,0,0,.38);
+        transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+    }
+    .plan-card:hover {
+        transform: translateY(-8px);
+        border-color: rgba(219, 184, 255, .46);
+        box-shadow: 0 34px 70px rgba(0,0,0,.48), 0 0 26px rgba(163, 97, 235, .2);
+    }
+    .plan-card.featured {
+        background:
+            radial-gradient(105% 90% at 8% 2%, rgba(154, 88, 226, 0.36) 0%, transparent 72%),
+            rgba(20, 13, 39, 0.86);
+        border-color: rgba(220, 191, 255, .52);
+        box-shadow: 0 38px 78px rgba(0,0,0,.56), 0 0 34px rgba(169, 102, 246, .26);
+        transform: translateY(-5px) scale(1.015);
+    }
+    .plan-pill {
+        align-self: flex-start;
+        border-radius: 999px;
+        font-size: .7rem;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        color: #efe4ff;
+        border: 1px solid rgba(237, 213, 255, .4);
+        background: rgba(91, 45, 142, .28);
+        padding: .35rem .62rem;
+        margin-bottom: .85rem;
+    }
+    .plan-price {
+        display: flex;
+        align-items: baseline;
+        gap: .45rem;
+        margin: .35rem 0 .8rem;
+    }
+    .plan-price strong {
+        font-size: 2.1rem;
+        line-height: 1;
+    }
+    .plan-features {
+        margin: .15rem 0 1.2rem;
+        padding-left: 1.05rem;
+        color: var(--muted);
+        line-height: 1.8;
+        flex: 1;
+    }
+    .plan-features li::marker {
+        color: #b98bf1;
+    }
+    .plan-card .btn {
+        width: 100%;
+    }
+    @media (max-width: 1200px) {
+        .plans-grid { grid-template-columns: repeat(2, minmax(0, 360px)); }
+    }
+    @media (max-width: 860px) {
+        .plans-grid { grid-template-columns: minmax(0, 1fr); }
+    }
+</style></head>
+<body>
+<div class="ambient"></div>
+<div class="portal-shell">
+    <aside class="sidebar">
+        <p class="brand">Convergr RE Portal</p>
+        <a class="nav-link" href="/portal/re/index.html">Dashboard</a>
+        <a class="nav-link active" href="/portal/re/plans.html">Plans</a>
+        <a class="nav-link" href="/portal/re/onboarding.html">Onboarding</a>
+        <a class="nav-link" href="/portal/re/support.html">Support</a>
+        <a class="nav-link" href="#" data-logout>Logout</a>
+    </aside>
+    <main class="main container" style="max-width:none;width:auto;">
+        <section class="glass card plans-wrap">
+            <div class="plans-header">
+                <h1 class="headline" style="font-size:2.55rem;">Choose Your Convergr Growth Plan</h1>
+                <p class="sub">Premium one-time packages built for referral quality and predictable closings.</p>
+            </div>
+            <div class="plans-grid">
+                <article class="plan-card">
+                    <div class="plan-pill">Starter</div>
+                    <div class="plan-price"><strong>$399</strong><span class="muted" style="font-size:.95rem;">one-time</span></div>
+                    <ul class="plan-features"><li>2-3 exclusive referrals/mo</li><li>2-4 zip codes</li><li>BDR-verified leads</li><li>email marketing</li><li>referral fee structure</li><li>CRM add-on available</li></ul>
+                    <a class="btn btn-primary" href="/portal/re/onboarding.html">Select Starter</a>
+                </article>
+                <article class="plan-card featured">
+                    <div class="plan-pill">Most Popular</div>
+                    <h3 style="margin:.05rem 0 0;">Growth</h3>
+                    <div class="plan-price"><strong>$699</strong><span class="muted" style="font-size:.95rem;">one-time</span></div>
+                    <ul class="plan-features"><li>3-5 referrals/mo</li><li>5-7 zip codes</li><li>scheduled appointments</li><li>SEO agent profile</li><li>priority support</li><li>referral fee structure</li><li>CRM add-on available</li></ul>
+                    <a class="btn btn-primary" href="/portal/re/onboarding.html">Select Growth</a>
+                </article>
+                <article class="plan-card">
+                    <div class="plan-pill">Ultra</div>
+                    <div class="plan-price"><strong>$999</strong><span class="muted" style="font-size:.95rem;">one-time</span></div>
+                    <ul class="plan-features"><li>4-6 exclusive referrals/mo</li><li>zip codes/counties/cities</li><li>live transfers</li><li>SEO profile</li><li>dedicated support manager</li><li>FREE CRM included</li></ul>
+                    <a class="btn btn-primary" href="/portal/re/onboarding.html">Select Ultra</a>
+                </article>
+            </div>
+        </section>
+    </main>
+</div>
+<script src="/portal/auth.js"></script>
+<script>requirePortal("re");attachLogout();</script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>RE Support</title><link rel="stylesheet" href="/portal/portal.css">
+<style>
+    .support-wrap {
+        width: min(1120px, 100%);
+        margin: 1.5rem auto 0;
+    }
+    .support-hero {
+        border-radius: 28px;
+        background:
+            radial-gradient(90% 90% at 6% 2%, rgba(137, 81, 203, 0.3) 0%, transparent 72%),
+            rgba(16, 12, 29, 0.82);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        box-shadow: 0 30px 64px rgba(0, 0, 0, 0.42);
+    }
+    .support-head {
+        text-align: center;
+        margin-bottom: .95rem;
+    }
+    .support-head .headline {
+        font-size: clamp(2rem, 3.3vw, 2.7rem);
+        margin-bottom: .45rem;
+    }
+    .support-head .sub {
+        max-width: 62ch;
+        margin: 0 auto;
+    }
+    .support-cards {
+        margin-top: 1rem;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: .85rem;
+    }
+    .support-card {
+        border-radius: 18px;
+        border: 1px solid rgba(255,255,255,.13);
+        background: rgba(10, 8, 17, .56);
+        padding: 1rem;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+    }
+    .support-panels {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+    .support-panel {
+        border-radius: 22px;
+        border: 1px solid rgba(255,255,255,.13);
+        background: rgba(12, 9, 20, 0.64);
+        padding: 1rem;
+        box-shadow: 0 22px 48px rgba(0,0,0,.3);
+    }
+    .support-faq details {
+        border: 1px solid rgba(255,255,255,.11);
+        background: rgba(8,7,14,.52);
+        border-radius: 14px;
+        padding: .7rem .8rem;
+        margin-top: .55rem;
+    }
+    .support-faq summary {
+        cursor: pointer;
+        font-weight: 600;
+        color: #f2ebff;
+    }
+    .support-form label {
+        color: #e3d8f4;
+        font-size: .86rem;
+    }
+    .support-form input,
+    .support-form textarea {
+        background: rgba(8,8,14,.74);
+        border-color: rgba(255,255,255,.2);
+        transition: border-color .24s ease, box-shadow .24s ease;
+    }
+    .support-form input:focus,
+    .support-form textarea:focus {
+        border-color: rgba(183, 131, 251, 0.8);
+        box-shadow: 0 0 0 3px rgba(91, 45, 142, 0.25), 0 0 24px rgba(146, 92, 230, 0.16);
+    }
+    .support-chat {
+        margin-top: .95rem;
+        border-radius: 16px;
+        border: 1px solid rgba(255,255,255,.14);
+        background: rgba(10,8,16,.72);
+        padding: .9rem;
+    }
+    @media (max-width: 980px) {
+        .support-cards { grid-template-columns: 1fr; }
+        .support-panels { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 860px) {
+        .support-wrap { margin-top: 1rem; }
+    }
+</style></head>
+<body>
+<div class="ambient"></div>
+<div class="portal-shell">
+    <aside class="sidebar">
+        <p class="brand">Convergr RE Portal</p>
+        <a class="nav-link" href="/portal/re/index.html">Dashboard</a>
+        <a class="nav-link" href="/portal/re/plans.html">Plans</a>
+        <a class="nav-link" href="/portal/re/onboarding.html">Onboarding</a>
+        <a class="nav-link active" href="/portal/re/support.html">Support</a>
+        <a class="nav-link" href="#" data-logout>Logout</a>
+    </aside>
+    <main class="main container" style="max-width:none;width:auto;">
+        <section class="glass card support-wrap support-hero">
+            <div class="support-head">
+                <h1 class="headline">Support Center</h1>
+                <p class="sub">Get strategic, technical, and campaign support in one place.</p>
+            </div>
+            <div class="support-cards">
+                <article class="support-card"><strong>Account Help</strong><p class="muted">Billing, referral settings, and profile updates.</p></article>
+                <article class="support-card"><strong>Campaign Support</strong><p class="muted">Messaging adjustments and ZIP area strategy.</p></article>
+                <article class="support-card"><strong>Priority Success</strong><p class="muted">Fast route for urgent active-lead issues.</p></article>
+            </div>
+        </section>
+        <section class="support-panels support-wrap" style="margin-top:1rem;">
+            <article class="support-panel support-faq">
+                <h3 style="margin-top:0;">FAQ</h3>
+                <details><summary>How quickly are new referrals delivered?</summary><p class="muted">Most campaigns begin delivery within 7-10 business days.</p></details>
+                <details><summary>Can I update target areas later?</summary><p class="muted">Yes, your zones can be adjusted based on performance.</p></details>
+                <details><summary>How does verification work?</summary><p class="muted">Leads are validated by BDR outreach and qualification checks.</p></details>
+            </article>
+            <article class="support-panel support-form">
+                <h3 style="margin-top:0;">Contact Support</h3>
+                <form>
+                    <label>Subject</label><input>
+                    <label style="margin-top:.5rem;">Message</label><textarea rows="4"></textarea>
+                    <button class="btn btn-primary" type="button" style="margin-top:.7rem;">Send Request</button>
+                </form>
+                <div class="support-chat">
+                    <strong>Live Chat (Preview)</strong>
+                    <p class="muted" style="margin:.4rem 0 0;">A support specialist typically replies in under 10 minutes.</p>
+                </div>
+            </article>
+        </section>
+    </main>
+</div>
+<script src="/portal/auth.js"></script>
+<script>requirePortal("re");attachLogout();</script>
+</body>
+</html>

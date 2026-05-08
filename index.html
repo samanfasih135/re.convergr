@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap"
         rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/motion@11.11.13/dist/motion.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -52,6 +53,7 @@
 
         .text-gradient {
             background: linear-gradient(to right, #8B5CF6, #5B2D8E);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -77,18 +79,394 @@
             border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
-        .accordion-content {
+        .faq-section {
+            background: #07070d;
+        }
+
+        .faq-bg-glow {
+            position: absolute;
+            inset: -20%;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                radial-gradient(40% 50% at 14% 28%, rgba(91, 45, 142, 0.28), transparent 72%),
+                radial-gradient(42% 52% at 85% 72%, rgba(201, 24, 74, 0.2), transparent 74%);
+            filter: blur(70px);
+            animation: faq-drift 18s ease-in-out infinite alternate;
+        }
+
+        @keyframes faq-drift {
+            0% { transform: translate3d(-2%, -1%, 0) scale(1); }
+            100% { transform: translate3d(2.5%, 2%, 0) scale(1.06); }
+        }
+
+        .faq-card {
+            border-radius: 1.4rem;
+            background: rgba(20, 17, 31, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: border-color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                        background 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .faq-card:hover {
+            border-color: rgba(166, 129, 244, 0.46);
+            background: rgba(24, 20, 40, 0.78);
+            box-shadow: 0 20px 40px -18px rgba(0, 0, 0, 0.65), 0 0 24px rgba(139, 92, 246, 0.18);
+            transform: translateY(-1px);
+        }
+
+        .faq-card.is-open {
+            border-color: rgba(189, 153, 255, 0.62);
+            box-shadow: 0 30px 50px -22px rgba(0, 0, 0, 0.7), 0 0 34px rgba(139, 92, 246, 0.3);
+            background: rgba(27, 22, 44, 0.82);
+        }
+
+        .faq-trigger {
+            width: 100%;
+            background: none;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: left;
+            gap: 1rem;
+            padding: 1.55rem 1.6rem;
+        }
+
+        .faq-icon {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            background: rgba(255, 255, 255, 0.03);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                        border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                        color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            color: rgba(228, 216, 255, 0.78);
+            flex-shrink: 0;
+        }
+
+        .faq-card.is-open .faq-icon {
+            transform: rotate(45deg);
+            border-color: rgba(197, 162, 255, 0.72);
+            color: #ffffff;
+        }
+
+        .faq-answer {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease-out;
+            transition: max-height 0.55s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .accordion-open .accordion-content {
-            max-height: 200px;
+        .faq-answer-inner {
+            padding: 0 1.6rem 1.55rem;
+            color: rgba(214, 206, 233, 0.82);
+            line-height: 1.8;
+            font-size: 0.98rem;
         }
 
-        .accordion-open .accordion-icon {
-            transform: rotate(180deg);
+        /* Global deep black section rhythm */
+        #Home,
+        #stats-section,
+        #why-convergr,
+        #who-we-serve,
+        #pricing,
+        #faq {
+            background-color: #0A0A0A;
+        }
+
+        #how-it-works,
+        #services,
+        #hours-selector,
+        #get-started,
+        .marquee-section,
+        footer {
+            background-color: #0D0D0D;
+        }
+
+        /* Premium footer redesign */
+        .site-footer {
+            position: relative;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: inset 0 1px 0 rgba(180, 133, 255, 0.12);
+        }
+
+        .site-footer::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            width: min(980px, 90vw);
+            height: 80px;
+            transform: translateX(-50%);
+            background: radial-gradient(ellipse at center, rgba(137, 92, 246, 0.28) 0%, transparent 70%);
+            filter: blur(28px);
+            pointer-events: none;
+        }
+
+        .footer-link {
+            color: rgba(203, 197, 216, 0.82);
+            position: relative;
+            transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 100%;
+            height: 1px;
+            transform: scaleX(0);
+            transform-origin: left;
+            background: rgba(167, 139, 250, 0.9);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .footer-link:hover {
+            color: #c5a8ff;
+            text-shadow: 0 0 16px rgba(139, 92, 246, 0.2);
+        }
+
+        .footer-link:hover::after {
+            transform: scaleX(1);
+        }
+
+        .trust-widget {
+            background: linear-gradient(165deg, #ffffff 0%, #f6f6f9 100%);
+            border-radius: 1.2rem;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 24px 50px -24px rgba(0, 0, 0, 0.55), 0 0 24px rgba(255, 255, 255, 0.28);
+            color: #121212;
+            padding: 1.1rem 1.2rem;
+            max-width: 250px;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .trust-widget:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 26px 52px -24px rgba(0, 0, 0, 0.62), 0 0 30px rgba(255, 255, 255, 0.34);
+        }
+
+        .trust-stars {
+            letter-spacing: 0.12em;
+            color: #f4b400;
+            font-size: 0.86rem;
+        }
+
+        /* Built Different section: purple/black only mesh palette */
+        #why-convergr {
+            background: #0A0A0A;
+        }
+
+        #why-convergr .blob-1 {
+            background: radial-gradient(circle, #0A0A0A 0%, #111111 26%, #5B2D8E 62%, transparent 86%);
+        }
+
+        #why-convergr .blob-2 {
+            background: radial-gradient(circle, #0D0D0D 0%, #111111 34%, #8B5CF6 68%, transparent 90%);
+        }
+
+        #why-convergr .blob-3 {
+            background: radial-gradient(circle, rgba(91, 45, 142, 0.86) 0%, rgba(139, 92, 246, 0.34) 48%, transparent 76%);
+        }
+
+        #why-convergr .blob-4 {
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.44) 0%, rgba(91, 45, 142, 0.28) 100%);
+        }
+
+        .step-orbit-icon {
+            position: absolute;
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: rgba(17, 14, 29, 0.62);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(214, 192, 255, 0.92);
+            box-shadow: 0 16px 34px -18px rgba(0, 0, 0, 0.72), 0 0 22px rgba(139, 92, 246, 0.16);
+            pointer-events: none;
+        }
+
+        .step-orbit-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke-width: 2.2;
+        }
+
+        .step-orbit-1 {
+            top: 18px;
+            right: 26px;
+            animation: step-float-1 6.8s ease-in-out infinite;
+        }
+
+        .step-orbit-2 {
+            bottom: 24px;
+            left: 24px;
+            animation: step-float-2 7.6s ease-in-out infinite;
+        }
+
+        @keyframes step-float-1 {
+            0%, 100% { transform: translateY(0); opacity: 0.84; }
+            50% { transform: translateY(-5px); opacity: 1; }
+        }
+
+        @keyframes step-float-2 {
+            0%, 100% { transform: translateY(0); opacity: 0.78; }
+            50% { transform: translateY(-4px); opacity: 0.96; }
+        }
+
+        /* Premium intake section */
+        .intake-section {
+            background: #0A0A0A;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intake-bg-glow {
+            position: absolute;
+            inset: -24%;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                radial-gradient(42% 52% at 14% 22%, rgba(91, 45, 142, 0.26), transparent 72%),
+                radial-gradient(45% 58% at 86% 74%, rgba(201, 24, 74, 0.18), transparent 74%);
+            filter: blur(76px);
+            animation: faq-drift 20s ease-in-out infinite alternate;
+        }
+
+        .intake-shell {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1.08fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .intake-form-card {
+            background: rgba(18, 14, 29, 0.76);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 2rem;
+            padding: 1.5rem;
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow: 0 38px 70px -30px rgba(0, 0, 0, 0.72), 0 0 34px rgba(139, 92, 246, 0.12);
+        }
+
+        .intake-label {
+            display: block;
+            color: rgba(228, 219, 247, 0.88);
+            font-size: 0.88rem;
+            margin-bottom: 0.45rem;
+            font-weight: 600;
+        }
+
+        .intake-input,
+        .intake-select,
+        .intake-textarea {
+            width: 100%;
+            background: rgba(9, 9, 14, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 0.95rem;
+            color: #fff;
+            padding: 0.9rem 0.95rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            outline: none;
+        }
+
+        .intake-input:focus,
+        .intake-select:focus,
+        .intake-textarea:focus {
+            border-color: rgba(168, 123, 245, 0.72);
+            box-shadow: 0 0 0 3px rgba(91, 45, 142, 0.24);
+            background: rgba(12, 11, 20, 0.84);
+        }
+
+        .intake-checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.7rem;
+        }
+
+        .intake-check {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            background: rgba(8, 8, 13, 0.56);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.8rem;
+            padding: 0.62rem 0.7rem;
+            color: rgba(225, 216, 243, 0.9);
+            font-size: 0.86rem;
+        }
+
+        .intake-submit {
+            width: 100%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            padding: 1.05rem 1.35rem;
+            border-radius: 999px;
+            border: 1px solid rgba(184, 144, 248, 0.42);
+            background: linear-gradient(140deg, #0e0d14 0%, #1a1329 48%, #2a1740 100%);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
+        }
+
+        .intake-submit:hover {
+            transform: translateY(-2px);
+            border-color: rgba(208, 179, 255, 0.7);
+            box-shadow: 0 26px 46px -20px rgba(0, 0, 0, 0.8), 0 0 28px rgba(176, 102, 255, 0.28);
+        }
+
+        .intake-submit[disabled] {
+            opacity: 0.72;
+            cursor: wait;
+        }
+
+        .intake-success {
+            border-radius: 1rem;
+            border: 1px solid rgba(74, 222, 128, 0.36);
+            background: rgba(74, 222, 128, 0.12);
+            color: #d1fadf;
+            padding: 0.85rem 0.95rem;
+            font-size: 0.9rem;
+        }
+
+        .intake-error {
+            border-radius: 1rem;
+            border: 1px solid rgba(251, 113, 133, 0.45);
+            background: rgba(251, 113, 133, 0.16);
+            color: #ffdce4;
+            padding: 0.75rem 0.9rem;
+            font-size: 0.86rem;
+        }
+
+        @media (max-width: 768px) {
+            .faq-trigger { padding: 1.25rem 1.1rem; }
+            .faq-answer-inner { padding: 0 1.1rem 1.2rem; font-size: 0.95rem; line-height: 1.7; }
+            .trust-widget { max-width: 100%; }
+            .intake-shell { grid-template-columns: 1fr; gap: 1.8rem; }
+            .intake-form-card { padding: 1rem; border-radius: 1.35rem; }
+            .intake-checkbox-grid { grid-template-columns: 1fr; }
         }
 
         .swash-underline {
@@ -205,23 +583,211 @@
         }
 
         /* Hero Visual */
+        #Home {
+            isolation: isolate;
+        }
+
+        #Home::before,
+        #Home::after {
+            content: '';
+            position: absolute;
+            inset: -16% -8%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        #Home::before {
+            background:
+                radial-gradient(42% 52% at 18% 30%, rgba(108, 62, 187, 0.22), transparent 72%),
+                radial-gradient(36% 48% at 78% 68%, rgba(6, 182, 212, 0.16), transparent 74%);
+            filter: blur(68px);
+            animation: hero-aura-shift 16s ease-in-out infinite alternate;
+        }
+
+        #Home::after {
+            background: linear-gradient(110deg, transparent 24%, rgba(255, 255, 255, 0.045) 44%, transparent 66%);
+            transform: translateX(-12%);
+            opacity: 0.28;
+            mix-blend-mode: screen;
+            animation: hero-light-sweep 12s ease-in-out infinite;
+        }
+
+        #Home .hero-bg-base {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(120% 95% at 8% 8%, rgba(91, 45, 142, 0.2) 0%, transparent 52%),
+                        radial-gradient(100% 90% at 88% 36%, rgba(6, 182, 212, 0.14) 0%, transparent 50%),
+                        linear-gradient(150deg, #0A0A0A 0%, #0A0A0A 52%, #0D0D0D 100%);
+            z-index: 0;
+        }
+
+        #Home .hero-bg-ambient {
+            position: absolute;
+            inset: -18%;
+            pointer-events: none;
+            z-index: 1;
+            background:
+                radial-gradient(38% 46% at 18% 62%, rgba(91, 45, 142, 0.22), transparent 70%),
+                radial-gradient(34% 44% at 78% 40%, rgba(6, 182, 212, 0.16), transparent 72%);
+            filter: blur(62px);
+            animation: hero-ambient-drift 16s ease-in-out infinite alternate;
+        }
+
+        #Home .hero-bg-noise {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: 0.028;
+            mix-blend-mode: soft-light;
+        }
+
+        #Home .hero-bg-vignette {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            pointer-events: none;
+            background: radial-gradient(ellipse at center, transparent 44%, rgba(0, 0, 0, 0.58) 100%);
+        }
+
+        #Home .hero-bottom-fade {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -1px;
+            height: 150px;
+            z-index: 4;
+            pointer-events: none;
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0) 0%, #0D0D0D 95%);
+        }
+
+        @keyframes hero-ambient-drift {
+            0% { transform: translate3d(-2%, -2%, 0) scale(1); }
+            100% { transform: translate3d(3%, 2%, 0) scale(1.06); }
+        }
+
+        @keyframes hero-aura-shift {
+            0% { transform: translate3d(-2%, -2%, 0) scale(1); }
+            100% { transform: translate3d(2.5%, 2%, 0) scale(1.08); }
+        }
+
+        @keyframes hero-light-sweep {
+            0%, 100% { transform: translateX(-12%); opacity: 0.2; }
+            50% { transform: translateX(9%); opacity: 0.34; }
+        }
+
         .hero-visual-container {
             position: relative;
-            width: 115%; /* Balanced dominance */
-            max-width: none;
-            margin-left: -7.5%;
+            width: 100%;
+            max-width: 1320px;
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
             overflow: visible;
+        }
+
+        .hero-visual-container::before {
+            content: none;
+        }
+
+        .hero-visual-panel {
+            position: relative;
+            width: 100%;
+            max-width: 1120px;
+            max-height: min(66vh, 720px);
+            overflow: visible;
+            border-radius: 0;
+            background: transparent;
+            box-shadow: none;
+            isolation: isolate;
+            border: none;
+            transform: translateX(10%);
+            animation: hero-panel-float 12s ease-in-out infinite;
+            /* dissolve edge into section */
+            mask-image: radial-gradient(ellipse 142% 116% at 70% 56%, rgba(0,0,0,0.98) 52%, rgba(0,0,0,0.78) 73%, rgba(0,0,0,0.28) 88%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 142% 116% at 70% 56%, rgba(0,0,0,0.98) 52%, rgba(0,0,0,0.78) 73%, rgba(0,0,0,0.28) 88%, transparent 100%);
+        }
+
+        .hero-visual-panel::before {
+            content: none;
+        }
+
+        .hero-visual-panel::after {
+            content: '';
+            position: absolute;
+            inset: -2%;
+            z-index: 2;
+            pointer-events: none;
+            background:
+                radial-gradient(52% 64% at 12% 50%, rgba(10, 10, 10, 0.72), transparent 78%),
+                radial-gradient(42% 56% at 96% 56%, rgba(10, 10, 10, 0.58), transparent 76%),
+                linear-gradient(180deg, rgba(10, 10, 10, 0.26) 0%, rgba(10, 10, 10, 0.02) 22%, rgba(10, 10, 10, 0.4) 100%);
+            display: none;
+        }
+
+        @keyframes hero-panel-float {
+            0%, 100% { transform: translateX(10%) translateY(0); }
+            50% { transform: translateX(10%) translateY(-6px); }
         }
 
         .hero-base-image {
             width: 100%;
+            max-height: min(66vh, 720px);
             height: auto;
+            object-fit: contain;
+            object-position: center;
             display: block;
             position: relative;
             z-index: 1;
-            /* Enhanced Cinematic Masking: Center bright, edges dark/transparent */
-            mask-image: radial-gradient(ellipse 70% 80% at 50% 50%, black 40%, transparent 95%);
-            -webkit-mask-image: radial-gradient(ellipse 70% 80% at 50% 50%, black 40%, transparent 95%);
+            transform: scale(1.06);
+            transform-origin: center;
+            filter: saturate(1.08) contrast(1.05) brightness(1.08);
+            mask-image: none;
+            -webkit-mask-image: none;
+        }
+
+        .hero-panel-left-fade {
+            position: absolute;
+            inset: 0;
+            z-index: 4;
+            pointer-events: none;
+            display: none;
+        }
+
+        .hero-panel-vignette {
+            position: absolute;
+            inset: 0;
+            z-index: 4;
+            display: none;
+        }
+
+        .hero-panel-ambient {
+            display: none;
+        }
+
+        .hero-panel-blend {
+            display: none;
+        }
+
+        .hero-panel-edge-haze {
+            display: none;
+        }
+
+        .hero-panel-cutout-shadow {
+            position: absolute;
+            inset: 0;
+            z-index: 6;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 34% 46% at 55% 57%, rgba(0, 0, 0, 0.34) 0%, rgba(0, 0, 0, 0.18) 42%, transparent 72%);
+            filter: blur(10px);
+            display: none;
+        }
+
+        .hero-svg-overlay {
+            display: none;
         }
 
         /* Floating Icon Cards */
@@ -232,13 +798,16 @@
             transform: translateY(18px) scale(0.92);
             transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
                         transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-            background: none;
+            background: transparent;
             border: none;
+            border-radius: 0;
             padding: 0;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
             display: flex;
             align-items: center;
             justify-content: center;
-            filter: drop-shadow(0 15px 45px rgba(0,0,0,0.8));
+            box-shadow: none;
         }
 
         .reveal-visible .hero-float-card {
@@ -247,15 +816,72 @@
         }
 
         .hero-float-card img {
-            width: 190px; /* Slightly larger */
+            width: clamp(81px, 5.85vw, 102px);
             height: auto;
             display: block;
+            border-radius: 0;
+            filter: drop-shadow(0 12px 26px rgba(0, 0, 0, 0.52))
+                    drop-shadow(0 0 14px rgba(139, 92, 246, 0.18))
+                    drop-shadow(0 0 10px rgba(6, 182, 212, 0.14));
+        }
+
+        #Home .text-cyan {
+            color: #06B6D4;
+            text-shadow: 0 0 16px rgba(6, 182, 212, 0.34);
+        }
+
+        #Home #hero-title {
+            letter-spacing: -0.045em;
+            line-height: 1.03;
+            text-wrap: balance;
+            text-shadow: 0 18px 46px rgba(0, 0, 0, 0.42), 0 0 26px rgba(167, 139, 250, 0.08);
+        }
+
+        #Home #hero-subtitle {
+            max-width: 34rem;
+            color: rgba(223, 217, 236, 0.9);
+        }
+
+        #Home .hero-btn-primary,
+        #Home .hero-btn-secondary {
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, background 0.35s ease;
+        }
+
+        #Home .hero-btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 22px 44px -18px rgba(0, 0, 0, 0.8), 0 0 24px rgba(139, 92, 246, 0.28);
+        }
+
+        #Home .hero-btn-primary:active {
+            transform: translateY(-1px) scale(0.995);
+        }
+
+        #Home .hero-btn-secondary:hover {
+            transform: translateY(-2px);
+            border-color: rgba(167, 139, 250, 0.55);
+            box-shadow: 0 16px 34px -18px rgba(0, 0, 0, 0.72);
+        }
+
+        #Home .hero-btn-secondary {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.01));
+            backdrop-filter: blur(7px);
+            -webkit-backdrop-filter: blur(7px);
+        }
+
+        /* Hours CTA mirrors hero button, with touch-toggle pop */
+        #hours-selector .hours-match-btn {
+            transform-origin: center;
+        }
+
+        #hours-selector .hours-match-btn.is-pop {
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 24px 46px -18px rgba(0, 0, 0, 0.82), 0 0 28px rgba(139, 92, 246, 0.34);
         }
 
         /* Particles on paths */
         .glow-particle {
-            fill: #8B5CF6;
-            filter: blur(2px) drop-shadow(0 0 8px #8B5CF6);
+            fill: #A78BFA;
+            filter: blur(1.1px) drop-shadow(0 0 5px rgba(167, 139, 250, 0.55));
             opacity: 0;
             transition: opacity 1s ease 1.5s;
         }
@@ -267,22 +893,22 @@
         /* Organic Floating Motion */
         @keyframes hero-bob-1 {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
+            50% { transform: translateY(-7px); }
         }
         @keyframes hero-bob-2 {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-9px); }
         }
         @keyframes hero-bob-3 {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-6px); }
         }
 
-        .float-bob-1 { animation: hero-bob-1 5s   ease-in-out infinite; }
-        .float-bob-2 { animation: hero-bob-2 5.5s  ease-in-out 0.3s infinite; }
-        .float-bob-3 { animation: hero-bob-3 6s    ease-in-out 0.8s infinite; }
-        .float-bob-4 { animation: hero-bob-1 5.8s  ease-in-out 1.2s infinite; }
-        .float-bob-5 { animation: hero-bob-2 6.2s  ease-in-out 0.5s infinite; }
+        .float-bob-1 { animation: hero-bob-1 7.5s ease-in-out infinite; }
+        .float-bob-2 { animation: hero-bob-2 8.4s ease-in-out 0.35s infinite; }
+        .float-bob-3 { animation: hero-bob-3 8.9s ease-in-out 0.9s infinite; }
+        .float-bob-4 { animation: hero-bob-1 8.1s ease-in-out 1.2s infinite; }
+        .float-bob-5 { animation: hero-bob-2 9.2s ease-in-out 0.55s infinite; }
 
         /* Staggered entrance delays */
         .enter-1 { transition-delay: 0.2s; }
@@ -304,17 +930,18 @@
         }
 
         .dotted-path {
-            stroke: #8B5CF6;
-            stroke-width: 1.5;
-            stroke-dasharray: 4 10;
+            stroke: #A78BFA;
+            stroke-width: 0.8;
+            stroke-dasharray: 1.6 11;
             stroke-linecap: round;
             fill: none;
             opacity: 0;
             transition: opacity 1.5s ease 1.2s;
+            filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.18));
         }
 
         .reveal-visible .dotted-path {
-            opacity: 0.25;
+            opacity: 0.16;
         }
 
         .line-delay-1 { transition-delay: 1.2s; }
@@ -494,7 +1121,16 @@
         @media (max-width: 1024px) {
             .hero-float-card { display: none; }
             .hero-svg-overlay { display: none; }
-            .hero-visual-container { width: 100%; margin-left: 0; }
+            .hero-visual-container { width: 100%; max-width: 620px; margin: 0 auto; }
+            .hero-visual-panel { max-height: none; border-radius: 1.6rem; transform: none; animation: none; }
+            .hero-base-image {
+                max-height: none;
+                object-position: center center;
+                transform: none;
+            }
+            .hero-panel-ambient { display: none; }
+            .hero-panel-left-fade,
+            .hero-panel-vignette { display: none; }
         }
 
         /* Logo Marquee */
@@ -504,7 +1140,8 @@
             overflow: hidden;
             width: 100%;
             position: relative;
-            border-y: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         .logo-marquee-track {
@@ -887,25 +1524,190 @@
             z-index: 3;
         }
 
-        .selector-pill {
-            min-width: 175px;
-            padding: 1.35rem 2.75rem;
-            border-radius: 9999px;
-            background: rgba(10, 10, 10, 0.7); /* Even darker luxury glass */
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            color: rgba(255, 255, 255, 0.85);
+        /* Hours selector: premium motion pass */
+        #hours-selector {
+            background: linear-gradient(118deg, #08153f 0%, #122a73 28%, #4d39b8 56%, #8e2fbd 76%, #d7268e 100%);
+            isolation: isolate;
+        }
+
+        #hours-selector .hours-gradient-sweep {
+            position: absolute;
+            inset: -30%;
+            background:
+                radial-gradient(42% 52% at 18% 36%, rgba(104, 31, 212, 0.34), transparent 70%),
+                radial-gradient(44% 58% at 82% 68%, rgba(255, 0, 140, 0.28), transparent 72%);
+            filter: blur(80px);
+            animation: gradient-drift 18s ease-in-out infinite alternate;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Hours section-only blue -> magenta swoosh override (no black) */
+        #hours-selector .mesh-gradient-container {
+            background: #04000f;
+            overflow: hidden;
+        }
+
+        #hours-selector .mesh-gradient-container::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            bottom: -30%;
+            left: -110%;
+            width: 320%;
+            background: repeating-linear-gradient(
+                90deg,
+                #04000f 0%,
+                #08001f 8%,
+                #0f003b 16%,
+                #140249 24%,
+                #16034f 30%,
+                #210861 38%,
+                #270962 46%,
+                #3e0167 54%,
+                #4b0f6a 62%,
+                #5e136a 70%,
+                #710a5a 78%,
+                #980e64 84%,
+                #c2246e 90%,
+                #d21474 94%,
+                #e51679 97%,
+                #e9197a 100%,
+                #d31e73 108%,
+                #980e64 118%,
+                #710a5a 128%,
+                #5e136a 140%,
+                #4b0f6a 152%,
+                #3e0167 166%,
+                #270962 182%,
+                #210861 194%,
+                #16034f 206%,
+                #140249 218%,
+                #0f003b 232%,
+                #08001f 244%,
+                #04000f 256%
+            );
+            filter: blur(30px) saturate(1.12);
+            opacity: 0.9;
+            animation: hours-ribbon-loop 6s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        #hours-selector .mesh-gradient-container::after {
+            content: '';
+            position: absolute;
+            top: -28%;
+            bottom: -28%;
+            left: -80%;
+            width: 280%;
+            background: repeating-linear-gradient(
+                90deg,
+                rgba(4, 0, 15, 0.66) 0%,
+                rgba(15, 0, 59, 0.72) 16%,
+                rgba(22, 3, 79, 0.74) 28%,
+                rgba(39, 9, 98, 0.74) 42%,
+                rgba(62, 1, 103, 0.76) 54%,
+                rgba(94, 19, 106, 0.76) 66%,
+                rgba(152, 14, 100, 0.78) 80%,
+                rgba(211, 30, 115, 0.8) 92%,
+                rgba(233, 25, 122, 0.78) 100%,
+                rgba(211, 30, 115, 0.8) 112%,
+                rgba(152, 14, 100, 0.78) 126%,
+                rgba(94, 19, 106, 0.76) 142%,
+                rgba(62, 1, 103, 0.76) 160%,
+                rgba(39, 9, 98, 0.74) 180%,
+                rgba(22, 3, 79, 0.74) 202%,
+                rgba(15, 0, 59, 0.72) 228%,
+                rgba(4, 0, 15, 0.66) 256%
+            );
+            filter: blur(52px);
+            opacity: 0.56;
+            animation: hours-ribbon-loop 9s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        #hours-selector .hours-gradient-sweep,
+        #hours-selector .blob-1,
+        #hours-selector .blob-2,
+        #hours-selector .blob-3,
+        #hours-selector .blob-4 {
+            display: none;
+        }
+
+        #hours-selector .noise-overlay {
+            opacity: 0.022;
+        }
+
+        #hours-selector .vignette-overlay {
+            background: radial-gradient(circle at center, transparent 50%, rgba(102, 40, 147, 0.22) 100%);
+        }
+
+        @keyframes hours-ribbon-loop {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-33.333%); }
+        }
+
+        #hours-selector .hours-kicker,
+        #hours-selector .hours-title,
+        #hours-selector .hours-subtitle,
+        #hours-selector .hours-pill-row,
+        #hours-selector .hours-cta {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        #hours-selector.reveal-visible .hours-kicker,
+        #hours-selector.reveal-visible .hours-title,
+        #hours-selector.reveal-visible .hours-subtitle,
+        #hours-selector.reveal-visible .hours-pill-row,
+        #hours-selector.reveal-visible .hours-cta {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #hours-selector .hours-kicker { transition-delay: 0.12s; }
+        #hours-selector .hours-title { transition-delay: 0.26s; }
+        #hours-selector .hours-subtitle { transition-delay: 0.38s; }
+        #hours-selector .hours-pill-row { transition-delay: 0.52s; }
+        #hours-selector .hours-cta { transition-delay: 0.66s; }
+
+        #hours-selector .hours-title { color: #fff; text-shadow: 0 0 32px rgba(216, 176, 255, 0.12); }
+
+        #hours-selector .hours-subtitle {
+            color: rgba(235, 228, 255, 0.7);
+        }
+
+        .hours-logo {
+            font-size: 0.92rem;
+            letter-spacing: 0.26em;
+            text-transform: uppercase;
             font-weight: 700;
+            color: rgba(255, 255, 255, 0.88);
+        }
+
+        .selector-pill {
+            min-width: 166px;
+            padding: 1.15rem 2.3rem;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(205, 184, 255, 0.24);
+            color: rgba(255, 255, 255, 0.96);
+            font-weight: 650;
             font-size: 0.95rem;
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
+            transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             position: relative;
             z-index: 10;
-            box-shadow: 0 15px 45px rgba(0,0,0,0.5); /* Stronger depth */
+            box-shadow: 0 12px 28px rgba(0,0,0,0.34), 0 0 14px rgba(157, 95, 244, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
             white-space: nowrap;
+            animation: hours-pill-pop 3.4s ease-in-out infinite;
         }
 
         .selector-pill::before {
@@ -919,49 +1721,47 @@
         }
 
         .selector-pill:hover {
-            background: rgba(139, 92, 246, 0.2);
+            background: rgba(255, 255, 255, 0.06);
             color: white;
-            transform: translateY(-4px);
-            border-color: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            transform: translateY(-4px) scale(1.025);
+            border-color: rgba(230, 208, 255, 0.34);
+            box-shadow: 0 16px 34px rgba(0,0,0,0.36), 0 0 20px rgba(182, 113, 255, 0.12);
         }
 
         .selector-pill.active {
-            background: white;
-            color: #1a1a1a;
-            border-color: white;
-            transform: translateY(-8px);
-            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.7), 0 0 40px rgba(255, 255, 255, 0.4);
-            font-weight: 900;
+            background: rgba(255, 255, 255, 0.04);
+            color: #fff;
+            border-color: rgba(205, 184, 255, 0.24);
+            transform: none;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.34), 0 0 14px rgba(157, 95, 244, 0.2);
+            font-weight: 650;
         }
 
-        /* Ambient light behind selected pill - soft purple/white glow */
         .selector-pill.active::after {
-            content: '';
-            position: absolute;
-            inset: -20px;
-            background: radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, transparent 70%);
-            z-index: -1;
-            filter: blur(20px);
-            animation: mesh-pulse 5s infinite ease-in-out;
+            content: none;
+        }
+
+        @keyframes hours-pill-pop {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-2px) scale(1.015); }
         }
 
         .selector-cta {
             display: inline-flex;
             align-items: center;
             gap: 1rem;
-            padding: 1.5rem 3.5rem;
-            background: #000;
+            padding: 1.35rem 3.25rem;
+            background: #0b0b10;
             color: #fff;
-            border-radius: 9999px; /* True pill shape */
-            font-size: 1.15rem;
+            border-radius: 9999px;
+            font-size: 1.1rem;
             font-weight: 800;
             text-decoration: none;
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(201, 24, 74, 0.2); /* Soft pink glow shadow */
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.72), inset 0 1px 0 rgba(255, 255, 255, 0.12);
             position: relative;
             overflow: visible;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.22);
         }
 
         /* Glossy highlight for CTA */
@@ -972,27 +1772,51 @@
             left: 5%;
             width: 90%;
             height: 50%;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.15), transparent); /* Stronger gloss */
+            background: linear-gradient(to bottom, rgba(255,255,255,0.18), transparent);
             border-radius: inherit;
             pointer-events: none;
         }
 
         .selector-cta:hover {
-            transform: translateY(-8px) scale(1.05); /* Increased lift */
-            box-shadow: 0 45px 90px rgba(0, 0, 0, 0.9);
-            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 38px 76px rgba(0, 0, 0, 0.82), 0 0 28px rgba(214, 77, 215, 0.24);
+            border-color: rgba(255, 255, 255, 0.35);
+        }
+
+        #hours-selector .selector-cta {
+            background: linear-gradient(135deg, #09090d 0%, #131220 46%, #1d1630 100%);
+            border: 1px solid rgba(179, 138, 248, 0.3);
         }
 
         .cta-glow-wrapper::before {
             content: '';
             position: absolute;
             inset: -30px;
-            background: radial-gradient(circle, rgba(201, 24, 74, 0.3) 0%, transparent 70%); /* Magenta glow */
+            background: radial-gradient(circle, rgba(199, 69, 236, 0.32) 0%, transparent 70%);
             z-index: 0;
             filter: blur(30px);
-            opacity: 0.6;
+            opacity: 0.65;
             animation: mesh-pulse 6s infinite ease-in-out;
             pointer-events: none;
+        }
+
+        @keyframes gradient-drift {
+            0% { transform: translate3d(-3%, -2%, 0) scale(1); }
+            50% { transform: translate3d(2%, 3%, 0) scale(1.05); }
+            100% { transform: translate3d(4%, -1%, 0) scale(1.02); }
+        }
+
+        @media (max-width: 1024px) {
+            #hours-selector { padding-top: 6.25rem; padding-bottom: 6.25rem; }
+            .selector-pill { min-width: 150px; }
+        }
+
+        @media (max-width: 768px) {
+            #hours-selector { padding-top: 5.25rem; padding-bottom: 5.25rem; }
+            #hours-selector .hours-title { font-size: clamp(2.15rem, 9vw, 3.25rem); line-height: 1.06; }
+            #hours-selector .hours-subtitle { font-size: 1rem; }
+            .selector-pill { width: min(320px, 100%); min-width: 0; padding: 1rem 1.5rem; }
+            .selector-cta { width: min(340px, 100%); justify-content: center; }
         }
 
 
@@ -1318,7 +2142,7 @@
 
             <!-- CTA Buttons (Right) -->
             <div class="hidden xl:flex items-center space-x-4">
-                <a href="#login"
+                <a href="/portal/login.html"
                     class="border border-white/20 px-6 py-2 rounded-lg text-sm font-bold text-white hover:border-white transition-all">Login</a>
                 <a href="#get-started"
                     class="bg-brand-purple px-6 py-2 rounded-lg text-sm font-bold text-white hover:bg-brand-purpleLight transition-all">Get
@@ -1335,13 +2159,15 @@
     </header>
 
     <!-- Hero Section -->
-    <section id="Home" class="reveal-section pt-32 pb-20 overflow-hidden bg-brand-base relative">
-        <!-- Abstract Background Shape/Gradient -->
-        <div class="absolute inset-0 bg-gradient-to-br from-brand-base via-brand-dark to-[#1f0d3a] z-0 opacity-50"></div>
+    <section id="Home" class="reveal-section pt-24 lg:pt-28 pb-10 lg:pb-14 min-h-[calc(92vh-5rem)] overflow-hidden bg-brand-base relative flex items-center">
+        <div class="hero-bg-base"></div>
+        <div class="hero-bg-ambient"></div>
+        <div class="hero-bg-noise"></div>
+        <div class="hero-bg-vignette"></div>
         
-        <div class="container mx-auto px-6 flex flex-col lg:flex-row items-center relative z-10">
+        <div class="container mx-auto px-6 py-0 flex flex-col lg:flex-row items-center gap-10 lg:gap-8 relative z-10">
             <!-- Left Content: Text & CTA -->
-            <div class="lg:w-1/2 text-center lg:text-left mb-16 lg:mb-0">
+            <div class="lg:w-1/2 text-center lg:text-left mb-8 lg:mb-0 lg:pr-8">
                 <h1 id="hero-title" class="opacity-0 anim-title text-6xl lg:text-7xl font-black leading-[1.1] mb-8 tracking-tighter text-white">
                     Delegate <span class="text-cyan swash-underline">Smarter.</span><br> Grow <span class="text-cyan swash-underline">Faster.</span>
                 </h1>
@@ -1352,60 +2178,68 @@
                 <!-- CTA Buttons -->
                 <div class="opacity-0 anim-cta flex flex-col sm:flex-row items-center lg:items-start space-y-4 sm:space-y-0 sm:space-x-6">
                     <a href="#get-started"
-                        class="w-full sm:w-auto bg-brand-purple py-5 px-12 rounded-xl text-lg font-black flex items-center justify-center space-x-4 shadow-2xl transform hover:scale-105 transition-all text-white">
+                        class="hero-btn-primary w-full sm:w-auto bg-brand-purple py-5 px-12 rounded-xl text-lg font-black flex items-center justify-center space-x-4 shadow-2xl transition-all text-white">
                         <span id="hero-cta-text">Get Started</span>
                     </a>
                     <a href="#services"
-                        class="w-full sm:w-auto border border-white/20 py-5 px-12 rounded-xl text-lg font-black flex items-center justify-center space-x-4 hover:bg-white/5 transition-all text-white">
+                        class="hero-btn-secondary w-full sm:w-auto border border-white/20 py-5 px-12 rounded-xl text-lg font-black flex items-center justify-center space-x-4 hover:bg-white/5 transition-all text-white">
                         <span>See What We Do</span>
                     </a>
                 </div>
             </div>
 
             <!-- Right Content: Hero Visual -->
-            <div class="lg:w-1/2 flex items-center justify-center relative">
+            <div class="lg:w-1/2 flex items-center justify-center lg:justify-end relative lg:pl-4">
                 <div class="hero-visual-container">
-                    <!-- Base Image: New Premium Portrait -->
-                    <img src="assets/img/hero/ai new.png" alt="Convergr Premium Support" class="hero-base-image">
+                    <div class="hero-visual-panel">
+                        <div class="hero-panel-ambient"></div>
+                        <!-- Base Image: Right-side cinematic panel -->
+                        <img src="assets/img/hero/final.png" alt="Convergr Premium Support" class="hero-base-image">
+                        <div class="hero-panel-left-fade"></div>
+                        <div class="hero-panel-vignette"></div>
+                        <div class="hero-panel-blend"></div>
+                        <div class="hero-panel-edge-haze"></div>
+                        <div class="hero-panel-cutout-shadow"></div>
+                    </div>
 
                     <!-- SVG Dotted Connection Lines with Moving Glow Particles -->
                     <svg class="hero-svg-overlay" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid meet">
                         <!-- Path 1: Appoint (top-left) -->
-                        <path id="path-1" class="dotted-path line-delay-1" d="M220,130 C300,130 360,180 440,380" />
-                        <circle r="3" class="glow-particle">
-                            <animateMotion dur="4s" repeatCount="indefinite" rotate="auto">
+                        <path id="path-1" class="dotted-path line-delay-1" d="M282,150 C356,132 424,212 448,294 C464,344 474,374 492,410" />
+                        <circle r="2.4" class="glow-particle">
+                            <animateMotion dur="7.2s" repeatCount="indefinite" rotate="auto">
                                 <mpath href="#path-1"/>
                             </animateMotion>
                         </circle>
 
                         <!-- Path 2: Inbox (mid-left) -->
-                        <path id="path-2" class="dotted-path line-delay-2" d="M200,310 C280,360 380,420 500,440" />
-                        <circle r="3" class="glow-particle">
-                            <animateMotion dur="5s" repeatCount="indefinite" rotate="auto">
+                        <path id="path-2" class="dotted-path line-delay-2" d="M250,340 C322,318 396,348 434,400 C454,424 472,436 494,438" />
+                        <circle r="2.4" class="glow-particle">
+                            <animateMotion dur="8.2s" repeatCount="indefinite" rotate="auto">
                                 <mpath href="#path-2"/>
                             </animateMotion>
                         </circle>
 
                         <!-- Path 3: Tasks (top-right) -->
-                        <path id="path-3" class="dotted-path line-delay-3" d="M780,130 C700,130 640,180 560,380" />
-                        <circle r="3" class="glow-particle">
-                            <animateMotion dur="4.5s" repeatCount="indefinite" rotate="auto">
+                        <path id="path-3" class="dotted-path line-delay-3" d="M726,148 C648,132 582,214 554,294 C538,342 524,372 510,410" />
+                        <circle r="2.4" class="glow-particle">
+                            <animateMotion dur="7.8s" repeatCount="indefinite" rotate="auto">
                                 <mpath href="#path-3"/>
                             </animateMotion>
                         </circle>
 
                         <!-- Path 4: Hours (mid-right) -->
-                        <path id="path-4" class="dotted-path line-delay-4" d="M800,310 C720,360 620,420 500,440" />
-                        <circle r="3" class="glow-particle">
-                            <animateMotion dur="5.5s" repeatCount="indefinite" rotate="auto">
+                        <path id="path-4" class="dotted-path line-delay-4" d="M750,340 C674,316 602,348 556,400 C536,422 522,434 506,438" />
+                        <circle r="2.4" class="glow-particle">
+                            <animateMotion dur="8.8s" repeatCount="indefinite" rotate="auto">
                                 <mpath href="#path-4"/>
                             </animateMotion>
                         </circle>
 
                         <!-- Path 5: Follow-Ups (lower-right) -->
-                        <path id="path-5" class="dotted-path line-delay-5" d="M740,440 C660,460 580,460 510,440" />
-                        <circle r="3" class="glow-particle">
-                            <animateMotion dur="6s" repeatCount="indefinite" rotate="auto">
+                        <path id="path-5" class="dotted-path line-delay-5" d="M690,454 C632,478 574,470 536,444 C518,432 508,424 500,422" />
+                        <circle r="2.4" class="glow-particle">
+                            <animateMotion dur="9.4s" repeatCount="indefinite" rotate="auto">
                                 <mpath href="#path-5"/>
                             </animateMotion>
                         </circle>
@@ -1413,27 +2247,27 @@
 
                     <!-- Floating Icon Cards — Repositioned for framing -->
                     <!-- 1. Appointments Managed — upper-left -->
-                    <div class="hero-float-card float-bob-1 enter-1" style="top: 5%; left: 10%;">
+                    <div class="hero-float-card float-bob-1 enter-1" style="top: 14%; left: 14%;">
                         <img src="assets/img/hero/appoint.svg" alt="Appointments Managed">
                     </div>
 
                     <!-- 2. Inbox Zero — mid-left -->
-                    <div class="hero-float-card float-bob-2 enter-2" style="top: 35%; left: 0%;">
+                    <div class="hero-float-card float-bob-2 enter-2" style="top: 58%; left: 11%;">
                         <img src="assets/img/hero/inbox.svg" alt="Inbox Zero">
                     </div>
 
                     <!-- 3. Tasks Completed — upper-right -->
-                    <div class="hero-float-card float-bob-3 enter-3" style="top: 5%; right: 10%;">
+                    <div class="hero-float-card float-bob-3 enter-3" style="top: 12%; right: 10%;">
                         <img src="assets/img/hero/task.svg" alt="Tasks Completed">
                     </div>
 
                     <!-- 4. Hours Saved — mid-right -->
-                    <div class="hero-float-card float-bob-4 enter-4" style="top: 35%; right: 0%;">
+                    <div class="hero-float-card float-bob-4 enter-4" style="top: 56%; right: 2%;">
                         <img src="assets/img/hero/time.svg" alt="Hours Saved">
                     </div>
 
                     <!-- 5. Client Follow-Ups — lower-right -->
-                    <div class="hero-float-card float-bob-5 enter-5" style="top: 65%; right: 10%;">
+                    <div class="hero-float-card float-bob-5 enter-5" style="top: 76%; right: 16%;">
                         <img src="assets/img/hero/chat.svg" alt="Client Follow-Ups">
                     </div>
                 </div>
@@ -1442,33 +2276,41 @@
                 <div class="absolute w-[140%] h-[140%] bg-brand-purple/8 rounded-full blur-[160px] z-0 -top-[20%] -left-[20%] pointer-events-none"></div>
             </div>
         </div>
+        <div class="hero-bottom-fade"></div>
     </section>
 
     <!-- How It Works Section - Deposyt Style Rebuild -->
     <section id="how-it-works" class="reveal-section py-32 bg-brand-dark overflow-hidden scroll-mt-24">
         <div class="container mx-auto px-6">
-            <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+            <div class="flex flex-col lg:flex-row items-stretch gap-12 lg:gap-16">
                 <!-- Left Side: Large Illustration Panel -->
-                <div class="lg:w-1/2 order-2 lg:order-1">
-                    <div class="relative group">
+                <div class="lg:w-[56%] order-2 lg:order-1">
+                    <div class="relative group h-full">
                         <!-- Premium Glow Effect -->
                         <div class="absolute -inset-4 bg-brand-purple/15 rounded-[3rem] blur-3xl opacity-60 group-hover:opacity-100 transition duration-1000"></div>
                         
                         <!-- Main Card -->
-                        <div class="relative bg-brand-light p-5 rounded-[2.5rem] shadow-2xl overflow-hidden border border-white/5 backdrop-blur-sm">
-                            <img src="assets/img/solutions-hero.png" alt="Convergr Workflow" class="w-full h-auto rounded-[2rem] transform group-hover:scale-[1.02] transition duration-700 opacity-90">
+                        <div class="relative bg-brand-light p-3 lg:p-4 rounded-[2.5rem] shadow-2xl overflow-hidden border border-white/5 backdrop-blur-sm h-full min-h-[560px] lg:min-h-[640px]">
+                            <img src="assets/img/3 step.png" alt="Convergr Workflow" class="w-full h-full object-cover object-center rounded-[2rem] transform group-hover:scale-[1.02] transition duration-700 opacity-95">
                             
-                            <!-- Floating Premium Badge -->
-                            <div class="absolute top-10 right-10 bg-brand-purple/80 backdrop-blur-xl px-8 py-4 rounded-2xl shadow-2xl flex items-center space-x-4 border border-white/20 animate-float-slow">
-                                <div class="w-4 h-4 bg-brand-purpleLight rounded-full animate-pulse shadow-[0_0_15px_rgba(139,92,246,0.8)]"></div>
-                                <span class="text-base font-extrabold text-white tracking-wide">VA Matched</span>
+                            <div class="step-orbit-icon step-orbit-1" aria-hidden="true">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h8M8 12h8m-8 5h5"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 5h16v14H4z"></path>
+                                </svg>
+                            </div>
+                            <div class="step-orbit-icon step-orbit-2" aria-hidden="true">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v6m0 0l-2.5-2.5M12 9l2.5-2.5"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13a7 7 0 0 0 14 0"></path>
+                                </svg>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Right Side: Content & Structured Steps -->
-                <div class="lg:w-1/2 order-1 lg:order-2">
+                <div class="lg:w-[44%] order-1 lg:order-2">
                     <!-- Heading Area -->
                     <div class="mb-16 reveal-section">
                         <h2 class="text-5xl lg:text-6xl font-black text-white leading-tight mb-8 tracking-tighter">
@@ -1745,11 +2587,14 @@
 
     <!-- Why Convergr Section - Premium Grid Redesign -->
     <section id="why-convergr" class="reveal-section py-40 bg-brand-base relative overflow-hidden scroll-mt-24">
-        <!-- Ambient Depth Layers -->
-        <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-            <div class="absolute top-[20%] left-[10%] w-[500px] h-[500px] bg-brand-purple/5 blur-[120px] animate-pulse"></div>
-            <div class="absolute bottom-[20%] right-[10%] w-[600px] h-[600px] bg-brand-cyan/5 blur-[120px] animate-pulse" style="animation-delay: -5s;"></div>
-            <div class="absolute inset-0 dot-texture opacity-10"></div>
+        <!-- Flowing Mesh Gradient Background (matches Hours section) -->
+        <div class="mesh-gradient-container">
+            <div class="mesh-blob blob-1"></div>
+            <div class="mesh-blob blob-2"></div>
+            <div class="mesh-blob blob-3"></div>
+            <div class="mesh-blob blob-4"></div>
+            <div class="noise-overlay"></div>
+            <div class="vignette-overlay"></div>
         </div>
 
         <div class="container mx-auto px-6 relative z-10">
@@ -1869,9 +2714,10 @@
 
 
     <!-- Hours Selector Section - Enhanced Premium Animation -->
-    <section id="hours-selector" class="reveal-section py-40 relative overflow-hidden">
+    <section id="hours-selector" class="reveal-section py-28 relative overflow-hidden">
         <!-- Flowing Mesh Gradient Background -->
         <div class="mesh-gradient-container">
+            <div class="hours-gradient-sweep"></div>
             <div class="mesh-blob blob-1"></div> <!-- Blue Left -->
             <div class="mesh-blob blob-2"></div> <!-- Magenta Right -->
             <div class="mesh-blob blob-3"></div> <!-- Purple Center Blending -->
@@ -1883,47 +2729,46 @@
 
         <div class="container mx-auto px-6 relative z-10 text-center">
             <!-- Centered Icon (Reference Style) -->
-            <div class="mb-12 flex justify-center reveal-fade-up">
-                <div class="w-14 h-14 bg-white/10 backdrop-blur-2xl rounded-2xl flex items-center justify-center border border-white/20 shadow-2xl overflow-hidden group">
+            <div class="mb-12 flex justify-center reveal-fade-up hours-kicker">
+                <div class="px-7 py-4 bg-white/10 backdrop-blur-2xl rounded-full flex items-center justify-center border border-white/20 shadow-2xl overflow-hidden group">
                     <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
-                    <svg class="w-8 h-8 text-white relative z-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                    <span class="hours-logo relative z-10">Convergr</span>
                 </div>
             </div>
 
             <!-- Heading & Subtitle -->
             <div class="max-w-4xl mx-auto mb-16 reveal-fade-up">
-                <h2 class="text-6xl lg:text-[5.5rem] font-black text-white mb-6 tracking-[-0.04em] leading-[1.05]">
-                    How Many Hours <br> Do You Need Per Month?
+                <h2 class="hours-title text-5xl lg:text-[4.1rem] font-black text-white mb-6 tracking-[-0.03em] leading-[1.08]">
+                    How Many Hours Do You Need Per Month?
                 </h2>
-                <p class="text-xl text-white/50 font-medium max-w-xl mx-auto leading-relaxed">
+                <p class="hours-subtitle text-xl text-white/50 font-medium max-w-xl mx-auto leading-relaxed">
                     Choose your workload range.
                 </p>
             </div>
 
             <!-- Selector Pills -->
-            <div class="flex flex-wrap justify-center gap-4 mb-20 reveal-stagger">
-                <button onclick="selectHoursPremium(this, 'Under 20 hrs')" class="selector-pill active">
+            <div class="hours-pill-row flex flex-wrap justify-center gap-4 mb-20 reveal-stagger">
+                <button type="button" data-hours-value="Under 20 hrs" onclick="selectHoursPremium(this, 'Under 20 hrs')" class="selector-pill active">
                     Under 20 hrs
                 </button>
-                <button onclick="selectHoursPremium(this, '20–40 hrs')" class="selector-pill">
+                <button type="button" data-hours-value="20–40 hrs" onclick="selectHoursPremium(this, '20–40 hrs')" class="selector-pill">
                     20–40 hrs
                 </button>
-                <button onclick="selectHoursPremium(this, '40–80 hrs')" class="selector-pill">
+                <button type="button" data-hours-value="40–80 hrs" onclick="selectHoursPremium(this, '40–80 hrs')" class="selector-pill">
                     40–80 hrs
                 </button>
-                <button onclick="selectHoursPremium(this, '80–120 hrs')" class="selector-pill">
+                <button type="button" data-hours-value="80–120 hrs" onclick="selectHoursPremium(this, '80–120 hrs')" class="selector-pill">
                     80–120 hrs
                 </button>
-                <button onclick="selectHoursPremium(this, '120+ hrs')" class="selector-pill">
+                <button type="button" data-hours-value="120+ hrs" onclick="selectHoursPremium(this, '120+ hrs')" class="selector-pill">
                     120+ hrs
                 </button>
             </div>
 
             <!-- CTA Button -->
-            <div class="reveal-fade-up cta-glow-wrapper">
-                <a href="#get-started" class="selector-cta group">
-                    <span>Get Matched Now</span>
-                    <svg class="w-6 h-6 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+            <div class="hours-cta reveal-fade-up cta-glow-wrapper">
+                <a href="#get-started" class="hours-match-btn w-auto bg-black/95 py-3.5 px-8 rounded-full text-base font-black inline-flex items-center justify-center shadow-[0_10px_24px_rgba(0,0,0,0.4)] border border-white/10 transition-all text-white" onclick="handleHoursCTA(event)">
+                    <span>Get Matched Now →</span>
                 </a>
             </div>
 
@@ -2086,124 +2931,232 @@
     </section>
 
     <!-- FAQ Section -->
-    <section id="faq" class="reveal-section py-32 bg-brand-dark overflow-hidden scroll-mt-24 border-t border-white/5">
-        <div class="container mx-auto px-6 max-w-4xl">
-            <h2 class="text-5xl font-black mb-16 text-center text-white reveal">Frequently Asked <span class="text-gradient">Questions</span></h2>
+    <section id="faq" class="faq-section reveal-section py-40 relative overflow-hidden scroll-mt-24 border-t border-white/5">
+        <div class="faq-bg-glow"></div>
+        <div class="container mx-auto px-6 max-w-5xl relative z-10">
+            <div class="text-center mb-16 reveal-fade-up">
+                <p class="text-[0.72rem] tracking-[0.28em] uppercase font-extrabold text-brand-purpleLight/90 mb-4">FAQ</p>
+                <h2 class="text-5xl lg:text-7xl font-black text-white tracking-[-0.04em] leading-[1.06] mb-6">Frequently Asked Questions</h2>
+                <p class="text-lg lg:text-xl text-white/50 max-w-2xl mx-auto leading-relaxed">Everything you need to know before getting started with Convergr.</p>
+            </div>
 
-            <div class="space-y-4 reveal-stagger">
-                <!-- FAQ 1 -->
-                <div class="accordion-item bg-brand-light rounded-2xl overflow-hidden cursor-pointer border border-white/5 hover:border-brand-purple/30 transition-all" onclick="this.classList.toggle('accordion-open')">
-                    <div class="p-6 flex justify-between items-center">
-                        <h4 class="font-bold text-white">How do you match me with a VA?</h4>
-                        <span class="accordion-icon transition-transform duration-300 text-brand-purpleLight">▼</span>
-                    </div>
-                    <div class="accordion-content px-6 pb-6 text-gray-400 text-sm">
-                        After your intake call, we review our roster of trained VAs to find the one whose skills, tools, and industry experience best match your needs. We typically have a match ready for you within 24–48 hours.
-                    </div>
-                </div>
-                <!-- FAQ 2 -->
-                <div class="accordion-item bg-brand-light rounded-2xl overflow-hidden cursor-pointer border border-white/5 hover:border-brand-purple/30 transition-all" onclick="this.classList.toggle('accordion-open')">
-                    <div class="p-6 flex justify-between items-center">
-                        <h4 class="font-bold text-white">What tasks can my VA handle?</h4>
-                        <span class="accordion-icon transition-transform duration-300 text-brand-purpleLight">▼</span>
-                    </div>
-                    <div class="accordion-content px-6 pb-6 text-gray-400 text-sm">
-                        Our VAs are trained in email management, scheduling, CRM data entry, lead follow-up, research, document preparation, and more. If it's a digital task that can be delegated, they can likely handle it.
-                    </div>
-                </div>
-                <!-- FAQ 3 -->
-                <div class="accordion-item bg-brand-light rounded-2xl overflow-hidden cursor-pointer border border-white/5 hover:border-brand-purple/30 transition-all" onclick="this.classList.toggle('accordion-open')">
-                    <div class="p-6 flex justify-between items-center">
-                        <h4 class="font-bold text-white">Is there a long-term contract?</h4>
-                        <span class="accordion-icon transition-transform duration-300 text-brand-purpleLight">▼</span>
-                    </div>
-                    <div class="accordion-content px-6 pb-6 text-gray-400 text-sm">
-                        No. All our plans are month-to-month. We believe in earning your business every single month through high-quality support and results.
-                    </div>
-                </div>
-                <!-- FAQ 4 -->
-                <div class="accordion-item bg-brand-light rounded-2xl overflow-hidden cursor-pointer border border-white/5 hover:border-brand-purple/30 transition-all" onclick="this.classList.toggle('accordion-open')">
-                    <div class="p-6 flex justify-between items-center">
-                        <h4 class="font-bold text-white">What happens if my VA is sick or away?</h4>
-                        <span class="accordion-icon transition-transform duration-300 text-brand-purpleLight">▼</span>
-                    </div>
-                    <div class="accordion-content px-6 pb-6 text-gray-400 text-sm">
-                        We have a backup system in place. If your VA is unavailable, their supervisor steps in to ensure critical tasks are still handled, or we provide a temporary replacement so your business doesn't skip a beat.
-                    </div>
-                </div>
+            <div class="space-y-4 reveal-stagger" id="faq-accordion">
+                <article class="faq-card">
+                    <button type="button" class="faq-trigger" aria-expanded="false">
+                        <span class="font-bold text-white text-lg">How quickly can I get started?</span>
+                        <span class="faq-icon"><svg class="w-4 h-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 4v12M4 10h12"/></svg></span>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">Within 24-48 hours of completing your intake form, you'll be matched with a VA and ready to delegate.</div></div>
+                </article>
+
+                <article class="faq-card">
+                    <button type="button" class="faq-trigger" aria-expanded="false">
+                        <span class="font-bold text-white text-lg">What industries do you work with?</span>
+                        <span class="faq-icon"><svg class="w-4 h-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 4v12M4 10h12"/></svg></span>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">All of them. Our VAs are trained on general business operations and adapt to your specific tools, workflows, and communication style.</div></div>
+                </article>
+
+                <article class="faq-card">
+                    <button type="button" class="faq-trigger" aria-expanded="false">
+                        <span class="font-bold text-white text-lg">What tools do your VAs use?</span>
+                        <span class="faq-icon"><svg class="w-4 h-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 4v12M4 10h12"/></svg></span>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">We work in your existing stack - Google Workspace, Slack, HubSpot, Notion, Calendly, and more.</div></div>
+                </article>
+
+                <article class="faq-card">
+                    <button type="button" class="faq-trigger" aria-expanded="false">
+                        <span class="font-bold text-white text-lg">Is there a long-term contract?</span>
+                        <span class="faq-icon"><svg class="w-4 h-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 4v12M4 10h12"/></svg></span>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">No. All plans are month-to-month. Cancel or adjust anytime with no penalties.</div></div>
+                </article>
+
+                <article class="faq-card">
+                    <button type="button" class="faq-trigger" aria-expanded="false">
+                        <span class="font-bold text-white text-lg">What's included in each plan?</span>
+                        <span class="faq-icon"><svg class="w-4 h-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 4v12M4 10h12"/></svg></span>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">Each plan outlines hours, task categories, communication channels, and support level. See the Pricing section for a full breakdown.</div></div>
+                </article>
+
+                <article class="faq-card">
+                    <button type="button" class="faq-trigger" aria-expanded="false">
+                        <span class="font-bold text-white text-lg">How do I communicate with my VA?</span>
+                        <span class="faq-icon"><svg class="w-4 h-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 4v12M4 10h12"/></svg></span>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">Directly - via Slack, email, or phone depending on your plan. No ticketing systems, no middlemen.</div></div>
+                </article>
+
+                <article class="faq-card">
+                    <button type="button" class="faq-trigger" aria-expanded="false">
+                        <span class="font-bold text-white text-lg">What if I'm not happy with my VA?</span>
+                        <span class="faq-icon"><svg class="w-4 h-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 4v12M4 10h12"/></svg></span>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">We'll rematch you at no cost. Satisfaction is guaranteed - if your VA isn't performing, we make it right.</div></div>
+                </article>
+
+                <article class="faq-card">
+                    <button type="button" class="faq-trigger" aria-expanded="false">
+                        <span class="font-bold text-white text-lg">Can I upgrade or downgrade my plan?</span>
+                        <span class="faq-icon"><svg class="w-4 h-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 4v12M4 10h12"/></svg></span>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">Yes, at any time. Just let your account manager know and changes take effect the following billing cycle.</div></div>
+                </article>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="get-started" class="reveal-section py-32 bg-brand-base">
-        <div class="container mx-auto px-6 max-w-5xl">
-            <div class="bg-brand-light p-12 lg:p-20 rounded-[4rem] shadow-2xl relative overflow-hidden reveal-section border border-white/5">
-                <div class="text-center mb-16">
-                    <h2 class="text-5xl lg:text-7xl font-black mb-6 text-white">
-                        Ready to <span class="text-gradient">Scale?</span>
-                    </h2>
-                    <p class="text-gray-400 text-lg">Book Your VA Consultation Today.</p>
+    <!-- Get Started Intake Section -->
+    <section id="get-started" class="intake-section reveal-section py-36 scroll-mt-24">
+        <div class="intake-bg-glow"></div>
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="intake-shell">
+                <div class="reveal-fade-up">
+                    <p class="text-[0.72rem] tracking-[0.28em] uppercase font-extrabold text-brand-purpleLight/90 mb-5">Get Started</p>
+                    <h2 class="text-5xl lg:text-7xl font-black text-white tracking-[-0.04em] leading-[1.04] mb-6">Find Your Perfect Virtual Assistant Match.</h2>
+                    <p class="text-lg lg:text-xl text-white/50 leading-relaxed max-w-xl mb-10">Tell us about your business and workflow needs - we'll match you with the right VA in as little as 24-48 hours.</p>
+                    <ul class="space-y-4 text-white/80 reveal-stagger">
+                        <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-brand-purpleLight"></span><span>Dedicated VA support</span></li>
+                        <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-brand-purpleLight"></span><span>Flexible monthly plans</span></li>
+                        <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-brand-purpleLight"></span><span>Fast onboarding</span></li>
+                        <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-brand-purpleLight"></span><span>No long-term contracts</span></li>
+                    </ul>
                 </div>
 
-                <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <input type="text" placeholder="Full Name"
-                        class="bg-brand-base border border-white/10 rounded-2xl p-5 text-white focus:border-brand-purple outline-none transition-all">
-                    <input type="email" placeholder="Business Email"
-                        class="bg-brand-base border border-white/10 rounded-2xl p-5 text-white focus:border-brand-purple outline-none transition-all">
-                    <input type="text" placeholder="Business Name"
-                        class="bg-brand-base border border-white/10 rounded-2xl p-5 text-white focus:border-brand-purple outline-none transition-all">
-                    <input type="tel" placeholder="Phone Number"
-                        class="bg-brand-base border border-white/10 rounded-2xl p-5 text-white focus:border-brand-purple outline-none transition-all">
-                    <div class="md:col-span-2">
-                        <textarea placeholder="Tell us about your business goals..." rows="4"
-                            class="w-full bg-brand-base border border-white/10 rounded-2xl p-5 text-white focus:border-brand-purple outline-none transition-all"></textarea>
-                    </div>
-                    <div class="md:col-span-2 text-center mt-6">
-                        <button type="submit"
-                            class="w-full bg-brand-purple py-6 rounded-full text-xl font-black uppercase tracking-widest shadow-xl text-white hover:bg-brand-purpleLight transition-all">
-                            Submit Request
-                        </button>
-                    </div>
-                </form>
+                <div class="intake-form-card reveal-stagger">
+                    <form id="intake-form" class="grid grid-cols-1 md:grid-cols-2 gap-4" novalidate>
+                        <input id="workload-range-input" name="workloadRange" type="hidden" value="Under 20 hrs">
+                        <div>
+                            <label class="intake-label" for="intake-full-name">Full Name *</label>
+                            <input class="intake-input" id="intake-full-name" name="fullName" required>
+                        </div>
+                        <div>
+                            <label class="intake-label" for="intake-email">Email Address *</label>
+                            <input class="intake-input" id="intake-email" name="email" type="email" required>
+                        </div>
+                        <div>
+                            <label class="intake-label" for="intake-phone">Phone Number *</label>
+                            <input class="intake-input" id="intake-phone" name="phone" required>
+                        </div>
+                        <div>
+                            <label class="intake-label" for="intake-company">Business / Company Name *</label>
+                            <input class="intake-input" id="intake-company" name="company" required>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="intake-label" for="intake-industry">Industry</label>
+                            <select class="intake-select" id="intake-industry" name="industry">
+                                <option value="">Select industry</option>
+                                <option>Real Estate</option>
+                                <option>Coaching/Consulting</option>
+                                <option>Agency</option>
+                                <option>E-commerce</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <p class="intake-label">What tasks do you need help with?</p>
+                            <div class="intake-checkbox-grid">
+                                <label class="intake-check"><input type="checkbox" name="tasks" value="Email management"> Email management</label>
+                                <label class="intake-check"><input type="checkbox" name="tasks" value="Scheduling"> Scheduling</label>
+                                <label class="intake-check"><input type="checkbox" name="tasks" value="CRM/Data Entry"> CRM/Data Entry</label>
+                                <label class="intake-check"><input type="checkbox" name="tasks" value="Lead Follow-Up"> Lead Follow-Up</label>
+                                <label class="intake-check"><input type="checkbox" name="tasks" value="Social Media"> Social Media</label>
+                                <label class="intake-check"><input type="checkbox" name="tasks" value="Research"> Research</label>
+                                <label class="intake-check"><input type="checkbox" name="tasks" value="Document Prep"> Document Prep</label>
+                                <label class="intake-check"><input type="checkbox" name="tasks" value="Other"> Other</label>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="intake-label" for="intake-hours">How many hours per week do you need?</label>
+                            <select class="intake-select" id="intake-hours" name="hoursPerWeek">
+                                <option value="">Select hours</option>
+                                <option>Under 5</option>
+                                <option>5-10</option>
+                                <option>10-20</option>
+                                <option>20+ hours</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="intake-label" for="intake-source">How did you hear about us?</label>
+                            <select class="intake-select" id="intake-source" name="leadSource">
+                                <option value="">Select one</option>
+                                <option>Google Search</option>
+                                <option>Referral</option>
+                                <option>Social Media</option>
+                                <option>Email</option>
+                                <option>Podcast/YouTube</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <div id="intake-error" class="intake-error hidden"></div>
+                            <div id="intake-success" class="intake-success hidden"></div>
+                        </div>
+                        <div class="md:col-span-2 mt-1">
+                            <button id="intake-submit" type="submit" class="intake-submit">Get My VA Match →</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
 
 
     <!-- Footer -->
-    <footer class="reveal-section py-20 bg-brand-base text-white border-t border-white/5">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-                <div class="col-span-2">
-                    <div class="text-2xl font-bold font-display text-white mb-8">Convergr</div>
-                    <p class="text-gray-400 max-w-sm leading-relaxed mb-8">
-                        The ultimate support system for busy entrepreneurs. Trained, managed, and accountable virtual assistants.
-                    </p>
+    <footer class="site-footer reveal-section py-24 lg:py-28 text-white">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-16 lg:mb-20">
+                <div class="reveal-fade-up">
+                    <div class="text-3xl font-black font-display tracking-tight text-white mb-4">Convergr</div>
+                    <p class="text-white font-semibold text-lg mb-4">Delegate smarter. Grow faster.</p>
+                    <p class="text-gray-400 leading-relaxed max-w-xs">Skilled virtual assistants for businesses that refuse to slow down.</p>
                 </div>
-                <div>
-                    <h5 class="font-bold uppercase tracking-widest text-xs mb-8">Quick Links</h5>
-                    <ul class="space-y-4 text-sm text-gray-500">
-                        <li><a href="#" class="hover:text-brand-purpleLight transition-colors">Home</a></li>
-                        <li><a href="#how-it-works" class="hover:text-brand-purpleLight transition-colors">How It Works</a></li>
-                        <li><a href="#services" class="hover:text-brand-purpleLight transition-colors">Services</a></li>
-                        <li><a href="#pricing" class="hover:text-brand-purpleLight transition-colors">Pricing</a></li>
+
+                <div class="reveal-fade-up">
+                    <h5 class="font-bold uppercase tracking-[0.2em] text-[0.68rem] text-white/75 mb-6">Quick Links</h5>
+                    <ul class="space-y-4 text-sm">
+                        <li><a href="#services" class="footer-link">Services</a></li>
+                        <li><a href="#how-it-works" class="footer-link">How It Works</a></li>
+                        <li><a href="#pricing" class="footer-link">Pricing</a></li>
+                        <li><a href="#faq" class="footer-link">FAQ</a></li>
                     </ul>
                 </div>
-                <div>
-                    <h5 class="font-bold uppercase tracking-widest text-xs mb-8">Contact</h5>
-                    <ul class="space-y-4 text-sm text-gray-500">
-                        <li>info@convergr.net</li>
-                        <li>1-800-CONVERGR</li>
+
+                <div class="reveal-fade-up">
+                    <h5 class="font-bold uppercase tracking-[0.2em] text-[0.68rem] text-white/75 mb-6">Contact</h5>
+                    <ul class="space-y-4 text-sm text-gray-400 leading-relaxed">
+                        <li>123 Business Ave, Suite 400<br>New York, NY 10001</li>
+                        <li>Monday-Friday, 9am-6pm EST</li>
+                        <li><a href="mailto:support@convergr.net" class="footer-link">support@convergr.net</a></li>
+                        <li>(000) 000-0000</li>
                     </ul>
+                </div>
+
+                <div class="reveal-fade-up">
+                    <div class="trust-widget">
+                        <div class="flex items-center gap-2 mb-3">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                                <path d="M21.8 12.23c0-.74-.06-1.47-.2-2.18H12v4.13h5.49a4.7 4.7 0 0 1-2.03 3.08v2.56h3.29c1.93-1.78 3.05-4.42 3.05-7.59Z" fill="#4285F4"/>
+                                <path d="M12 22c2.75 0 5.06-.9 6.75-2.44l-3.29-2.56c-.92.61-2.1.97-3.46.97-2.66 0-4.92-1.8-5.73-4.22H2.88v2.64A10 10 0 0 0 12 22Z" fill="#34A853"/>
+                                <path d="M6.27 13.75A6 6 0 0 1 5.96 12c0-.61.1-1.2.3-1.75V7.61H2.88A10 10 0 0 0 2 12c0 1.61.39 3.13 1.08 4.39l3.19-2.64Z" fill="#FBBC05"/>
+                                <path d="M12 6.02c1.5 0 2.85.52 3.91 1.53l2.93-2.93C17.06 2.96 14.75 2 12 2a10 10 0 0 0-8.92 5.61l3.38 2.64C7.08 7.82 9.34 6.02 12 6.02Z" fill="#EA4335"/>
+                            </svg>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-[#5f6368]">Google</span>
+                        </div>
+                        <div class="trust-stars mb-2">★★★★★</div>
+                        <p class="text-sm font-bold text-[#202124] mb-1">5.0 Rated Service</p>
+                        <p class="text-[0.72rem] text-[#5f6368]">Verified by Trustindex</p>
+                    </div>
                 </div>
             </div>
-            <div
-                class="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-widest text-gray-600">
-                <p>&copy; 2026 Convergr. All Rights Reserved.</p>
-                <div class="flex space-x-6 mt-4 md:mt-0">
-                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
-                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs text-gray-500">
+                <p>&copy; 2026 Convergr LLC. All Rights Reserved.</p>
+                <div class="flex items-center gap-6">
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
                 </div>
             </div>
         </div>
@@ -2237,15 +3190,153 @@
             }
         }
 
+        let selectedWorkloadRange = 'Under 20 hrs';
+
         function selectHoursPremium(btn, value) {
             document.querySelectorAll('.selector-pill').forEach(b => {
                 b.classList.remove('active');
             });
             btn.classList.add('active');
+            selectedWorkloadRange = value;
+            const workloadInput = document.getElementById('workload-range-input');
+            if (workloadInput) workloadInput.value = value;
             console.log('Selected support level:', value);
         }
 
-        document.addEventListener('DOMContentLoaded', loadContent);
+        function handleHoursCTA(event) {
+            event.preventDefault();
+
+            const workloadInput = document.getElementById('workload-range-input');
+            if (workloadInput) {
+                workloadInput.value = selectedWorkloadRange;
+            }
+            sessionStorage.setItem('selectedWorkloadRange', selectedWorkloadRange);
+
+            const target = document.querySelector('#get-started');
+            if (!target) return;
+
+            const headerOffset = 90;
+            const elementPosition = target.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+
+        function normalizePrimaryCTAs() {
+            const ctaPattern = /(get started|get matched|hire a va|book a call|get my va)/i;
+            document.querySelectorAll('a').forEach((anchor) => {
+                const text = (anchor.textContent || '').replace(/\s+/g, ' ').trim();
+                if (!ctaPattern.test(text)) return;
+                anchor.setAttribute('href', '#get-started');
+            });
+        }
+
+        function setupIntakeForm() {
+            const form = document.getElementById('intake-form');
+            if (!form) return;
+            const submitBtn = document.getElementById('intake-submit');
+            const errorBox = document.getElementById('intake-error');
+            const successBox = document.getElementById('intake-success');
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                errorBox.classList.add('hidden');
+                successBox.classList.add('hidden');
+                errorBox.textContent = '';
+                successBox.textContent = '';
+
+                if (!form.checkValidity()) {
+                    errorBox.textContent = 'Please complete all required fields before submitting.';
+                    errorBox.classList.remove('hidden');
+                    form.reportValidity();
+                    return;
+                }
+
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Matching You...';
+
+                const formData = new FormData(form);
+                const selectedTasks = Array.from(form.querySelectorAll('input[name="tasks"]:checked')).map((el) => el.value);
+                const payload = {
+                    fullName: formData.get('fullName'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                    company: formData.get('company'),
+                    industry: formData.get('industry'),
+                    tasks: selectedTasks,
+                    hoursPerWeek: formData.get('hoursPerWeek'),
+                    leadSource: formData.get('leadSource'),
+                    workloadRangeFromSelector: formData.get('workloadRange')
+                };
+
+                try {
+                    // TODO: Replace with EmailJS / HubSpot / API endpoint integration.
+                    // Intended destination: support@convergr.net
+                    sessionStorage.setItem('convergrIntakeDraft', JSON.stringify(payload));
+                    await new Promise((resolve) => setTimeout(resolve, 1250));
+
+                    successBox.textContent = "You're all set. Your intake has been received and our team will follow up within 24-48 hours.";
+                    successBox.classList.remove('hidden');
+                    form.reset();
+                } catch (err) {
+                    errorBox.textContent = 'Submission failed. Please try again or email support@convergr.net.';
+                    errorBox.classList.remove('hidden');
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Get My VA Match →';
+                }
+            });
+        }
+
+        function setupHoursSectionMotion() {
+            const hoursSection = document.getElementById('hours-selector');
+            if (!hoursSection) return;
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+            const motionLib = window.Motion || window.motion;
+            if (!motionLib || typeof motionLib.animate !== 'function') return;
+            const { animate } = motionLib;
+
+            const pillEls = hoursSection.querySelectorAll('.selector-pill');
+            pillEls.forEach((pill) => {
+                pill.addEventListener('mouseenter', () => {
+                    animate(pill, { scale: [1, 1.025] }, { duration: 0.22, easing: 'ease-out' });
+                });
+                pill.addEventListener('mouseleave', () => {
+                    animate(pill, { scale: [1.025, 1] }, { duration: 0.24, easing: 'ease-out' });
+                });
+            });
+
+            const matchBtn = hoursSection.querySelector('.hours-match-btn');
+            if (matchBtn) {
+                const setPop = (enabled) => matchBtn.classList.toggle('is-pop', enabled);
+                matchBtn.addEventListener('mouseenter', () => setPop(true));
+                matchBtn.addEventListener('mouseleave', () => setPop(false));
+                matchBtn.addEventListener('touchstart', () => {
+                    setPop(true);
+                    window.setTimeout(() => setPop(false), 220);
+                }, { passive: true });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadContent();
+            normalizePrimaryCTAs();
+            setupIntakeForm();
+            setupHoursSectionMotion();
+            const activePill = document.querySelector('.selector-pill.active');
+            if (activePill) {
+                const value = activePill.getAttribute('data-hours-value');
+                if (value) selectedWorkloadRange = value;
+            }
+            const rememberedRange = sessionStorage.getItem('selectedWorkloadRange');
+            if (!rememberedRange) return;
+            const rememberedPill = document.querySelector(`.selector-pill[data-hours-value="${rememberedRange}"]`);
+            if (rememberedPill) selectHoursPremium(rememberedPill, rememberedRange);
+        });
     </script>
     <script>
         // Task 1: Intersection Observer for Scroll Reveal (Deposyt Style)
@@ -2267,6 +3358,40 @@
         // Apply observer to all reveal-section elements
         document.querySelectorAll('.reveal-section').forEach(el => {
             revealObserver.observe(el);
+        });
+
+        // Premium FAQ accordion (single-open, smooth height animation)
+        const faqCards = Array.from(document.querySelectorAll('#faq-accordion .faq-card'));
+        const closeFaqCard = (card) => {
+            card.classList.remove('is-open');
+            const trigger = card.querySelector('.faq-trigger');
+            const answer = card.querySelector('.faq-answer');
+            if (trigger) trigger.setAttribute('aria-expanded', 'false');
+            if (answer) answer.style.maxHeight = '0px';
+        };
+        const openFaqCard = (card) => {
+            card.classList.add('is-open');
+            const trigger = card.querySelector('.faq-trigger');
+            const answer = card.querySelector('.faq-answer');
+            if (trigger) trigger.setAttribute('aria-expanded', 'true');
+            if (answer) answer.style.maxHeight = `${answer.scrollHeight}px`;
+        };
+        faqCards.forEach((card, index) => {
+            const trigger = card.querySelector('.faq-trigger');
+            if (!trigger) return;
+            trigger.addEventListener('click', () => {
+                const isOpen = card.classList.contains('is-open');
+                faqCards.forEach(closeFaqCard);
+                if (!isOpen) openFaqCard(card);
+            });
+            if (index === 0) openFaqCard(card);
+        });
+        window.addEventListener('resize', () => {
+            faqCards.forEach((card) => {
+                if (!card.classList.contains('is-open')) return;
+                const answer = card.querySelector('.faq-answer');
+                if (answer) answer.style.maxHeight = `${answer.scrollHeight}px`;
+            });
         });
 
         // Smooth Scroll with Header Offset

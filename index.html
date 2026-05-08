@@ -819,7 +819,7 @@
             box-shadow: none;
         }
 
-        .reveal-visible .hero-float-card {
+        #Home.reveal-visible.hero-icons-ready .hero-float-card {
             opacity: 1;
             transform: translateY(0) scale(1);
         }
@@ -3252,7 +3252,7 @@
             });
         }
 
-        function selectHoursPremium(btn, value) {
+        function selectHoursPremium(btn, value, options = {}) {
             document.querySelectorAll('.selector-pill').forEach(b => {
                 b.classList.remove('active');
             });
@@ -3262,7 +3262,9 @@
             const workloadInput = document.getElementById('workload-range-input');
             if (workloadInput) workloadInput.value = value;
             console.log('Selected support level:', value);
-            navigateToIntakeWithPrefill();
+            if (!options.skipNavigate) {
+                navigateToIntakeWithPrefill();
+            }
         }
 
         function handleHoursCTA(event) {
@@ -3367,11 +3369,35 @@
             }
         }
 
+        function setupHeroVisualLoadSequence() {
+            const homeSection = document.getElementById('Home');
+            if (!homeSection) return;
+
+            const heroImage = homeSection.querySelector('.hero-base-image');
+            if (!heroImage) return;
+
+            const revealIcons = () => {
+                const delayMs = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 320;
+                window.setTimeout(() => {
+                    homeSection.classList.add('hero-icons-ready');
+                }, delayMs);
+            };
+
+            if (heroImage.complete && heroImage.naturalWidth > 0) {
+                revealIcons();
+                return;
+            }
+
+            heroImage.addEventListener('load', revealIcons, { once: true });
+            heroImage.addEventListener('error', revealIcons, { once: true });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             loadContent();
             normalizePrimaryCTAs();
             setupIntakeForm();
             setupHoursSectionMotion();
+            setupHeroVisualLoadSequence();
             const activePill = document.querySelector('.selector-pill.active');
             if (activePill) {
                 const value = activePill.getAttribute('data-hours-value');
@@ -3380,7 +3406,7 @@
             const rememberedRange = sessionStorage.getItem('selectedWorkloadRange');
             if (!rememberedRange) return;
             const rememberedPill = document.querySelector(`.selector-pill[data-hours-value="${rememberedRange}"]`);
-            if (rememberedPill) selectHoursPremium(rememberedPill, rememberedRange);
+            if (rememberedPill) selectHoursPremium(rememberedPill, rememberedRange, { skipNavigate: true });
         });
     </script>
     <script>

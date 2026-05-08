@@ -655,95 +655,349 @@
             box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.5);
         }
 
-        /* Hours Selector Section - Deposyt Clone Styles */
-        .selector-pill {
-            padding: 1rem 2rem;
-            border-radius: 1rem;
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 700;
-            font-size: 1.125rem;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        /* Who We Serve - New Reference Layout Styles */
+        .industry-section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .selector-pill:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            transform: translateY(-2px);
-            border-color: rgba(255, 255, 255, 0.3);
+        .industry-layout-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
         }
 
-        /* Hours Selector Section - Extra Polish */
-        .gradient-blob {
+        @media (min-width: 1024px) {
+            .industry-layout-container {
+                flex-direction: row;
+                align-items: stretch; /* Align height */
+                gap: 1.5rem;
+            }
+        }
+
+        .industry-image-wrapper {
+            width: 100%;
+            position: relative;
+            border-radius: 2.5rem;
+            overflow: hidden;
+            background: #0D0D0D;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        @media (min-width: 1024px) {
+            .industry-image-wrapper {
+                width: 50%;
+                min-height: 100%;
+            }
+        }
+
+        .industry-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+            transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .industry-image-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        .industry-image-glow {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 30%, rgba(91, 45, 142, 0.15) 100%);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .industry-cards-grid {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .industry-cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .industry-cards-grid {
+                width: 50%;
+                gap: 1rem;
+            }
+        }
+
+        .industry-card-matte {
+            background: rgba(13, 13, 13, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 2rem;
+            padding: 2.5rem;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .industry-card-matte::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .industry-card-matte:hover {
+            transform: translateY(-8px) scale(1.02);
+            background: rgba(20, 20, 20, 0.9);
+            border-color: rgba(139, 92, 246, 0.2);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6), 
+                        0 0 20px rgba(139, 92, 246, 0.1);
+        }
+
+        .industry-card-matte:hover::after {
+            opacity: 1;
+        }
+
+        .industry-card-icon-box {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            transition: all 0.5s ease;
+        }
+
+        .industry-card-matte:hover .industry-card-icon-box {
+            background: rgba(139, 92, 246, 0.15);
+            border-color: rgba(139, 92, 246, 0.3);
+            transform: scale(1.1) rotate(5deg);
+        }
+
+
+        /* Hours Selector Section - Flowing Mesh Gradient (Deposyt Exact Match) */
+        .mesh-gradient-container {
+            position: absolute;
+            inset: 0;
+            background: #050505; /* Very dark base to allow screen blend to pop */
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        /* The Luminous Flowing Layers */
+        .mesh-blob {
             position: absolute;
             border-radius: 50%;
             filter: blur(120px);
-            opacity: 0.6;
-            transition: all 1s ease-in-out;
+            opacity: 0.7; /* Increased for luminosity */
+            mix-blend-mode: screen;
+            will-change: transform, opacity;
+        }
+
+        /* Noticeable but premium flowing animations */
+        @keyframes flow-left {
+            0% { transform: translate(-10%, -5%) scale(1) rotate(0deg); }
+            33% { transform: translate(15%, 10%) scale(1.2) rotate(5deg); }
+            66% { transform: translate(-5%, 20%) scale(0.9) rotate(-5deg); }
+            100% { transform: translate(-10%, -5%) scale(1) rotate(0deg); }
+        }
+
+        @keyframes flow-right {
+            0% { transform: translate(10%, 15%) scale(1.1) rotate(0deg); }
+            50% { transform: translate(-15%, -10%) scale(1.3) rotate(-10deg); }
+            100% { transform: translate(10%, 15%) scale(1.1) rotate(0deg); }
+        }
+
+        @keyframes flow-center {
+            0% { transform: translate(-50%, -45%) scale(1); opacity: 0.4; }
+            50% { transform: translate(-50%, -55%) scale(1.1); opacity: 0.6; }
+            100% { transform: translate(-50%, -45%) scale(1); opacity: 0.4; }
+        }
+
+        /* 1. Large Animated Blue/Violet Orb - LEFT SIDE */
+        .blob-1 {
+            width: 1400px;
+            height: 1400px;
+            background: radial-gradient(circle, #240046 0%, #3c096c 30%, #5a189a 60%, transparent 85%);
+            top: -20%;
+            left: -25%;
+            animation: flow-left 30s infinite ease-in-out;
+        }
+
+        /* 2. Large Animated Magenta Orb - RIGHT SIDE */
+        .blob-2 {
+            width: 1300px;
+            height: 1300px;
+            background: radial-gradient(circle, #ff006e 0%, #c9184a 40%, #9013fe 70%, transparent 90%);
+            bottom: -20%;
+            right: -20%;
+            animation: flow-right 25s infinite ease-in-out;
+        }
+
+        /* 3. Soft Purple Blending Layer - CENTER */
+        .blob-3 {
+            width: 1200px;
+            height: 1000px;
+            background: radial-gradient(circle, #7b2cbf 0%, transparent 75%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: flow-center 35s infinite ease-in-out;
+        }
+
+        /* 4. Subtle Ambient Moving Haze Layer - Overall Glow */
+        .blob-4 {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(36, 0, 70, 0.3) 0%, rgba(201, 24, 74, 0.3) 100%);
+            filter: blur(150px);
+            opacity: 0.4;
+            animation: flow-right 40s infinite reverse linear;
+        }
+
+        .noise-overlay {
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.04;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .vignette-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.85) 100%);
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .selector-pill {
+            min-width: 175px;
+            padding: 1.35rem 2.75rem;
+            border-radius: 9999px;
+            background: rgba(10, 10, 10, 0.7); /* Even darker luxury glass */
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.5); /* Stronger depth */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+        }
+
+        .selector-pill::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.15), transparent);
+            opacity: 0.4;
             pointer-events: none;
         }
 
-        @keyframes blob-drift {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(10%, 10%) scale(1.1); }
-            66% { transform: translate(-5%, 15%) scale(0.9); }
-        }
-
-        .animate-blob-drift {
-            animation: blob-drift 20s infinite alternate ease-in-out;
+        .selector-pill:hover {
+            background: rgba(139, 92, 246, 0.2);
+            color: white;
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
         }
 
         .selector-pill.active {
             background: white;
-            color: #5B2D8E;
+            color: #1a1a1a;
             border-color: white;
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 255, 255, 0.2);
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.7), 0 0 40px rgba(255, 255, 255, 0.4);
             font-weight: 900;
+        }
+
+        /* Ambient light behind selected pill - soft purple/white glow */
+        .selector-pill.active::after {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, transparent 70%);
+            z-index: -1;
+            filter: blur(20px);
+            animation: mesh-pulse 5s infinite ease-in-out;
         }
 
         .selector-cta {
             display: inline-flex;
             align-items: center;
             gap: 1rem;
-            padding: 1.5rem 4rem;
+            padding: 1.5rem 3.5rem;
             background: #000;
             color: #fff;
-            border-radius: 1.25rem;
-            font-size: 1.25rem;
-            font-weight: 900;
+            border-radius: 9999px; /* True pill shape */
+            font-size: 1.15rem;
+            font-weight: 800;
             text-decoration: none;
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(201, 24, 74, 0.2); /* Soft pink glow shadow */
             position: relative;
-            overflow: hidden;
+            overflow: visible;
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        .selector-cta::after {
+        /* Glossy highlight for CTA */
+        .selector-cta::before {
             content: '';
             position: absolute;
-            inset: -50%;
-            background: radial-gradient(circle at center, rgba(139, 92, 246, 0.2), transparent 70%);
-            opacity: 0;
-            transition: opacity 0.5s;
-            z-index: 1;
+            top: 0;
+            left: 5%;
+            width: 90%;
+            height: 50%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.15), transparent); /* Stronger gloss */
+            border-radius: inherit;
+            pointer-events: none;
         }
 
-        .selector-cta:hover::after {
-            opacity: 1;
+        .selector-cta:hover {
+            transform: translateY(-8px) scale(1.05); /* Increased lift */
+            box-shadow: 0 45px 90px rgba(0, 0, 0, 0.9);
+            border-color: rgba(255, 255, 255, 0.4);
         }
+
+        .cta-glow-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -30px;
+            background: radial-gradient(circle, rgba(201, 24, 74, 0.3) 0%, transparent 70%); /* Magenta glow */
+            z-index: 0;
+            filter: blur(30px);
+            opacity: 0.6;
+            animation: mesh-pulse 6s infinite ease-in-out;
+            pointer-events: none;
+        }
+
 
         .bg-noise {
-            background-image: url("https://www.transparenttextures.com/patterns/p6-stipple.png");
-        }
-
-        .selector-cta span {
-            position: relative;
-            z-index: 2;
+            background-image: none; /* Replaced with SVG noise */
         }
 
         .feature-card-premium {
@@ -798,7 +1052,6 @@
             color: rgba(139, 92, 246, 0.8);
             animation: orbit 15s linear infinite;
             z-index: 20;
-            opacity: 0.6;
         }
 
         .feature-line-connector {
@@ -823,10 +1076,223 @@
             animation: pulse-glow 10s ease-in-out infinite;
         }
 
-        .hour-pill.active {
-            background-color: #5B2D8E;
-            border-color: #8B5CF6;
+        /* Infinite Marquee - Deposyt Style */
+        .marquee-section {
+            background: #050505;
+            position: relative;
+            z-index: 10;
         }
+
+        .marquee-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 2rem 0;
+            /* Fading edges mask */
+            -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marquee-scroll 40s linear infinite;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        @keyframes marquee-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .marquee-logo {
+            height: 32px;
+            width: auto;
+            filter: brightness(0) invert(1) opacity(0.4);
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: white;
+            white-space: nowrap;
+            text-transform: lowercase;
+            letter-spacing: -0.02em;
+        }
+
+        .marquee-logo img {
+            height: 100%;
+            width: auto;
+        }
+
+        .marquee-logo:hover {
+            filter: brightness(0) invert(1) opacity(1);
+            transform: scale(1.05);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .marquee-ambient-glow {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(91, 45, 142, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Pricing Section - Premium Redesign */
+        .pricing-section {
+            position: relative;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .pricing-card {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 3.5rem;
+            padding: 3.5rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-15px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.9);
+        }
+
+        .pricing-card.featured {
+            transform: scale(1.05);
+            border-color: rgba(139, 92, 246, 0.4);
+            background: rgba(15, 10, 25, 0.75);
+            box-shadow: 0 60px 120px -30px rgba(0, 0, 0, 1);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.07) translateY(-15px);
+            border-color: rgba(139, 92, 246, 0.6);
+        }
+
+        .pricing-badge {
+            background: linear-gradient(135deg, #7C3AED, #E11D48);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 10px 20px rgba(124, 58, 237, 0.3);
+            white-space: nowrap;
+        }
+
+        .pricing-plan-name {
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .pricing-amount {
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 2rem;
+            letter-spacing: -0.04em;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .pricing-amount span {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 500;
+            margin-left: 0.5rem;
+        }
+
+        .pricing-feature-list {
+            margin-bottom: 3rem;
+            flex: 1;
+        }
+
+        .pricing-feature-list li {
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 1.25rem;
+            font-size: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            line-height: 1.5;
+        }
+
+        .pricing-feature-list li strong {
+            color: white;
+            font-weight: 700;
+        }
+
+        .pricing-feature-list li svg {
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+            color: #7C3AED;
+        }
+
+        .pricing-button {
+            width: 100%;
+            padding: 1.5rem;
+            background: #000;
+            color: white;
+            border-radius: 9999px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), transparent);
+            pointer-events: none;
+        }
+
+        .pricing-button:hover {
+            transform: translateY(-5px);
+            background: #111;
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .pricing-card.featured .pricing-button {
+            background: white;
+            color: black;
+            border: none;
+        }
+
+        .pricing-card.featured .pricing-button:hover {
+            background: #f0f0f0;
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.2);
+        }
+
     </style>
 </head>
 
@@ -1358,274 +1824,263 @@
                     <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-green-500 transition-colors">Works with Your Tools</h3>
                     <p class="text-gray-400 text-sm leading-relaxed font-medium">Google Workspace, Slack, HubSpot, Notion, Calendly, Asana — your VA adapts to your tech stack, not the other way around.</p>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- Who We Serve Section - Premium Split Layout (Flipped) -->
-    <section id="who-we-serve" class="reveal-section py-32 bg-brand-base overflow-hidden scroll-mt-24 relative">
+    <!-- Who We Serve Section - New Balanced Composition -->
+    <section id="who-we-serve" class="reveal-section py-40 bg-[#050505] overflow-hidden scroll-mt-24 relative">
         <!-- Ambient Background Glows -->
         <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-            <div class="absolute top-[20%] right-[10%] w-[600px] h-[600px] bg-brand-purple/10 blur-[140px] animate-pulse"></div>
+            <div class="absolute top-[20%] right-[10%] w-[600px] h-[600px] bg-brand-purple/5 blur-[140px] animate-pulse"></div>
             <div class="absolute bottom-[10%] left-[5%] w-[400px] h-[400px] bg-brand-cyan/5 blur-[100px]" style="animation-delay: -3s;"></div>
         </div>
 
         <div class="container mx-auto px-6 relative z-10">
-            <div class="flex flex-col-reverse lg:flex-row items-center gap-16 lg:gap-24">
-                
-                <!-- Left Side: Content & Industry Grid -->
-                <div class="lg:w-1/2">
-                    <div class="mb-12">
-                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-purple/10 border border-brand-purple/20 mb-6">
-                            <div class="w-2 h-2 rounded-full bg-brand-purpleLight animate-pulse"></div>
-                            <span class="text-brand-purpleLight text-xs font-bold uppercase tracking-widest">Who We Serve</span>
-                        </div>
-                        <h2 class="text-5xl lg:text-6xl font-black text-white leading-[1.1] mb-8 tracking-tighter">
-                            Built for Professionals <br> Across <span class="text-gradient">Every Industry.</span>
-                        </h2>
-                        <p class="text-xl text-gray-400 font-medium leading-relaxed max-w-xl">
-                            Whether you're a solo entrepreneur or running a growing team, Convergr has a VA solution tailored to your workflow.
-                        </p>
-                    </div>
+            <!-- Top Center Area -->
+            <div class="industry-section-header reveal-fade-up">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-purple/10 border border-brand-purple/20 mb-8">
+                    <div class="w-2 h-2 rounded-full bg-brand-purpleLight animate-pulse"></div>
+                    <span class="text-brand-purpleLight text-xs font-bold uppercase tracking-widest">Industry Expertise</span>
+                </div>
+                <h2 class="text-6xl lg:text-7xl font-black text-white leading-[1.1] mb-8 tracking-tighter">
+                    Built for Professionals <br> Across <span class="text-brand-purpleLight">Every Industry.</span>
+                </h2>
+                <p class="text-xl text-gray-400 font-medium leading-relaxed max-w-2xl mx-auto">
+                    Whether you're a solo entrepreneur or running a growing team, Convergr has a VA solution tailored to your exact workflow.
+                </p>
+            </div>
 
-                    <div id="industries-we-service-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-6 reveal-stagger">
-                        <!-- Populated via data/industries.json -->
-                    </div>
+            <!-- Bottom Layout Block -->
+            <div class="industry-layout-container">
+                <!-- Left Side: Large Cinematic Image -->
+                <div class="industry-image-wrapper group reveal-fade-up">
+                    <img src="assets/img/new man.png" alt="Convergr Professional Support" class="reveal-visible">
+                    <div class="industry-image-glow"></div>
                 </div>
 
-                <!-- Right Side: Premium Visual & Floating UI -->
-                <div class="lg:w-1/2 relative group">
-                    <div class="relative z-10 p-4">
-                        <!-- Abstract Background Shapes -->
-                        <div class="absolute -top-10 -right-10 w-40 h-40 bg-brand-purple/20 rounded-full blur-3xl animate-pulse"></div>
-                        <div class="absolute -bottom-10 -left-10 w-60 h-60 bg-brand-cyan/10 rounded-full blur-3xl animate-pulse" style="animation-delay: -2s;"></div>
-                        
-                        <div class="relative rounded-[3rem] overflow-hidden border border-white/5 shadow-2xl">
-                            <!-- Main Image: man.png -->
-                            <img src="assets/img/man.png" alt="Busy Professional" class="w-full h-auto premium-image-mask relative z-10 transform group-hover:scale-[1.02] transition-transform duration-1000">
-                            <div class="absolute inset-0 bg-gradient-to-t from-brand-base via-transparent to-transparent opacity-60 z-20"></div>
-                        </div>
-
-                        <!-- Floating UI Cards -->
-                        <div class="absolute -top-6 -left-6 bg-white/[0.03] backdrop-blur-xl p-6 rounded-2xl border border-white/10 shadow-2xl z-30 animate-float-slow">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-brand-purple/20 flex items-center justify-center text-brand-purpleLight">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                </div>
-                                <div>
-                                    <div class="text-xs font-bold text-gray-400 uppercase tracking-widest">Time Saved</div>
-                                    <div class="text-xl font-black text-white">+12.5 hrs</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="absolute bottom-10 -right-6 bg-white/[0.03] backdrop-blur-xl p-6 rounded-2xl border border-white/10 shadow-2xl z-30 animate-float-slow" style="animation-delay: -2s;">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-brand-cyan/20 flex items-center justify-center text-brand-cyan">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                </div>
-                                <div>
-                                    <div class="text-xs font-bold text-gray-400 uppercase tracking-widest">Tasks Done</div>
-                                    <div class="text-xl font-black text-white">98%</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Right Side: 2x3 Grid of Cards -->
+                <div id="industries-we-service-grid" class="industry-cards-grid reveal-stagger">
+                    <!-- Populated via data/industries.json -->
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Hours Selector Section - Deposyt Clone -->
-    <section id="hours-selector" class="reveal-section py-40 relative overflow-hidden bg-noise">
-        <!-- Animated Gradient Background (Deposyt-style Mesh) -->
-        <div class="absolute inset-0 z-0 bg-[#1A0B2E] overflow-hidden">
-            <div class="gradient-blob w-[800px] h-[800px] bg-brand-purple/20 top-[-10%] left-[-10%] animate-blob-drift"></div>
-            <div class="gradient-blob w-[700px] h-[700px] bg-[#BE185D]/20 bottom-[-10%] right-[-10%] animate-blob-drift" style="animation-delay: -5s; animation-direction: reverse;"></div>
-            <div class="gradient-blob w-[600px] h-[600px] bg-[#8B5CF6]/15 top-[20%] right-[10%] animate-blob-drift" style="animation-delay: -10s;"></div>
-            <div class="absolute inset-0 bg-noise opacity-30 mix-blend-overlay"></div>
-            <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/40"></div>
+
+    <!-- Hours Selector Section - Enhanced Premium Animation -->
+    <section id="hours-selector" class="reveal-section py-40 relative overflow-hidden">
+        <!-- Flowing Mesh Gradient Background -->
+        <div class="mesh-gradient-container">
+            <div class="mesh-blob blob-1"></div> <!-- Blue Left -->
+            <div class="mesh-blob blob-2"></div> <!-- Magenta Right -->
+            <div class="mesh-blob blob-3"></div> <!-- Purple Center Blending -->
+            <div class="mesh-blob blob-4"></div> <!-- Ambient Haze -->
+            <div class="noise-overlay"></div>
+            <div class="vignette-overlay"></div>
         </div>
 
+
         <div class="container mx-auto px-6 relative z-10 text-center">
-            <!-- Centered Icon -->
-            <div class="mb-10 flex justify-center reveal-fade-up">
-                <div class="w-16 h-16 bg-white/10 backdrop-blur-xl rounded-2xl flex items-center justify-center border border-white/20 shadow-2xl">
-                    <div class="text-white font-black text-2xl">C</div>
+            <!-- Centered Icon (Reference Style) -->
+            <div class="mb-12 flex justify-center reveal-fade-up">
+                <div class="w-14 h-14 bg-white/10 backdrop-blur-2xl rounded-2xl flex items-center justify-center border border-white/20 shadow-2xl overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
+                    <svg class="w-8 h-8 text-white relative z-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
                 </div>
             </div>
 
             <!-- Heading & Subtitle -->
-            <div class="max-w-3xl mx-auto mb-16 reveal-fade-up">
-                <h2 class="text-6xl lg:text-7xl font-black text-white mb-8 tracking-tighter leading-tight">
-                    How Much Support <br> Do You Need?
+            <div class="max-w-4xl mx-auto mb-16 reveal-fade-up">
+                <h2 class="text-6xl lg:text-[5.5rem] font-black text-white mb-6 tracking-[-0.04em] leading-[1.05]">
+                    How Many Hours <br> Do You Need Per Month?
                 </h2>
-                <p class="text-xl text-white/80 font-medium max-w-xl mx-auto leading-relaxed">
-                    Choose the level that fits your business.
+                <p class="text-xl text-white/50 font-medium max-w-xl mx-auto leading-relaxed">
+                    Choose your workload range.
                 </p>
             </div>
 
             <!-- Selector Pills -->
             <div class="flex flex-wrap justify-center gap-4 mb-20 reveal-stagger">
-                <button onclick="selectHoursPremium(this, 'Under 10 Hours')" class="selector-pill active">
-                    Under 10 Hours
+                <button onclick="selectHoursPremium(this, 'Under 20 hrs')" class="selector-pill active">
+                    Under 20 hrs
                 </button>
-                <button onclick="selectHoursPremium(this, '10–20 Hours')" class="selector-pill">
-                    10–20 Hours
+                <button onclick="selectHoursPremium(this, '20–40 hrs')" class="selector-pill">
+                    20–40 hrs
                 </button>
-                <button onclick="selectHoursPremium(this, '20–40 Hours')" class="selector-pill">
-                    20–40 Hours
+                <button onclick="selectHoursPremium(this, '40–80 hrs')" class="selector-pill">
+                    40–80 hrs
                 </button>
-                <button onclick="selectHoursPremium(this, 'Full-Time VA')" class="selector-pill">
-                    Full-Time VA
+                <button onclick="selectHoursPremium(this, '80–120 hrs')" class="selector-pill">
+                    80–120 hrs
                 </button>
-                <button onclick="selectHoursPremium(this, 'Custom Setup')" class="selector-pill">
-                    Custom Setup
+                <button onclick="selectHoursPremium(this, '120+ hrs')" class="selector-pill">
+                    120+ hrs
                 </button>
             </div>
 
             <!-- CTA Button -->
-            <div class="reveal-fade-up">
+            <div class="reveal-fade-up cta-glow-wrapper">
                 <a href="#get-started" class="selector-cta group">
-                    <span>Get Started Now</span>
+                    <span>Get Matched Now</span>
                     <svg class="w-6 h-6 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                 </a>
             </div>
+
         </div>
     </section>
 
-    <!-- Integrations Marquee -->
-    <section class="reveal-section py-20 bg-brand-dark border-y border-white/5 overflow-hidden">
-        <div class="container mx-auto px-6 mb-12 text-center">
-            <p class="text-sm font-bold text-gray-500 uppercase tracking-widest">Your VA Integrates With Your Existing Stack</p>
-        </div>
-        <div class="logo-marquee-container">
-            <div class="logo-marquee-track">
-                <!-- Row 1 -->
-                <div class="logo-item"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/slack.svg" alt="">slack</div>
-                <div class="logo-item"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/googleworkspace.svg" alt="">google workspace</div>
-                <div class="logo-item"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/hubspot.svg" alt="">hubspot</div>
-                <div class="logo-item"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/notion.svg" alt="">notion</div>
-                <div class="logo-item"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/calendly.svg" alt="">calendly</div>
-                <div class="logo-item"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/asana.svg" alt="">asana</div>
-                <div class="logo-item"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/mondaydotcom.svg" alt="">monday.com</div>
-                <div class="logo-item"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/trello.svg" alt="">trello</div>
-                <!-- Row 2 -->
-                <div class="logo-item"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/slack.svg" alt="">slack</div>
-                <div class="logo-item"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/googleworkspace.svg" alt="">google workspace</div>
-                <div class="logo-item"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/hubspot.svg" alt="">hubspot</div>
-                <div class="logo-item"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/notion.svg" alt="">notion</div>
-                <div class="logo-item"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/calendly.svg" alt="">calendly</div>
-                <div class="logo-item"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/asana.svg" alt="">asana</div>
-                <div class="logo-item"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/mondaydotcom.svg" alt="">monday.com</div>
-                <div class="logo-item"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/trello.svg" alt="">trello</div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Pricing Section -->
-    <section id="pricing" class="reveal-section py-32 bg-brand-base overflow-hidden scroll-mt-24">
-        <div class="container mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-20">
-                <h2 class="text-5xl lg:text-6xl font-black text-white leading-tight mb-8">
-                    Simple, Transparent <span class="text-gradient">Pricing.</span>
+    <!-- Pricing Section - Premium Redesign -->
+    <section id="pricing" class="pricing-section reveal-section py-40 relative overflow-hidden scroll-mt-24">
+        <!-- Flowing Mesh Gradient Background -->
+        <div class="mesh-gradient-container">
+            <div class="mesh-blob blob-1"></div> <!-- Blue Left -->
+            <div class="mesh-blob blob-2"></div> <!-- Magenta Right -->
+            <div class="mesh-blob blob-3"></div> <!-- Purple Center Blending -->
+            <div class="mesh-blob blob-4"></div> <!-- Ambient Haze -->
+            <div class="noise-overlay"></div>
+            <div class="vignette-overlay"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <!-- Section Header -->
+            <div class="text-center max-w-4xl mx-auto mb-28 reveal-fade-up">
+                <h2 class="text-6xl lg:text-[5.5rem] font-black text-white mb-8 tracking-[-0.04em] leading-[1.05]">
+                    Simple, Transparent <br> Pricing.
                 </h2>
-                <p class="text-xl text-gray-400">
+                <p class="text-xl text-white/50 font-medium max-w-2xl mx-auto leading-relaxed">
                     No hidden fees. No long-term contracts. Just skilled support at a price that makes sense.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 reveal-stagger">
-                <!-- Starter Plan -->
-                <div class="p-10 rounded-[3rem] bg-brand-light border border-white/5 flex flex-col h-full hover:border-white/10 transition-all">
+            <!-- Pricing Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 items-stretch reveal-stagger">
+                
+                <!-- Starter Card -->
+                <div class="pricing-card flex flex-col">
                     <div class="mb-8">
-                        <h3 class="text-2xl font-bold text-white mb-2">Starter</h3>
-                        <p class="text-gray-500">Perfect for individuals needing occasional support.</p>
+                        <h3 class="pricing-plan-name">Starter</h3>
+                        <div class="pricing-amount">$397<span>/mo</span></div>
+                        <p class="text-white/40 font-medium">Perfect for individuals needing occasional support.</p>
                     </div>
-                    <div class="mb-8">
-                        <span class="text-5xl font-black text-white">$499</span>
-                        <span class="text-gray-500">/mo</span>
-                    </div>
-                    <ul class="space-y-4 mb-12 flex-1">
-                        <li class="flex items-center space-x-3 text-gray-300">
-                            <span class="text-brand-purpleLight">✓</span>
-                            <span>20 Hours Per Month</span>
-                        </li>
-                        <li class="flex items-center space-x-3 text-gray-300">
-                            <span class="text-brand-purpleLight">✓</span>
-                            <span>Email & Calendar Management</span>
-                        </li>
-                        <li class="flex items-center space-x-3 text-gray-300">
-                            <span class="text-brand-purpleLight">✓</span>
-                            <span>Dedicated Trained VA</span>
-                        </li>
+                    
+                    <ul class="pricing-feature-list">
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span><strong>8 Hours</strong> of VA Support</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Email inbox management</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Calendar & appointment scheduling</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Basic data entry & CRM updates</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Document prep & organization</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Task & project coordination</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Social media scheduling (pre-made)</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Weekly task summary report</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Response time: <strong>24–48 hours</strong></span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>1 dedicated VA</span></li>
                     </ul>
-                    <a href="#get-started" class="w-full py-4 rounded-xl border border-white/10 text-white font-bold text-center hover:bg-white/5 transition-all">Get Started</a>
+
+                    <a href="#get-started" class="pricing-button">Get Started</a>
                 </div>
 
-                <!-- Growth Plan (Highlighted) -->
-                <div class="p-10 rounded-[3rem] bg-brand-purple border border-brand-purpleLight/50 flex flex-col h-full shadow-2xl transform scale-105 relative z-10">
-                    <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-brand-purpleLight text-white px-6 py-1 rounded-full text-xs font-black uppercase tracking-widest">Most Popular</div>
+                <!-- Pro Card (Featured) -->
+                <div class="pricing-card featured flex flex-col">
+                    <div class="pricing-badge">⭐ Most Popular</div>
                     <div class="mb-8">
-                        <h3 class="text-2xl font-bold text-white mb-2">Growth</h3>
-                        <p class="text-white/70">Our most popular plan for growing businesses.</p>
+                        <h3 class="pricing-plan-name">Pro</h3>
+                        <div class="pricing-amount">$697<span>/mo</span></div>
+                        <p class="text-white/40 font-medium">Our most popular plan for growing businesses.</p>
                     </div>
-                    <div class="mb-8">
-                        <span class="text-5xl font-black text-white">$899</span>
-                        <span class="text-white/70">/mo</span>
-                    </div>
-                    <ul class="space-y-4 mb-12 flex-1">
-                        <li class="flex items-center space-x-3 text-white">
-                            <span>✓</span>
-                            <span>40 Hours Per Month</span>
-                        </li>
-                        <li class="flex items-center space-x-3 text-white">
-                            <span>✓</span>
-                            <span>Full Admin Support</span>
-                        </li>
-                        <li class="flex items-center space-x-3 text-white">
-                            <span>✓</span>
-                            <span>CRM & Lead Follow-Up</span>
-                        </li>
-                        <li class="flex items-center space-x-3 text-white">
-                            <span>✓</span>
-                            <span>Priority Matching</span>
-                        </li>
+                    
+                    <ul class="pricing-feature-list">
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span><strong>18 Hours</strong> of VA Support</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span><strong>Everything in Starter, plus:</strong></span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Transaction & workflow support</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Social media content creation</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Client follow-up & email drafting</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Proposal & document writing</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Vendor & third-party coordination</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Database & contact list management</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Response time: <strong>12–24 hours</strong></span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Monthly performance check-in call</span></li>
                     </ul>
-                    <a href="#get-started" class="w-full py-4 rounded-xl bg-white text-brand-purple font-bold text-center hover:bg-gray-100 transition-all shadow-xl">Get Started</a>
+
+                    <a href="#get-started" class="pricing-button">Get Started</a>
                 </div>
 
-                <!-- Ultra Plan -->
-                <div class="p-10 rounded-[3rem] bg-brand-light border border-white/5 flex flex-col h-full hover:border-white/10 transition-all">
+                <!-- Ultra Card -->
+                <div class="pricing-card flex flex-col">
                     <div class="mb-8">
-                        <h3 class="text-2xl font-bold text-white mb-2">Ultra</h3>
-                        <p class="text-gray-500">Full-scale support for teams and high-volume operations.</p>
+                        <h3 class="pricing-plan-name">Ultra</h3>
+                        <div class="pricing-amount">$997<span>/mo</span></div>
+                        <p class="text-white/40 font-medium">Enterprise-level support for high-impact teams.</p>
                     </div>
-                    <div class="mb-8">
-                        <span class="text-5xl font-black text-white">$1,699</span>
-                        <span class="text-gray-500">/mo</span>
-                    </div>
-                    <ul class="space-y-4 mb-12 flex-1">
-                        <li class="flex items-center space-x-3 text-gray-300">
-                            <span class="text-brand-purpleLight">✓</span>
-                            <span>80 Hours Per Month</span>
-                        </li>
-                        <li class="flex items-center space-x-3 text-gray-300">
-                            <span class="text-brand-purpleLight">✓</span>
-                            <span>Advanced Operations Support</span>
-                        </li>
-                        <li class="flex items-center space-x-3 text-gray-300">
-                            <span class="text-brand-purpleLight">✓</span>
-                            <span>Project Management</span>
-                        </li>
-                        <li class="flex items-center space-x-3 text-gray-300">
-                            <span class="text-brand-purpleLight">✓</span>
-                            <span>Slack/Phone Communication</span>
-                        </li>
+                    
+                    <ul class="pricing-feature-list">
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span><strong>30 Hours</strong> of VA Support</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span><strong>Everything in Pro, plus:</strong></span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Cold calling & outreach support</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Full social media management</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Event & meeting coordination</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Drip campaign setup & management</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Priority task handling</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Response time: <strong>4–8 hours</strong></span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>VA + supervisor oversight</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Bi-weekly strategy call</span></li>
                     </ul>
-                    <a href="#get-started" class="w-full py-4 rounded-xl border border-white/10 text-white font-bold text-center hover:bg-white/5 transition-all">Get Started</a>
+
+                    <a href="#get-started" class="pricing-button">Get Started</a>
                 </div>
+
+            </div>
+
+            <!-- Footer Note -->
+            <div class="mt-20 text-center reveal-fade-up">
+                <p class="text-white/30 font-medium tracking-wide">
+                    “Unused hours do not roll over.”
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Infinite Continuous Logo Marquee - Deposyt Exact Match -->
+    <section class="marquee-section py-20 border-y border-white/5 overflow-hidden">
+        <div class="marquee-ambient-glow"></div>
+        <div class="container mx-auto px-6 mb-12 text-center reveal-fade-up">
+            <p class="text-xs font-black text-white/30 uppercase tracking-[0.2em]">Your VA Integrates With Your Stack</p>
+        </div>
+        
+        <div class="marquee-container">
+            <div class="marquee-track">
+                <!-- Set 1 -->
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/googleworkspace/white" alt="">google workspace</div>
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/slack/white" alt="">slack</div>
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/zoom/white" alt="">zoom</div>
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/notion/white" alt="">notion</div>
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/hubspot/white" alt="">hubspot</div>
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/salesforce/white" alt="">salesforce</div>
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/calendly/white" alt="">calendly</div>
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/asana/white" alt="">asana</div>
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/trello/white" alt="">trello</div>
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/mondaydotcom/white" alt="">monday.com</div>
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/docusign/white" alt="">docusign</div>
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/zapier/white" alt="">zapier</div>
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/clickup/white" alt="">clickup</div>
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/airtable/white" alt="">airtable</div>
+                
+                <!-- Set 2 (Duplicate for Seamless Loop) -->
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/googleworkspace/white" alt="">google workspace</div>
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/slack/white" alt="">slack</div>
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/zoom/white" alt="">zoom</div>
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/notion/white" alt="">notion</div>
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/hubspot/white" alt="">hubspot</div>
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/salesforce/white" alt="">salesforce</div>
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/calendly/white" alt="">calendly</div>
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/asana/white" alt="">asana</div>
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/trello/white" alt="">trello</div>
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/mondaydotcom/white" alt="">monday.com</div>
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/docusign/white" alt="">docusign</div>
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/zapier/white" alt="">zapier</div>
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/clickup/white" alt="">clickup</div>
+                <div class="marquee-logo"><img src="https://cdn.simpleicons.org/airtable/white" alt="">airtable</div>
             </div>
         </div>
     </section>
@@ -1764,18 +2219,16 @@
                 const industriesGrid = document.getElementById('industries-we-service-grid');
                 if (industriesGrid) {
                     industriesGrid.innerHTML = industriesData.map(ind => `
-                        <div class="group industry-card-glass p-8 rounded-[2rem] flex flex-col h-full reveal-fade-up">
-                            <div class="industry-icon-box w-12 h-12 bg-white/[0.03] border border-white/5 rounded-2xl flex items-center justify-center text-gray-400 mb-6 transition-all duration-500">
-                                <img src="${ind.icon}" class="w-6 h-6 opacity-40 group-hover:opacity-100 transition-opacity" alt="">
+                        <div class="industry-card-matte group reveal-fade-up">
+                            <div class="industry-card-icon-box">
+                                <img src="${ind.icon}" class="w-5 h-5 opacity-50 group-hover:opacity-100 transition-opacity invert" alt="">
                             </div>
-                            <h3 class="text-xl font-bold text-white mb-3 tracking-tight group-hover:text-brand-purpleLight transition-colors">${ind.name}</h3>
-                            <p class="text-gray-500 text-sm leading-relaxed font-medium group-hover:text-gray-400 transition-colors">${ind.description}</p>
-                            
-                            <!-- Subtle Card Lighting Accent -->
-                            <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-purple/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                            <h3 class="text-xl lg:text-2xl font-bold text-white mb-4 tracking-tight group-hover:text-brand-purpleLight transition-colors">${ind.name}</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed font-medium group-hover:text-gray-300 transition-colors">${ind.description}</p>
                         </div>
                     `).join('');
                 }
+
 
                 console.log('Content loaded successfully');
 

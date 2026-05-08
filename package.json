@@ -1,7 +1,11 @@
 {
-  "name": "deposyt_replica",
+  "name": "convergr",
   "version": "1.0.0",
-  "description": "",
+  "description": "Convergr website project.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/samanfasih135/convergr.git"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

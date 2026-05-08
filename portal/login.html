@@ -44,7 +44,6 @@
                     </label>
                     <button class="btn btn-primary" type="submit">Login</button>
                 </div>
-                <p class="muted" style="margin:.9rem 0 0;">Demo credentials: <strong>guest</strong> / <strong>re123</strong></p>
             </form>
         </section>
     </main>
@@ -77,13 +76,17 @@
             const ok = loginPortal({ portal: selectedPortal, username, password, persist });
             if (!ok) {
                 errorEl.className = "error";
-                errorEl.textContent = "Invalid credentials. Use guest / re123.";
+                errorEl.textContent = "Invalid credentials.";
+                return;
+            }
+            if (selectedPortal === "re") {
+                location.href = "https://re.marketlyne.com";
                 return;
             }
             if (next) {
                 location.href = `/${next}`;
             } else {
-                location.href = selectedPortal === "re" ? "/portal/re/index.html" : "/portal/va/index.html";
+                location.href = "/portal/va/index.html";
             }
         });
     </script>

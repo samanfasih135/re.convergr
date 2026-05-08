@@ -1,0 +1,12 @@
+{
+    "partners": {
+        "title": "Become a <span class=\"text-brand-blue\">Partner</span>",
+        "description": "Integrate our payment technology into your platform and offer your users the most competitive rates in the market.",
+        "ctaText": "Partner Sign Up"
+    },
+    "agents": {
+        "title": "Referral <span class=\"text-brand-blue\">Agents</span>",
+        "description": "Earn industry-leading residuals by referring businesses to our platform. High conversion and dedicated support.",
+        "ctaText": "Agent Registration"
+    }
+}

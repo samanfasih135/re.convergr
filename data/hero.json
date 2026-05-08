@@ -1,0 +1,33 @@
+{
+    "text": {
+        "title": "We Put A <br> <span class=\"swash-underline\">Percentage</span> Back In <br> Your Pocket",
+        "subtitle": "The <span class=\"font-bold text-brand-dark\">all-in-one merchant solution</span> <br> with <span class=\"text-brand-blue font-black underline decoration-2\">ZERO</span> credit card fees.",
+        "ctaText": "Get Processing Now",
+        "secondaryText": "Claim Your FREE Consultation Today.",
+        "trustPilot": "349 reviews"
+    },
+    "styling": {
+        "fonts": {
+            "family": "'Inter', sans-serif",
+            "weights": {
+                "title": 900,
+                "subtitle": 400,
+                "cta": 900
+            },
+            "sizes": {
+                "title": "text-6xl lg:text-7xl",
+                "subtitle": "text-xl"
+            }
+        },
+        "colors": {
+            "primary": "#006DFF",
+            "background": "#FFFFFF",
+            "text": "#2A2928",
+            "button": "#000000"
+        },
+        "layout": {
+            "paddingTop": "160px",
+            "paddingBottom": "100px"
+        }
+    }
+}

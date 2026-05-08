@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-premium-dark text-premium-white font-sans antialiased;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+  
+  .btn-gold {
+    @apply bg-premium-gold hover:bg-premium-goldLight text-premium-dark font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105;
+  }
+  
+  .text-glow {
+    text-shadow: 0 0 20px rgba(180, 145, 70, 0.5);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}

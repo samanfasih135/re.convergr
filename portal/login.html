@@ -3,92 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convergr Portal Login</title>
-    <link rel="stylesheet" href="/portal/portal.css">
+    <title>Convergr Redirect</title>
 </head>
 <body>
-    <div class="ambient"></div>
-    <main class="portal-login">
-        <section class="glass card" style="padding:2rem;">
-            <p class="brand" style="margin:0 0 .5rem;">Convergr Portals</p>
-            <h1 class="headline" style="font-size:2rem;">Choose Your Portal</h1>
-            <p class="sub">Select the portal you need, then sign in with your credentials.</p>
-
-            <div class="portal-choice-grid" style="margin:1.2rem 0 1.4rem;">
-                <article class="portal-choice active" data-portal="va">
-                    <h3 style="margin:.2rem 0;">VA Portal</h3>
-                    <p class="muted">For Convergr virtual assistant clients to manage onboarding and account setup.</p>
-                </article>
-                <article class="portal-choice" data-portal="re">
-                    <h3 style="margin:.2rem 0;">RE Portal</h3>
-                    <p class="muted">Real estate lead generation portal for exclusive buyer and seller leads.</p>
-                </article>
-            </div>
-
-            <form id="login-form" class="glass card" style="padding:1.2rem;">
-                <h2 id="portal-heading" style="margin:0 0 .75rem;">Login to VA Portal</h2>
-                <div class="grid-2">
-                    <div>
-                        <label for="username">Username</label>
-                        <input id="username" name="username" autocomplete="username" required>
-                    </div>
-                    <div>
-                        <label for="password">Password</label>
-                        <input id="password" type="password" name="password" autocomplete="current-password" required>
-                    </div>
-                </div>
-                <div id="login-error" class="hidden" style="margin-top:.8rem;"></div>
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:1rem;gap:1rem;flex-wrap:wrap;">
-                    <label style="display:flex;align-items:center;gap:.5rem;margin:0;">
-                        <input id="persist" type="checkbox" style="width:auto;"> Keep me signed in
-                    </label>
-                    <button class="btn btn-primary" type="submit">Login</button>
-                </div>
-            </form>
-        </section>
-    </main>
-    <script src="/portal/auth.js"></script>
     <script>
-        const params = new URLSearchParams(location.search);
-        const next = params.get("next");
-        let selectedPortal = params.get("portal") === "re" ? "re" : "va";
-        const heading = document.getElementById("portal-heading");
-        const choices = document.querySelectorAll(".portal-choice");
-        const errorEl = document.getElementById("login-error");
+        (function forwardToApp() {
+            const AUTH_FLAG_KEY = "convergr_main_app_authenticated";
+            const params = new URLSearchParams(location.search);
+            const hasAuth = params.get("auth") === "1" || params.get("authenticated") === "1" || params.get("authenticated") === "true";
 
-        function updatePortal(portal) {
-            selectedPortal = portal;
-            heading.textContent = `Login to ${portal.toUpperCase()} Portal`;
-            choices.forEach(c => c.classList.toggle("active", c.dataset.portal === portal));
-        }
-
-        choices.forEach(card => {
-            card.addEventListener("click", () => updatePortal(card.dataset.portal));
-        });
-        updatePortal(selectedPortal);
-
-        document.getElementById("login-form").addEventListener("submit", (e) => {
-            e.preventDefault();
-            errorEl.className = "hidden";
-            const username = document.getElementById("username").value.trim();
-            const password = document.getElementById("password").value.trim();
-            const persist = document.getElementById("persist").checked;
-            const ok = loginPortal({ portal: selectedPortal, username, password, persist });
-            if (!ok) {
-                errorEl.className = "error";
-                errorEl.textContent = "Invalid credentials.";
+            if (hasAuth) {
+                sessionStorage.setItem(AUTH_FLAG_KEY, "1");
+                localStorage.setItem(AUTH_FLAG_KEY, "1");
+                location.replace("/index.html");
                 return;
             }
-            if (selectedPortal === "re") {
-                location.href = "https://reconvergr.vercel.app";
-                return;
-            }
-            if (next) {
-                location.href = `/${next}`;
+
+            const alreadyAuthed = sessionStorage.getItem(AUTH_FLAG_KEY) === "1" || localStorage.getItem(AUTH_FLAG_KEY) === "1";
+            if (alreadyAuthed) {
+                location.replace("/index.html");
             } else {
-                location.href = "/portal/va/index.html";
+                location.replace("https://convergr.vercel.app");
             }
-        });
+        })();
     </script>
 </body>
 </html>

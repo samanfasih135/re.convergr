@@ -2134,9 +2134,10 @@
         (function enforceMainAppAuth() {
             const AUTH_FLAG_KEY = "convergr_main_app_authenticated";
             const params = new URLSearchParams(window.location.search);
-            const hasAuthQuery = params.get("auth") === "1";
+            const hasAuthQuery = params.get("auth") === "1" || params.get("authenticated") === "1" || params.get("authenticated") === "true";
             if (hasAuthQuery) {
                 sessionStorage.setItem(AUTH_FLAG_KEY, "1");
+                localStorage.setItem(AUTH_FLAG_KEY, "1");
             }
             const hasMainAuth = sessionStorage.getItem(AUTH_FLAG_KEY) === "1" || localStorage.getItem(AUTH_FLAG_KEY) === "1";
             if (!hasMainAuth) {

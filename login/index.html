@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in — Convergr</title>
+    <link rel="stylesheet" href="/portal/portal.css">
+</head>
+<body>
+    <div class="ambient"></div>
+    <main class="portal-login">
+        <section class="glass card" style="padding:2rem;">
+            <p class="brand" style="margin:0 0 .5rem;">Convergr</p>
+            <h1 class="headline" style="font-size:2rem;margin:0 0 1.25rem;">Sign in</h1>
+            <form id="login-form" class="glass card" style="padding:1.2rem;">
+                <div class="grid-2">
+                    <div>
+                        <label for="username">Username</label>
+                        <input id="username" name="username" autocomplete="username" required>
+                    </div>
+                    <div>
+                        <label for="password">Password</label>
+                        <input id="password" type="password" name="password" autocomplete="current-password" required>
+                    </div>
+                </div>
+                <div id="login-error" class="hidden" style="margin-top:.8rem;"></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:1rem;gap:1rem;flex-wrap:wrap;">
+                    <label style="display:flex;align-items:center;gap:.5rem;margin:0;">
+                        <input id="persist" type="checkbox" style="width:auto;"> Keep me signed in
+                    </label>
+                    <button class="btn btn-primary" type="submit">Sign in</button>
+                </div>
+            </form>
+        </section>
+    </main>
+    <script src="/auth.js"></script>
+    <script>
+        (function () {
+            const params = new URLSearchParams(location.search);
+            const errorEl = document.getElementById("login-error");
+
+            if (ConvergrAuth.isAuthenticated()) {
+                const dest = ConvergrAuth.safeNextParam(params.get("next"));
+                location.replace(dest);
+                return;
+            }
+
+            document.getElementById("login-form").addEventListener("submit", function (e) {
+                e.preventDefault();
+                errorEl.className = "hidden";
+                errorEl.textContent = "";
+                var username = document.getElementById("username").value.trim();
+                var password = document.getElementById("password").value.trim();
+                var persist = document.getElementById("persist").checked;
+                if (!ConvergrAuth.login(username, password, persist)) {
+                    errorEl.className = "error";
+                    errorEl.textContent = "Invalid credentials.";
+                    return;
+                }
+                var dest = ConvergrAuth.safeNextParam(params.get("next"));
+                location.href = dest;
+            });
+        })();
+    </script>
+</body>
+</html>

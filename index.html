@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/auth.js"></script>
+    <script>ConvergrAuth.requireAuth();</script>
     <title>Convergr | Premium Virtual Assistants</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2151,7 +2153,7 @@
 
             <!-- CTA Buttons (Right) -->
             <div class="hidden xl:flex items-center space-x-4">
-                <a href="/portal/login.html"
+                <a href="/login/"
                     class="border border-white/20 px-6 py-2 rounded-lg text-sm font-bold text-white hover:border-white transition-all">Login</a>
                 <a href="#get-started"
                     class="bg-brand-purple px-6 py-2 rounded-lg text-sm font-bold text-white hover:bg-brand-purpleLight transition-all">Get
@@ -3482,6 +3484,19 @@
                         behavior: "smooth"
                     });
                 }
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (!window.ConvergrAuth || !ConvergrAuth.isAuthenticated()) return;
+            document.querySelectorAll('a[href="/login/"]').forEach(function (el) {
+                el.textContent = "Log out";
+                el.setAttribute("href", "#");
+                el.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    ConvergrAuth.logout();
+                });
             });
         });
     </script>

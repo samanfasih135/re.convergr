@@ -1,4 +1,6 @@
-# Convergr
+# RE Convergr (re.convergr)
+
+Duplicate of the main Convergr marketing site, deployed separately for the RE product line.
 
 A high-fidelity, single-page merchant solutions website inspired by **Deposyt.com** and themed with the premium aesthetic of **MarketLyne.com**.
 
@@ -29,4 +31,4 @@ A high-fidelity, single-page merchant solutions website inspired by **Deposyt.co
 Built with 🖤 for the next generation of merchants.
 
 ## Repository
-- GitHub: https://github.com/samanfasih135/convergr
+- GitHub: https://github.com/samanfasih135/re.convergr

@@ -1,10 +1,10 @@
 {
-  "name": "reconvergr",
+  "name": "convergr",
   "version": "1.0.0",
-  "description": "RE Convergr site (duplicate deployment).",
+  "description": "Convergr website project.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/samanfasih135/re.convergr.git"
+    "url": "https://github.com/samanfasih135/convergr.git"
   },
   "main": "index.js",
   "scripts": {

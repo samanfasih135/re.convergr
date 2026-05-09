@@ -3,29 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convergr Redirect</title>
+    <title>Convergr Portal Login</title>
+    <link rel="stylesheet" href="/portal/portal.css">
 </head>
 <body>
-    <script>
-        (function forwardToApp() {
-            const AUTH_FLAG_KEY = "convergr_main_app_authenticated";
-            const params = new URLSearchParams(location.search);
-            const hasAuth = params.get("auth") === "1" || params.get("authenticated") === "1" || params.get("authenticated") === "true";
+    <div class="ambient"></div>
+    <main class="portal-login">
+        <!-- Step 1: VA vs RE only -->
+        <section id="step-portals" class="glass card" style="padding:2rem;">
+            <p class="brand" style="margin:0 0 .5rem;">Convergr Portals</p>
+            <h1 class="headline" style="font-size:2rem;">Choose Your Portal</h1>
 
-            if (hasAuth) {
-                sessionStorage.setItem(AUTH_FLAG_KEY, "1");
-                localStorage.setItem(AUTH_FLAG_KEY, "1");
-                location.replace("/index.html");
+            <div class="portal-choice-grid" style="margin:1.5rem 0 0;">
+                <article class="portal-choice" data-portal="va" id="choice-va" role="button" tabindex="0">
+                    <div class="portal-choice-inner">
+                        <span class="portal-choice-icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+                        </span>
+                        <h3 class="portal-choice-title">VA Portal</h3>
+                    </div>
+                </article>
+                <article class="portal-choice" data-portal="re" id="choice-re" role="button" tabindex="0">
+                    <div class="portal-choice-inner">
+                        <span class="portal-choice-icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>
+                        </span>
+                        <h3 class="portal-choice-title">RE Portal</h3>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Step 2: VA credentials only -->
+        <section id="step-login" class="glass card hidden" style="padding:2rem;">
+            <p class="brand" style="margin:0 0 .5rem;">Convergr Portals</p>
+            <button type="button" class="btn" id="back-portals" style="margin-bottom:1rem;padding:.65rem 1rem;font-size:.88rem;">← Choose a different portal</button>
+            <form id="login-form" class="glass card" style="padding:1.2rem;">
+                <h2 id="portal-heading" style="margin:0 0 .75rem;">Sign in to VA Portal</h2>
+                <div class="grid-2">
+                    <div>
+                        <label for="username">Username</label>
+                        <input id="username" name="username" autocomplete="username" required>
+                    </div>
+                    <div>
+                        <label for="password">Password</label>
+                        <input id="password" type="password" name="password" autocomplete="current-password" required>
+                    </div>
+                </div>
+                <div id="login-error" class="hidden" style="margin-top:.8rem;"></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:1rem;gap:1rem;flex-wrap:wrap;">
+                    <label style="display:flex;align-items:center;gap:.5rem;margin:0;">
+                        <input id="persist" type="checkbox" style="width:auto;"> Keep me signed in
+                    </label>
+                    <button class="btn btn-primary" type="submit">Sign in</button>
+                </div>
+            </form>
+        </section>
+    </main>
+    <script src="/portal/auth.js"></script>
+    <script>
+        const params = new URLSearchParams(location.search);
+        const next = params.get("next");
+        const stepPortals = document.getElementById("step-portals");
+        const stepLogin = document.getElementById("step-login");
+        const choiceVa = document.getElementById("choice-va");
+        const choiceRe = document.getElementById("choice-re");
+        const backBtn = document.getElementById("back-portals");
+        const errorEl = document.getElementById("login-error");
+
+        const RE_APP_URL = "https://reconvergr.vercel.app/login";
+
+        function showVaLogin() {
+            stepPortals.classList.add("hidden");
+            stepLogin.classList.remove("hidden");
+            document.getElementById("username").focus();
+        }
+
+        function showPortalChoice() {
+            stepLogin.classList.add("hidden");
+            stepPortals.classList.remove("hidden");
+            errorEl.className = "hidden";
+            errorEl.textContent = "";
+        }
+
+        function goToRePortal() {
+            location.href = RE_APP_URL;
+        }
+
+        choiceVa.addEventListener("click", showVaLogin);
+        choiceVa.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                showVaLogin();
+            }
+        });
+
+        choiceRe.addEventListener("click", goToRePortal);
+        choiceRe.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                goToRePortal();
+            }
+        });
+
+        backBtn.addEventListener("click", showPortalChoice);
+
+        if (params.get("portal") === "re") {
+            goToRePortal();
+        }
+        if (params.get("portal") === "va") {
+            showVaLogin();
+        }
+
+        document.getElementById("login-form").addEventListener("submit", (e) => {
+            e.preventDefault();
+            errorEl.className = "hidden";
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const persist = document.getElementById("persist").checked;
+            const ok = loginPortal({ portal: "va", username, password, persist });
+            if (!ok) {
+                errorEl.className = "error";
+                errorEl.textContent = "Invalid credentials.";
                 return;
             }
-
-            const alreadyAuthed = sessionStorage.getItem(AUTH_FLAG_KEY) === "1" || localStorage.getItem(AUTH_FLAG_KEY) === "1";
-            if (alreadyAuthed) {
-                location.replace("/index.html");
-            } else {
-                location.replace("https://convergr.vercel.app");
+            if (next) {
+                location.href = `/${next}`;
+                return;
             }
-        })();
+            location.href = "/portal/va/index.html";
+        });
     </script>
 </body>
 </html>

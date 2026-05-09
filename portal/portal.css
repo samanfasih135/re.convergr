@@ -172,6 +172,34 @@ label { font-size: .9rem; color: #d6cde8; margin-bottom: .35rem; display: block;
     border-color: rgba(219, 194, 255, 0.78);
     box-shadow: 0 0 28px rgba(188, 133, 245, 0.38);
 }
+.portal-choice-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    text-align: center;
+}
+.portal-choice-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 14px;
+    background: rgba(91, 45, 142, 0.35);
+    border: 1px solid rgba(219, 194, 255, 0.35);
+    color: #e8ddff;
+}
+.portal-choice-icon svg {
+    width: 1.65rem;
+    height: 1.65rem;
+}
+.portal-choice-title {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 700;
+}
 .hidden { display: none !important; }
 .error {
     color: #ffd5de;

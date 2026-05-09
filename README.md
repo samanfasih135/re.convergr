@@ -1,6 +1,4 @@
-# RE Convergr (re.convergr)
-
-Duplicate of the main Convergr marketing site, deployed separately for the RE product line.
+# Convergr
 
 A high-fidelity, single-page merchant solutions website inspired by **Deposyt.com** and themed with the premium aesthetic of **MarketLyne.com**.
 

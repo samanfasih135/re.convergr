@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" fill="none">
+  <defs>
+    <linearGradient id="time-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#06D6D4"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+    <filter id="time-glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Clock circle -->
+  <circle cx="105" cy="85" r="65" fill="none" stroke="url(#time-grad)" stroke-width="3" filter="url(#time-glow)"/>
+  <!-- Hour ticks -->
+  <line x1="105" y1="25" x2="105" y2="35" stroke="#22D3EE" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="105" y1="135" x2="105" y2="145" stroke="#22D3EE" stroke-width="2" stroke-linecap="round"/>
+  <line x1="40" y1="85" x2="50" y2="85" stroke="#22D3EE" stroke-width="2" stroke-linecap="round"/>
+  <line x1="160" y1="85" x2="170" y2="85" stroke="#22D3EE" stroke-width="2" stroke-linecap="round"/>
+  <!-- Clock center dot -->
+  <circle cx="105" cy="85" r="5" fill="#22D3EE" filter="url(#time-glow)"/>
+  <!-- Minute hand (pointing to 3) -->
+  <line x1="105" y1="85" x2="140" y2="85" stroke="#22D3EE" stroke-width="3" stroke-linecap="round" filter="url(#time-glow)"/>
+  <!-- Hour hand (pointing to 12) -->
+  <line x1="105" y1="85" x2="105" y2="50" stroke="#22D3EE" stroke-width="3" stroke-linecap="round" filter="url(#time-glow)"/>
+  <!-- Rewind arrow (dotted arc + arrowhead) -->
+  <path d="M55,120 A55,55 0 0,1 55,50" fill="none" stroke="#4488FF" stroke-width="2" stroke-dasharray="4 4" opacity="0.7"/>
+  <polygon points="48,48 55,38 62,52" fill="#4488FF" opacity="0.8"/>
+  <!-- Label -->
+  <text x="100" y="185" text-anchor="middle" font-family="Inter,sans-serif" font-weight="700" font-size="16" fill="#ffffff">Hours Saved</text>
+</svg>

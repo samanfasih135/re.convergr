@@ -2130,21 +2130,6 @@
 </head>
 
 <body class="font-sans antialiased">
-    <script>
-        (function enforceMainAppAuth() {
-            const AUTH_FLAG_KEY = "convergr_main_app_authenticated";
-            const params = new URLSearchParams(window.location.search);
-            const hasAuthQuery = params.get("auth") === "1" || params.get("authenticated") === "1" || params.get("authenticated") === "true";
-            if (hasAuthQuery) {
-                sessionStorage.setItem(AUTH_FLAG_KEY, "1");
-                localStorage.setItem(AUTH_FLAG_KEY, "1");
-            }
-            const hasMainAuth = sessionStorage.getItem(AUTH_FLAG_KEY) === "1" || localStorage.getItem(AUTH_FLAG_KEY) === "1";
-            if (!hasMainAuth) {
-                window.location.replace("https://convergr.vercel.app");
-            }
-        })();
-    </script>
 
     <!-- Header -->
     <header class="fixed top-0 w-full z-50 transition-all duration-300 bg-brand-base/80 backdrop-blur-md border-b border-white/10">
@@ -2166,14 +2151,8 @@
 
             <!-- CTA Buttons (Right) -->
             <div class="hidden xl:flex items-center space-x-4">
-                <div class="relative" id="welcome-menu">
-                    <button type="button" id="welcome-toggle" aria-expanded="false"
-                        class="border border-white/20 px-6 py-2 rounded-lg text-sm font-bold text-white hover:border-white transition-all">Welcome</button>
-                    <div id="welcome-dropdown" class="hidden absolute right-0 mt-2 min-w-[10rem] rounded-lg border border-white/15 bg-brand-base/95 p-2 shadow-xl backdrop-blur-md">
-                        <button type="button" id="logout-btn"
-                            class="w-full rounded-md px-3 py-2 text-left text-sm font-semibold text-white hover:bg-white/10 transition-colors">Logout</button>
-                    </div>
-                </div>
+                <a href="/portal/login.html"
+                    class="border border-white/20 px-6 py-2 rounded-lg text-sm font-bold text-white hover:border-white transition-all">Login</a>
                 <a href="#get-started"
                     class="bg-brand-purple px-6 py-2 rounded-lg text-sm font-bold text-white hover:bg-brand-purpleLight transition-all">Get
                     Started</a>
@@ -2224,7 +2203,7 @@
                     <div class="hero-visual-panel">
                         <div class="hero-panel-ambient"></div>
                         <!-- Base Image: Right-side cinematic panel -->
-                        <img src="assets/img/hero/final.png" alt="Convergr Premium Support" class="hero-base-image">
+                        <img src="assets/img/hero/hero-main.png" alt="Convergr Premium Support" class="hero-base-image">
                         <div class="hero-panel-left-fade"></div>
                         <div class="hero-panel-vignette"></div>
                         <div class="hero-panel-blend"></div>
@@ -2275,30 +2254,30 @@
                         </circle>
                     </svg>
 
-                    <!-- Floating Icon Cards — Repositioned for framing -->
-                    <!-- 1. Appointments Managed — upper-left -->
-                    <div class="hero-float-card float-bob-1 enter-1" style="top: 14%; left: 14%;">
-                        <img src="assets/img/hero/appoint.svg" alt="Appointments Managed">
+                    <!-- Floating icons: pentagon orbit, safe insets, staggered L/R for depth -->
+                    <!-- 1. Appointments — upper-left -->
+                    <div class="hero-float-card float-bob-1 enter-1" style="top: 10%; left: 19%;">
+                        <img src="assets/img/hero/hero-float-appoint.svg" alt="Appointments Managed">
                     </div>
 
-                    <!-- 2. Inbox Zero — mid-left -->
-                    <div class="hero-float-card float-bob-2 enter-2" style="top: 58%; left: 11%;">
-                        <img src="assets/img/hero/inbox.svg" alt="Inbox Zero">
+                    <!-- 2. Inbox — lower-left -->
+                    <div class="hero-float-card float-bob-2 enter-2" style="top: 56%; left: 16%;">
+                        <img src="assets/img/hero/hero-float-inbox.svg" alt="Inbox Zero">
                     </div>
 
-                    <!-- 3. Tasks Completed — upper-right -->
-                    <div class="hero-float-card float-bob-3 enter-3" style="top: 12%; right: 10%;">
-                        <img src="assets/img/hero/task.svg" alt="Tasks Completed">
+                    <!-- 3. Tasks — upper-right -->
+                    <div class="hero-float-card float-bob-3 enter-3" style="top: 9%; right: 7%;">
+                        <img src="assets/img/hero/hero-float-task.svg" alt="Tasks Completed">
                     </div>
 
-                    <!-- 4. Hours Saved — mid-right -->
-                    <div class="hero-float-card float-bob-4 enter-4" style="top: 56%; right: 2%;">
-                        <img src="assets/img/hero/time.svg" alt="Hours Saved">
+                    <!-- 4. Hours — mid-right (visual anchor) -->
+                    <div class="hero-float-card float-bob-4 enter-4" style="top: 48%; right: 2%;">
+                        <img src="assets/img/hero/hero-float-time.svg" alt="Hours Saved">
                     </div>
 
-                    <!-- 5. Client Follow-Ups — lower-right -->
-                    <div class="hero-float-card float-bob-5 enter-5" style="top: 76%; right: 16%;">
-                        <img src="assets/img/hero/chat.svg" alt="Client Follow-Ups">
+                    <!-- 5. Follow-ups — lower-right -->
+                    <div class="hero-float-card float-bob-5 enter-5" style="top: 74%; right: 9%;">
+                        <img src="assets/img/hero/hero-float-chat.svg" alt="Client Follow-Ups">
                     </div>
                 </div>
 
@@ -2321,7 +2300,7 @@
                         
                         <!-- Main Card -->
                         <div class="relative bg-brand-light p-3 lg:p-4 rounded-[2.5rem] shadow-2xl overflow-hidden border border-white/5 backdrop-blur-sm h-full min-h-[560px] lg:min-h-[640px]">
-                            <img src="assets/img/3 step.png" alt="Convergr Workflow" class="w-full h-full object-cover object-center rounded-[2rem] transform group-hover:scale-[1.02] transition duration-700 opacity-95">
+                            <img src="assets/img/how-it-works-workflow.png" alt="Convergr Workflow" class="w-full h-full object-cover object-center rounded-[2rem] transform group-hover:scale-[1.02] transition duration-700 opacity-95">
                             
                             <div class="step-orbit-icon step-orbit-1" aria-hidden="true">
                                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2558,13 +2537,13 @@
                     <p class="text-gray-400 leading-relaxed font-medium">Appointments, reminders, rescheduling — your calendar stays organized effortlessly.</p>
                 </div>
 
-                <!-- Card 3: Lead Follow-Up -->
+                <!-- Card 3: Client Outreach -->
                 <div class="premium-service-card p-10 rounded-[2.5rem] group">
                     <div class="service-icon-wrapper">
                         <svg class="w-8 h-8 text-brand-purpleLight service-icon-neon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-brand-purpleLight transition-colors">Lead Follow-Up & Outreach</h3>
-                    <p class="text-gray-400 leading-relaxed font-medium">Your VA handles follow-up sequences and CRM updates so no lead goes cold.</p>
+                    <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-brand-purpleLight transition-colors">Client Outreach Support</h3>
+                    <p class="text-gray-400 leading-relaxed font-medium">Your VA manages outbound communication, follow-up sequences, and client touchpoints so every contact receives a timely, professional response.</p>
                 </div>
 
                 <!-- Card 4: CRM -->
@@ -2688,7 +2667,7 @@
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                     </div>
                     <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-green-500 transition-colors">No Long-Term Contracts</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed font-medium">Start month-to-month. Scale up when business grows, scale back when you need to. No penalties, no lock-ins.</p>
+                    <p class="text-gray-400 text-sm leading-relaxed font-medium">Start with flexible hour blocks. Scale up when business grows, scale back when you need to. No penalties, no lock-ins.</p>
                 </div>
 
                 <!-- Feature 6: Green Glow -->
@@ -2730,7 +2709,7 @@
             <div class="industry-layout-container">
                 <!-- Left Side: Large Cinematic Image -->
                 <div class="industry-image-wrapper group reveal-fade-up">
-                    <img src="assets/img/new man.png" alt="Convergr Professional Support" class="reveal-visible">
+                    <img src="assets/img/section-professional-support.png" alt="Convergr Professional Support" class="reveal-visible">
                     <div class="industry-image-glow"></div>
                 </div>
 
@@ -2795,6 +2774,10 @@
                 </button>
             </div>
 
+            <p class="hours-subtitle text-lg text-white/45 font-medium max-w-3xl mx-auto leading-relaxed mb-10 reveal-fade-up">
+                All hours are prepaid and roll over — unused hours never expire and carry forward to the following period.
+            </p>
+
             <!-- CTA Button -->
             <div class="hours-cta reveal-fade-up cta-glow-wrapper">
                 <a href="#get-started" class="hours-match-btn w-auto bg-black/95 py-3.5 px-8 rounded-full text-base font-black inline-flex items-center justify-center shadow-[0_10px_24px_rgba(0,0,0,0.4)] border border-white/10 transition-all text-white" onclick="handleHoursCTA(event)">
@@ -2836,12 +2819,13 @@
                 <div class="pricing-card flex flex-col">
                     <div class="mb-8">
                         <h3 class="pricing-plan-name">Starter</h3>
-                        <div class="pricing-amount">$397<span>/mo</span></div>
+                        <div class="pricing-amount">$395<span>/block</span></div>
                         <p class="text-white/40 font-medium">Perfect for individuals needing occasional support.</p>
                     </div>
                     
                     <ul class="pricing-feature-list">
                         <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span><strong>8 Hours</strong> of VA Support</span></li>
+                        <li><svg class="w-5 h-5 opacity-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d=""></path></svg><span>Hours roll over — unused hours carry forward automatically and never expire.</span></li>
                         <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Email inbox management</span></li>
                         <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Calendar & appointment scheduling</span></li>
                         <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Basic data entry & CRM updates</span></li>
@@ -2861,12 +2845,13 @@
                     <div class="pricing-badge">⭐ Most Popular</div>
                     <div class="mb-8">
                         <h3 class="pricing-plan-name">Pro</h3>
-                        <div class="pricing-amount">$697<span>/mo</span></div>
+                        <div class="pricing-amount">$695<span>/block</span></div>
                         <p class="text-white/40 font-medium">Our most popular plan for growing businesses.</p>
                     </div>
                     
                     <ul class="pricing-feature-list">
                         <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span><strong>18 Hours</strong> of VA Support</span></li>
+                        <li><svg class="w-5 h-5 opacity-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d=""></path></svg><span>Hours roll over — unused hours carry forward automatically and never expire.</span></li>
                         <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span><strong>Everything in Starter, plus:</strong></span></li>
                         <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Transaction & workflow support</span></li>
                         <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Social media content creation</span></li>
@@ -2885,12 +2870,13 @@
                 <div class="pricing-card flex flex-col">
                     <div class="mb-8">
                         <h3 class="pricing-plan-name">Ultra</h3>
-                        <div class="pricing-amount">$997<span>/mo</span></div>
+                        <div class="pricing-amount">$995<span>/block</span></div>
                         <p class="text-white/40 font-medium">Enterprise-level support for high-impact teams.</p>
                     </div>
                     
                     <ul class="pricing-feature-list">
                         <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span><strong>30 Hours</strong> of VA Support</span></li>
+                        <li><svg class="w-5 h-5 opacity-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d=""></path></svg><span>Hours roll over — unused hours carry forward automatically and never expire.</span></li>
                         <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span><strong>Everything in Pro, plus:</strong></span></li>
                         <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Cold calling & outreach support</span></li>
                         <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Full social media management</span></li>
@@ -2909,8 +2895,8 @@
 
             <!-- Footer Note -->
             <div class="mt-20 text-center reveal-fade-up">
-                <p class="text-white/30 font-medium tracking-wide">
-                    “Unused hours do not roll over.”
+                <p class="text-white/40 font-medium tracking-wide max-w-5xl mx-auto leading-relaxed">
+                    "Convergr plans are structured as prepaid hour blocks, not monthly subscriptions. Your hours are purchased upfront and credited to your account in full. Any unused hours carry forward automatically into the following period and remain available until fully utilized — giving you complete flexibility to engage your VA on your own schedule, at your own pace, without the pressure of a monthly reset."
                 </p>
             </div>
         </div>
@@ -3000,7 +2986,7 @@
                         <span class="font-bold text-white text-lg">Is there a long-term contract?</span>
                         <span class="faq-icon"><svg class="w-4 h-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 4v12M4 10h12"/></svg></span>
                     </button>
-                    <div class="faq-answer"><div class="faq-answer-inner">No. All plans are month-to-month. Cancel or adjust anytime with no penalties.</div></div>
+                    <div class="faq-answer"><div class="faq-answer-inner">No. All plans are prepaid hour blocks. Cancel or adjust anytime with no penalties.</div></div>
                 </article>
 
                 <article class="faq-card">
@@ -3009,6 +2995,14 @@
                         <span class="faq-icon"><svg class="w-4 h-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 4v12M4 10h12"/></svg></span>
                     </button>
                     <div class="faq-answer"><div class="faq-answer-inner">Each plan outlines hours, task categories, communication channels, and support level. See the Pricing section for a full breakdown.</div></div>
+                </article>
+
+                <article class="faq-card">
+                    <button type="button" class="faq-trigger" aria-expanded="false">
+                        <span class="font-bold text-white text-lg">Do my hours expire if I don't use them all?</span>
+                        <span class="faq-icon"><svg class="w-4 h-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 4v12M4 10h12"/></svg></span>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">Never. Convergr operates on a prepaid hour-block model, not a monthly subscription. Any hours you don't use in a given period carry forward automatically and remain in your account until fully utilized. There are no monthly resets, no expiry dates, and no pressure to use your hours before an arbitrary deadline. Your hours work on your schedule.</div></div>
                 </article>
 
                 <article class="faq-card">
@@ -3049,7 +3043,7 @@
                     <p class="text-lg lg:text-xl text-white/50 leading-relaxed max-w-xl mb-10">Tell us about your business and workflow needs - we'll match you with the right VA in as little as 24-48 hours.</p>
                     <ul class="space-y-4 text-white/80 reveal-stagger">
                         <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-brand-purpleLight"></span><span>Dedicated VA support</span></li>
-                        <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-brand-purpleLight"></span><span>Flexible monthly plans</span></li>
+                        <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-brand-purpleLight"></span><span>Flexible per-block hour plans — unused hours roll over automatically</span></li>
                         <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-brand-purpleLight"></span><span>Fast onboarding</span></li>
                         <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-brand-purpleLight"></span><span>No long-term contracts</span></li>
                     </ul>
@@ -3091,7 +3085,7 @@
                                 <label class="intake-check"><input type="checkbox" name="tasks" value="Email management"> Email management</label>
                                 <label class="intake-check"><input type="checkbox" name="tasks" value="Scheduling"> Scheduling</label>
                                 <label class="intake-check"><input type="checkbox" name="tasks" value="CRM/Data Entry"> CRM/Data Entry</label>
-                                <label class="intake-check"><input type="checkbox" name="tasks" value="Lead Follow-Up"> Lead Follow-Up</label>
+                                <label class="intake-check"><input type="checkbox" name="tasks" value="Client Follow-Up & Outreach"> Client Follow-Up & Outreach</label>
                                 <label class="intake-check"><input type="checkbox" name="tasks" value="Social Media"> Social Media</label>
                                 <label class="intake-check"><input type="checkbox" name="tasks" value="Research"> Research</label>
                                 <label class="intake-check"><input type="checkbox" name="tasks" value="Document Prep"> Document Prep</label>
@@ -3158,36 +3152,20 @@
                 <div class="reveal-fade-up">
                     <h5 class="font-bold uppercase tracking-[0.2em] text-[0.68rem] text-white/75 mb-6">Contact</h5>
                     <ul class="space-y-4 text-sm text-gray-400 leading-relaxed">
-                        <li>123 Business Ave, Suite 400<br>New York, NY 10001</li>
-                        <li>Monday-Friday, 9am-6pm EST</li>
+                        <li>Convergr LLC (Delaware)<br>Address to be provided</li>
+                        <li>Monday-Friday, 10am-7pm EST</li>
                         <li><a href="mailto:support@convergr.net" class="footer-link">support@convergr.net</a></li>
-                        <li>(000) 000-0000</li>
+                        <li>Phone number to be provided</li>
                     </ul>
-                </div>
-
-                <div class="reveal-fade-up">
-                    <div class="trust-widget">
-                        <div class="flex items-center gap-2 mb-3">
-                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
-                                <path d="M21.8 12.23c0-.74-.06-1.47-.2-2.18H12v4.13h5.49a4.7 4.7 0 0 1-2.03 3.08v2.56h3.29c1.93-1.78 3.05-4.42 3.05-7.59Z" fill="#4285F4"/>
-                                <path d="M12 22c2.75 0 5.06-.9 6.75-2.44l-3.29-2.56c-.92.61-2.1.97-3.46.97-2.66 0-4.92-1.8-5.73-4.22H2.88v2.64A10 10 0 0 0 12 22Z" fill="#34A853"/>
-                                <path d="M6.27 13.75A6 6 0 0 1 5.96 12c0-.61.1-1.2.3-1.75V7.61H2.88A10 10 0 0 0 2 12c0 1.61.39 3.13 1.08 4.39l3.19-2.64Z" fill="#FBBC05"/>
-                                <path d="M12 6.02c1.5 0 2.85.52 3.91 1.53l2.93-2.93C17.06 2.96 14.75 2 12 2a10 10 0 0 0-8.92 5.61l3.38 2.64C7.08 7.82 9.34 6.02 12 6.02Z" fill="#EA4335"/>
-                            </svg>
-                            <span class="text-xs font-semibold uppercase tracking-wider text-[#5f6368]">Google</span>
-                        </div>
-                        <div class="trust-stars mb-2">★★★★★</div>
-                        <p class="text-sm font-bold text-[#202124] mb-1">5.0 Rated Service</p>
-                        <p class="text-[0.72rem] text-[#5f6368]">Verified by Trustindex</p>
-                    </div>
                 </div>
             </div>
 
             <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs text-gray-500">
                 <p>&copy; 2026 Convergr LLC. All Rights Reserved.</p>
                 <div class="flex items-center gap-6">
-                    <a href="#" class="footer-link">Privacy Policy</a>
-                    <a href="#" class="footer-link">Terms of Service</a>
+                    <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
+                    <a href="/terms-of-service" class="footer-link">Terms of Service</a>
+                    <a href="/refund-policy" class="footer-link">Refund Policy</a>
                 </div>
             </div>
         </div>
@@ -3431,37 +3409,6 @@
         });
     </script>
     <script>
-        const AUTH_FLAG_KEY = "convergr_main_app_authenticated";
-
-        function setupWelcomeMenu() {
-            const menu = document.getElementById('welcome-menu');
-            const toggle = document.getElementById('welcome-toggle');
-            const dropdown = document.getElementById('welcome-dropdown');
-            const logoutBtn = document.getElementById('logout-btn');
-            if (!menu || !toggle || !dropdown || !logoutBtn) return;
-
-            const closeMenu = () => {
-                dropdown.classList.add('hidden');
-                toggle.setAttribute('aria-expanded', 'false');
-            };
-
-            toggle.addEventListener('click', () => {
-                const isHidden = dropdown.classList.contains('hidden');
-                dropdown.classList.toggle('hidden', !isHidden);
-                toggle.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
-            });
-
-            document.addEventListener('click', (event) => {
-                if (!menu.contains(event.target)) closeMenu();
-            });
-
-            logoutBtn.addEventListener('click', () => {
-                sessionStorage.removeItem(AUTH_FLAG_KEY);
-                localStorage.removeItem(AUTH_FLAG_KEY);
-                window.location.replace('https://convergr.vercel.app');
-            });
-        }
-
         // Task 1: Intersection Observer for Scroll Reveal (Deposyt Style)
         const observerOptions = {
             threshold: 0.1,
@@ -3482,7 +3429,6 @@
         document.querySelectorAll('.reveal-section').forEach(el => {
             revealObserver.observe(el);
         });
-        setupWelcomeMenu();
 
         // Premium FAQ accordion (single-open, smooth height animation)
         const faqCards = Array.from(document.querySelectorAll('#faq-accordion .faq-card'));

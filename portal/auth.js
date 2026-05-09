@@ -1,5 +1,4 @@
 const AUTH_KEY = "convergr_portal_auth";
-const MAIN_AUTH_KEY = "convergr_main_app_authenticated";
 const ALLOWED_USER = "guest";
 const ALLOWED_PASS = "re123";
 
@@ -29,22 +28,18 @@ function loginPortal({ portal, username, password, persist = false }) {
 }
 
 function requirePortal(portal) {
-    const hasMainAuth = sessionStorage.getItem(MAIN_AUTH_KEY) === "1" || localStorage.getItem(MAIN_AUTH_KEY) === "1";
-    if (!hasMainAuth) {
-        location.href = "https://convergr.vercel.app";
+    const auth = getAuth();
+    if (!auth || auth.portal !== portal) {
+        const next = encodeURIComponent(location.pathname.replace(/^\//, ""));
+        location.href = `/portal/login.html?portal=${portal}&next=${next}`;
         return null;
     }
-
-    const auth = getAuth();
-    if (!auth) return { portal, username: "guest", at: Date.now() };
-    return auth.portal === portal ? auth : { ...auth, portal };
+    return auth;
 }
 
 function logoutToHome() {
     clearAuth();
-    sessionStorage.removeItem(MAIN_AUTH_KEY);
-    localStorage.removeItem(MAIN_AUTH_KEY);
-    location.href = "https://convergr.vercel.app";
+    location.href = "/index.html";
 }
 
 function attachLogout(selector = "[data-logout]") {

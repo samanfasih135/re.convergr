@@ -2130,6 +2130,20 @@
 </head>
 
 <body class="font-sans antialiased">
+    <script>
+        (function enforceMainAppAuth() {
+            const AUTH_FLAG_KEY = "convergr_main_app_authenticated";
+            const params = new URLSearchParams(window.location.search);
+            const hasAuthQuery = params.get("auth") === "1";
+            if (hasAuthQuery) {
+                sessionStorage.setItem(AUTH_FLAG_KEY, "1");
+            }
+            const hasMainAuth = sessionStorage.getItem(AUTH_FLAG_KEY) === "1" || localStorage.getItem(AUTH_FLAG_KEY) === "1";
+            if (!hasMainAuth) {
+                window.location.replace("https://convergr.vercel.app");
+            }
+        })();
+    </script>
 
     <!-- Header -->
     <header class="fixed top-0 w-full z-50 transition-all duration-300 bg-brand-base/80 backdrop-blur-md border-b border-white/10">
@@ -2151,8 +2165,14 @@
 
             <!-- CTA Buttons (Right) -->
             <div class="hidden xl:flex items-center space-x-4">
-                <a href="/portal/login.html"
-                    class="border border-white/20 px-6 py-2 rounded-lg text-sm font-bold text-white hover:border-white transition-all">Login</a>
+                <div class="relative" id="welcome-menu">
+                    <button type="button" id="welcome-toggle" aria-expanded="false"
+                        class="border border-white/20 px-6 py-2 rounded-lg text-sm font-bold text-white hover:border-white transition-all">Welcome</button>
+                    <div id="welcome-dropdown" class="hidden absolute right-0 mt-2 min-w-[10rem] rounded-lg border border-white/15 bg-brand-base/95 p-2 shadow-xl backdrop-blur-md">
+                        <button type="button" id="logout-btn"
+                            class="w-full rounded-md px-3 py-2 text-left text-sm font-semibold text-white hover:bg-white/10 transition-colors">Logout</button>
+                    </div>
+                </div>
                 <a href="#get-started"
                     class="bg-brand-purple px-6 py-2 rounded-lg text-sm font-bold text-white hover:bg-brand-purpleLight transition-all">Get
                     Started</a>
@@ -3410,6 +3430,37 @@
         });
     </script>
     <script>
+        const AUTH_FLAG_KEY = "convergr_main_app_authenticated";
+
+        function setupWelcomeMenu() {
+            const menu = document.getElementById('welcome-menu');
+            const toggle = document.getElementById('welcome-toggle');
+            const dropdown = document.getElementById('welcome-dropdown');
+            const logoutBtn = document.getElementById('logout-btn');
+            if (!menu || !toggle || !dropdown || !logoutBtn) return;
+
+            const closeMenu = () => {
+                dropdown.classList.add('hidden');
+                toggle.setAttribute('aria-expanded', 'false');
+            };
+
+            toggle.addEventListener('click', () => {
+                const isHidden = dropdown.classList.contains('hidden');
+                dropdown.classList.toggle('hidden', !isHidden);
+                toggle.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!menu.contains(event.target)) closeMenu();
+            });
+
+            logoutBtn.addEventListener('click', () => {
+                sessionStorage.removeItem(AUTH_FLAG_KEY);
+                localStorage.removeItem(AUTH_FLAG_KEY);
+                window.location.replace('https://convergr.vercel.app');
+            });
+        }
+
         // Task 1: Intersection Observer for Scroll Reveal (Deposyt Style)
         const observerOptions = {
             threshold: 0.1,
@@ -3430,6 +3481,7 @@
         document.querySelectorAll('.reveal-section').forEach(el => {
             revealObserver.observe(el);
         });
+        setupWelcomeMenu();
 
         // Premium FAQ accordion (single-open, smooth height animation)
         const faqCards = Array.from(document.querySelectorAll('#faq-accordion .faq-card'));

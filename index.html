@@ -2160,13 +2160,27 @@
                     Started</a>
             </div>
 
-            <!-- Mobile Hamburger Menu (Toggle handled by a small script later) -->
+            <!-- Mobile Hamburger Menu -->
             <div class="xl:hidden flex items-center">
-                <button class="text-white hover:text-brand-purpleLight focus:outline-none">
+                <button id="mobile-menu-button" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu" class="text-white hover:text-brand-purpleLight focus:outline-none">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
             </div>
         </nav>
+        <div id="mobile-menu" class="xl:hidden hidden border-t border-white/10 bg-brand-base/95 backdrop-blur-md">
+            <div class="container mx-auto px-4 py-4 flex flex-col space-y-3 text-sm font-semibold text-gray-200">
+                <a href="#Home" class="mobile-nav-link hover:text-brand-purpleLight transition-colors">Home</a>
+                <a href="#services" class="mobile-nav-link hover:text-brand-purpleLight transition-colors">Services</a>
+                <a href="#who-we-serve" class="mobile-nav-link hover:text-brand-purpleLight transition-colors">Who We Serve</a>
+                <a href="#how-it-works" class="mobile-nav-link hover:text-brand-purpleLight transition-colors">How It Works</a>
+                <a href="#pricing" class="mobile-nav-link hover:text-brand-purpleLight transition-colors">Pricing</a>
+                <a href="#faq" class="mobile-nav-link hover:text-brand-purpleLight transition-colors">FAQ</a>
+                <div class="pt-2 flex items-center gap-3">
+                    <a href="/login/" class="mobile-nav-link border border-white/20 px-4 py-2 rounded-lg text-white hover:border-white transition-all">Login</a>
+                    <a href="#get-started" class="mobile-nav-link bg-brand-purple px-4 py-2 rounded-lg text-white hover:bg-brand-purpleLight transition-all">Get Started</a>
+                </div>
+            </div>
+        </div>
     </header>
 
     <!-- Hero Section -->
@@ -3399,6 +3413,29 @@
             setupIntakeForm();
             setupHoursSectionMotion();
             setupHeroVisualLoadSequence();
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenuButton && mobileMenu) {
+                const closeMobileMenu = () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                };
+                mobileMenuButton.addEventListener('click', () => {
+                    const isOpen = !mobileMenu.classList.contains('hidden');
+                    if (isOpen) {
+                        closeMobileMenu();
+                    } else {
+                        mobileMenu.classList.remove('hidden');
+                        mobileMenuButton.setAttribute('aria-expanded', 'true');
+                    }
+                });
+                mobileMenu.querySelectorAll('.mobile-nav-link').forEach((link) => {
+                    link.addEventListener('click', closeMobileMenu);
+                });
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth >= 1280) closeMobileMenu();
+                });
+            }
             const activePill = document.querySelector('.selector-pill.active');
             if (activePill) {
                 const value = activePill.getAttribute('data-hours-value');

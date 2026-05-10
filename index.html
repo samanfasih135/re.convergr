@@ -580,25 +580,12 @@
             animation: slide-up-fade 1s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards;
         }
 
-        .anim-support {
-            animation: slide-up-fade 1s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards;
-        }
-
-        .anim-value-props {
-            animation: slide-up-fade 1s cubic-bezier(0.16, 1, 0.3, 1) 0.52s forwards;
-        }
-
         .anim-cta {
-            animation: slide-up-fade 1s cubic-bezier(0.16, 1, 0.3, 1) 0.68s forwards;
-        }
-
-        .hero-vp-icon-wrap svg {
-            width: 1.25rem;
-            height: 1.25rem;
+            animation: slide-up-fade 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .reveal-section, .reveal-stagger > *, .float-element, .anim-title, .anim-subtitle, .anim-support, .anim-value-props, .anim-cta {
+            .reveal-section, .reveal-stagger > *, .float-element, .anim-title, .anim-subtitle, .anim-cta {
                 animation: none !important;
                 transition: none !important;
                 opacity: 1 !important;
@@ -704,150 +691,149 @@
         .hero-visual-container {
             position: relative;
             width: 100%;
-            max-width: none;
-            flex: 1;
-            min-height: inherit;
+            max-width: 1320px;
             margin-left: auto;
-            margin-right: 0;
             display: flex;
-            align-items: stretch;
+            align-items: center;
             justify-content: flex-end;
             overflow: visible;
         }
 
-        .hero-visual-glow {
-            position: absolute;
-            width: 124%;
-            height: 102%;
-            left: -12%;
-            top: -1%;
-            pointer-events: none;
-            z-index: 0;
-            background: radial-gradient(ellipse 72% 58% at 52% 48%, rgba(91, 45, 142, 0.48), transparent 74%);
-            filter: blur(56px);
-            opacity: 0.88;
+        .hero-visual-container::before {
+            content: none;
         }
 
         .hero-visual-panel {
             position: relative;
-            z-index: 2;
             width: 100%;
-            max-width: min(100%, 920px);
-            height: 100%;
-            min-height: min(52vh, 520px);
-            border-radius: 1.75rem;
-            padding: 1px;
-            background: linear-gradient(145deg,
-                rgba(167, 139, 250, 0.75) 0%,
-                rgba(91, 45, 142, 0.5) 38%,
-                rgba(6, 182, 212, 0.48) 68%,
-                rgba(91, 45, 142, 0.42) 100%);
-            box-shadow:
-                0 44px 110px -38px rgba(0, 0, 0, 0.92),
-                0 0 0 1px rgba(255, 255, 255, 0.07),
-                inset 0 1px 0 rgba(255, 255, 255, 0.15);
-            transform: translateX(2%);
-            animation: hero-panel-float 16s ease-in-out infinite;
+            max-width: 1120px;
+            max-height: min(66vh, 720px);
+            overflow: visible;
+            border-radius: 0;
+            background: transparent;
+            box-shadow: none;
             isolation: isolate;
-            display: flex;
-            flex-direction: column;
+            border: none;
+            transform: translateX(10%);
+            animation: hero-panel-float 12s ease-in-out infinite;
+            /* dissolve edge into section */
+            mask-image: radial-gradient(ellipse 142% 116% at 70% 56%, rgba(0,0,0,0.98) 52%, rgba(0,0,0,0.78) 73%, rgba(0,0,0,0.28) 88%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 142% 116% at 70% 56%, rgba(0,0,0,0.98) 52%, rgba(0,0,0,0.78) 73%, rgba(0,0,0,0.28) 88%, transparent 100%);
         }
 
-        .hero-visual-panel-inner {
-            position: relative;
-            border-radius: calc(1.75rem - 1px);
-            overflow: hidden;
-            background: linear-gradient(185deg, #14121f 0%, #06040d 100%);
-            flex: 1;
-            width: 100%;
-            min-height: min(52vh, 520px);
-            max-height: none;
+        .hero-visual-panel::before {
+            content: none;
         }
 
-        @media (min-width: 1024px) {
-            .hero-visual-panel {
-                min-height: min(84vh, 940px);
-                max-width: min(100%, 960px);
-            }
-            .hero-visual-panel-inner {
-                min-height: min(84vh, 940px);
-            }
-        }
-
-        .hero-visual-panel-inner::after {
+        .hero-visual-panel::after {
             content: '';
             position: absolute;
-            inset: 0;
+            inset: -2%;
+            z-index: 2;
             pointer-events: none;
-            z-index: 3;
-            border-radius: inherit;
-            box-shadow:
-                inset 0 0 0 1px rgba(255, 255, 255, 0.07),
-                inset 0 -36px 72px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            background:
+                radial-gradient(52% 64% at 12% 50%, rgba(10, 10, 10, 0.72), transparent 78%),
+                radial-gradient(42% 56% at 96% 56%, rgba(10, 10, 10, 0.58), transparent 76%),
+                linear-gradient(180deg, rgba(10, 10, 10, 0.26) 0%, rgba(10, 10, 10, 0.02) 22%, rgba(10, 10, 10, 0.4) 100%);
+            display: none;
         }
 
         @keyframes hero-panel-float {
-            0%, 100% { transform: translateX(2%) translateY(0); }
-            50% { transform: translateX(2%) translateY(-5px); }
+            0%, 100% { transform: translateX(10%) translateY(0); }
+            50% { transform: translateX(10%) translateY(-6px); }
         }
 
         .hero-base-image {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            max-height: min(66vh, 720px);
+            height: auto;
+            object-fit: contain;
             object-position: center;
             display: block;
             position: relative;
             z-index: 1;
-            transform: scale(1.04);
+            transform: scale(1.06);
             transform-origin: center;
-            transition: transform 1.15s cubic-bezier(0.16, 1, 0.3, 1);
-            filter: saturate(1.06) contrast(1.05) brightness(1.03);
+            filter: saturate(1.08) contrast(1.05) brightness(1.08);
+            mask-image: none;
+            -webkit-mask-image: none;
         }
 
-        #Home.hero-visual-ready .hero-base-image {
-            transform: scale(1);
-        }
-
-        .hero-image-vignette {
+        .hero-panel-left-fade {
             position: absolute;
             inset: 0;
-            z-index: 2;
-            pointer-events: none;
-            border-radius: inherit;
-            background:
-                linear-gradient(180deg, rgba(6, 5, 12, 0.15) 0%, transparent 38%),
-                linear-gradient(180deg, transparent 55%, rgba(6, 5, 12, 0.68) 100%),
-                linear-gradient(90deg, rgba(8, 6, 14, 0.48) 0%, transparent 26%, transparent 74%, rgba(8, 6, 14, 0.28) 100%);
-        }
-
-        .hero-image-shine {
-            position: absolute;
-            inset: -45% -35%;
             z-index: 4;
             pointer-events: none;
-            background: linear-gradient(118deg,
-                transparent 38%,
-                rgba(255, 255, 255, 0.09) 50%,
-                transparent 62%);
+            display: none;
+        }
+
+        .hero-panel-vignette {
+            position: absolute;
+            inset: 0;
+            z-index: 4;
+            display: none;
+        }
+
+        .hero-panel-ambient {
+            display: none;
+        }
+
+        .hero-panel-blend {
+            display: none;
+        }
+
+        .hero-panel-edge-haze {
+            display: none;
+        }
+
+        .hero-panel-cutout-shadow {
+            position: absolute;
+            inset: 0;
+            z-index: 6;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 34% 46% at 55% 57%, rgba(0, 0, 0, 0.34) 0%, rgba(0, 0, 0, 0.18) 42%, transparent 72%);
+            filter: blur(10px);
+            display: none;
+        }
+
+        .hero-svg-overlay {
+            display: none;
+        }
+
+        /* Floating Icon Cards */
+        .hero-float-card {
+            position: absolute;
+            z-index: 30;
             opacity: 0;
-            transition: opacity 1.05s ease 0.12s;
-            mix-blend-mode: soft-light;
+            transform: translateY(18px) scale(0.92);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            padding: 0;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: none;
         }
 
-        #Home.hero-visual-ready .hero-image-shine {
+        #Home.reveal-visible.hero-icons-ready .hero-float-card {
             opacity: 1;
+            transform: translateY(0) scale(1);
         }
 
-        @media (prefers-reduced-motion: reduce) {
-            #Home.hero-visual-ready .hero-base-image {
-                transform: scale(1);
-            }
-            .hero-visual-panel {
-                animation: none !important;
-                transform: translateX(2%) !important;
-            }
+        .hero-float-card img {
+            width: clamp(81px, 5.85vw, 102px);
+            height: auto;
+            display: block;
+            border-radius: 0;
+            filter: drop-shadow(0 12px 26px rgba(0, 0, 0, 0.52))
+                    drop-shadow(0 0 14px rgba(139, 92, 246, 0.18))
+                    drop-shadow(0 0 10px rgba(6, 182, 212, 0.14));
         }
 
         #Home .text-cyan {
@@ -863,13 +849,8 @@
         }
 
         #Home #hero-subtitle {
-            max-width: 42rem;
+            max-width: 34rem;
             color: rgba(223, 217, 236, 0.9);
-        }
-
-        #Home #hero-support {
-            max-width: 42rem;
-            color: rgba(189, 184, 204, 0.92);
         }
 
         #Home .hero-btn-primary,
@@ -907,6 +888,78 @@
             transform: translateY(-3px) scale(1.04);
             box-shadow: 0 24px 46px -18px rgba(0, 0, 0, 0.82), 0 0 28px rgba(139, 92, 246, 0.34);
         }
+
+        /* Particles on paths */
+        .glow-particle {
+            fill: #A78BFA;
+            filter: blur(1.1px) drop-shadow(0 0 5px rgba(167, 139, 250, 0.55));
+            opacity: 0;
+            transition: opacity 1s ease 1.5s;
+        }
+        
+        .reveal-visible .glow-particle {
+            opacity: 1;
+        }
+
+        /* Organic Floating Motion */
+        @keyframes hero-bob-1 {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-7px); }
+        }
+        @keyframes hero-bob-2 {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-9px); }
+        }
+        @keyframes hero-bob-3 {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .float-bob-1 { animation: hero-bob-1 7.5s ease-in-out infinite; }
+        .float-bob-2 { animation: hero-bob-2 8.4s ease-in-out 0.35s infinite; }
+        .float-bob-3 { animation: hero-bob-3 8.9s ease-in-out 0.9s infinite; }
+        .float-bob-4 { animation: hero-bob-1 8.1s ease-in-out 1.2s infinite; }
+        .float-bob-5 { animation: hero-bob-2 9.2s ease-in-out 0.55s infinite; }
+
+        /* Staggered entrance delays */
+        .enter-1 { transition-delay: 0.2s; }
+        .enter-2 { transition-delay: 0.4s; }
+        .enter-3 { transition-delay: 0.6s; }
+        .enter-4 { transition-delay: 0.8s; }
+        .enter-5 { transition-delay: 1.0s; }
+
+        /* SVG Connection Lines */
+        .hero-svg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 15;
+            overflow: visible;
+        }
+
+        .dotted-path {
+            stroke: #A78BFA;
+            stroke-width: 0.8;
+            stroke-dasharray: 1.6 11;
+            stroke-linecap: round;
+            fill: none;
+            opacity: 0;
+            transition: opacity 1.5s ease 1.2s;
+            filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.18));
+        }
+
+        .reveal-visible .dotted-path {
+            opacity: 0.16;
+        }
+
+        .line-delay-1 { transition-delay: 1.2s; }
+        .line-delay-2 { transition-delay: 1.4s; }
+        .line-delay-3 { transition-delay: 1.6s; }
+        .line-delay-4 { transition-delay: 1.8s; }
+        .line-delay-5 { transition-delay: 2.0s; }
 
         /* Legacy delay classes (used by other sections) */
         .delay-1 { transition-delay: 0.2s; }
@@ -1076,28 +1129,19 @@
             animation: float-particle 10s linear infinite;
         }
 
-        @media (max-width: 1023px) {
-            .hero-visual-container {
-                max-width: 100%;
-                margin: 0 auto;
-                justify-content: center;
-                min-height: 0;
-            }
-            .hero-visual-panel {
-                transform: none !important;
-                animation: none !important;
-                max-width: min(100%, 560px);
-                min-height: min(56vh, 560px);
-            }
-            .hero-visual-panel-inner {
-                min-height: min(56vh, 560px);
-            }
+        @media (max-width: 1024px) {
+            .hero-float-card { display: none; }
+            .hero-svg-overlay { display: none; }
+            .hero-visual-container { width: 100%; max-width: 620px; margin: 0 auto; }
+            .hero-visual-panel { max-height: none; border-radius: 1.6rem; transform: none; animation: none; }
             .hero-base-image {
-                transform: scale(1);
+                max-height: none;
+                object-position: center center;
+                transform: none;
             }
-            .hero-visual-glow {
-                opacity: 0.65;
-            }
+            .hero-panel-ambient { display: none; }
+            .hero-panel-left-fade,
+            .hero-panel-vignette { display: none; }
         }
 
         /* Logo Marquee */
@@ -2132,42 +2176,15 @@
         <div class="hero-bg-noise"></div>
         <div class="hero-bg-vignette"></div>
         
-        <div class="container mx-auto px-6 py-0 flex flex-col lg:flex-row lg:items-stretch gap-10 lg:gap-12 xl:gap-14 relative z-10 w-full">
+        <div class="container mx-auto px-6 py-0 flex flex-col lg:flex-row items-center gap-10 lg:gap-8 relative z-10">
             <!-- Left Content: Text & CTA -->
-            <div class="lg:w-[45%] xl:w-[44%] text-center lg:text-left mb-8 lg:mb-0 lg:pr-4 xl:pr-8 lg:flex lg:flex-col lg:justify-center">
-                <h1 id="hero-title" class="opacity-0 anim-title text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.1] mb-6 tracking-tighter text-white">
-                    More <span class="text-cyan swash-underline">Leads</span>. More <span class="text-cyan swash-underline">Closings</span>.<br>
-                    More <span class="text-cyan swash-underline">Commission</span>.
+            <div class="lg:w-1/2 text-center lg:text-left mb-8 lg:mb-0 lg:pr-8">
+                <h1 id="hero-title" class="opacity-0 anim-title text-6xl lg:text-7xl font-black leading-[1.1] mb-8 tracking-tighter text-white">
+                    Delegate <span class="text-cyan swash-underline">Smarter.</span><br> Grow <span class="text-cyan swash-underline">Faster.</span>
                 </h1>
-                <p id="hero-subtitle" class="opacity-0 anim-subtitle text-lg sm:text-xl text-gray-400 mb-5 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
-                    Convergr connects you with exclusive, pre-verified buyer and seller leads in your target market — so your pipeline never runs dry.
+                <p id="hero-subtitle" class="opacity-0 anim-subtitle text-xl text-gray-400 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
+                    We handle the tasks. <span class="text-white">You handle the results.</span>
                 </p>
-                <p id="hero-support" class="opacity-0 anim-support text-base sm:text-lg mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                    Stop chasing dead ends. Our leads are sourced, filtered, and delivered directly to you — so every conversation starts with potential.
-                </p>
-
-                <div class="opacity-0 anim-value-props mb-10 flex flex-row flex-nowrap items-center justify-center lg:justify-start gap-x-2 sm:gap-x-5 lg:gap-x-8 text-[11px] sm:text-sm md:text-base font-semibold tracking-tight text-white max-w-full overflow-x-auto lg:overflow-visible [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-                    <div class="flex flex-shrink-0 items-center gap-1.5 sm:gap-2.5 whitespace-nowrap">
-                        <span class="hero-vp-icon-wrap flex h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 flex-shrink-0 items-center justify-center rounded-lg sm:rounded-xl bg-brand-purple/25 border border-brand-purple/35 text-cyan" aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.09 9.09 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" /></svg>
-                        </span>
-                        <span>Quality Leads</span>
-                    </div>
-                    <span class="flex-shrink-0 px-0.5 sm:px-1 text-white/35" aria-hidden="true">|</span>
-                    <div class="flex flex-shrink-0 items-center gap-1.5 sm:gap-2.5 whitespace-nowrap">
-                        <span class="hero-vp-icon-wrap flex h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 flex-shrink-0 items-center justify-center rounded-lg sm:rounded-xl bg-brand-purple/25 border border-brand-purple/35 text-cyan" aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
-                        </span>
-                        <span>Faster Closings</span>
-                    </div>
-                    <span class="flex-shrink-0 px-0.5 sm:px-1 text-white/35" aria-hidden="true">|</span>
-                    <div class="flex flex-shrink-0 items-center gap-1.5 sm:gap-2.5 whitespace-nowrap">
-                        <span class="hero-vp-icon-wrap flex h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 flex-shrink-0 items-center justify-center rounded-lg sm:rounded-xl bg-brand-purple/25 border border-brand-purple/35 text-cyan" aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        </span>
-                        <span>More Profit Per Deal</span>
-                    </div>
-                </div>
 
                 <!-- CTA Buttons -->
                 <div class="opacity-0 anim-cta flex flex-col sm:flex-row items-center lg:items-start space-y-4 sm:space-y-0 sm:space-x-6">
@@ -2183,25 +2200,91 @@
             </div>
 
             <!-- Right Content: Hero Visual -->
-            <div class="lg:w-[55%] xl:w-[56%] flex items-stretch justify-center lg:justify-end relative lg:pl-2 xl:pl-8 min-h-[min(52vh,520px)] lg:min-h-[min(84vh,940px)]">
+            <div class="lg:w-1/2 flex items-center justify-center lg:justify-end relative lg:pl-4">
                 <div class="hero-visual-container">
-                    <div class="hero-visual-glow" aria-hidden="true"></div>
                     <div class="hero-visual-panel">
-                        <div class="hero-visual-panel-inner">
-                            <img src="assets/img/re-portal-hero.png"
-                                alt="Professional real estate closing — Convergr exclusive leads"
-                                class="hero-base-image"
-                                width="1200"
-                                height="960"
-                                loading="eager"
-                                decoding="async">
-                            <div class="hero-image-vignette" aria-hidden="true"></div>
-                            <div class="hero-image-shine" aria-hidden="true"></div>
-                        </div>
+                        <div class="hero-panel-ambient"></div>
+                        <!-- Base Image: Right-side cinematic panel -->
+                        <img src="assets/img/hero/hero-main.png" alt="Convergr Premium Support" class="hero-base-image">
+                        <div class="hero-panel-left-fade"></div>
+                        <div class="hero-panel-vignette"></div>
+                        <div class="hero-panel-blend"></div>
+                        <div class="hero-panel-edge-haze"></div>
+                        <div class="hero-panel-cutout-shadow"></div>
+                    </div>
+
+                    <!-- SVG Dotted Connection Lines with Moving Glow Particles -->
+                    <svg class="hero-svg-overlay" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid meet">
+                        <!-- Path 1: Appoint (top-left) -->
+                        <path id="path-1" class="dotted-path line-delay-1" d="M282,150 C356,132 424,212 448,294 C464,344 474,374 492,410" />
+                        <circle r="2.4" class="glow-particle">
+                            <animateMotion dur="7.2s" repeatCount="indefinite" rotate="auto">
+                                <mpath href="#path-1"/>
+                            </animateMotion>
+                        </circle>
+
+                        <!-- Path 2: Inbox (mid-left) -->
+                        <path id="path-2" class="dotted-path line-delay-2" d="M250,340 C322,318 396,348 434,400 C454,424 472,436 494,438" />
+                        <circle r="2.4" class="glow-particle">
+                            <animateMotion dur="8.2s" repeatCount="indefinite" rotate="auto">
+                                <mpath href="#path-2"/>
+                            </animateMotion>
+                        </circle>
+
+                        <!-- Path 3: Tasks (top-right) -->
+                        <path id="path-3" class="dotted-path line-delay-3" d="M726,148 C648,132 582,214 554,294 C538,342 524,372 510,410" />
+                        <circle r="2.4" class="glow-particle">
+                            <animateMotion dur="7.8s" repeatCount="indefinite" rotate="auto">
+                                <mpath href="#path-3"/>
+                            </animateMotion>
+                        </circle>
+
+                        <!-- Path 4: Hours (mid-right) -->
+                        <path id="path-4" class="dotted-path line-delay-4" d="M750,340 C674,316 602,348 556,400 C536,422 522,434 506,438" />
+                        <circle r="2.4" class="glow-particle">
+                            <animateMotion dur="8.8s" repeatCount="indefinite" rotate="auto">
+                                <mpath href="#path-4"/>
+                            </animateMotion>
+                        </circle>
+
+                        <!-- Path 5: Follow-Ups (lower-right) -->
+                        <path id="path-5" class="dotted-path line-delay-5" d="M690,454 C632,478 574,470 536,444 C518,432 508,424 500,422" />
+                        <circle r="2.4" class="glow-particle">
+                            <animateMotion dur="9.4s" repeatCount="indefinite" rotate="auto">
+                                <mpath href="#path-5"/>
+                            </animateMotion>
+                        </circle>
+                    </svg>
+
+                    <!-- Floating icons: pentagon orbit, safe insets, staggered L/R for depth -->
+                    <!-- 1. Appointments — upper-left -->
+                    <div class="hero-float-card float-bob-1 enter-1" style="top: 10%; left: 19%;">
+                        <img src="assets/img/hero/hero-float-appoint.svg" alt="Appointments Managed">
+                    </div>
+
+                    <!-- 2. Inbox — lower-left -->
+                    <div class="hero-float-card float-bob-2 enter-2" style="top: 56%; left: 16%;">
+                        <img src="assets/img/hero/hero-float-inbox.svg" alt="Inbox Zero">
+                    </div>
+
+                    <!-- 3. Tasks — upper-right -->
+                    <div class="hero-float-card float-bob-3 enter-3" style="top: 9%; right: 7%;">
+                        <img src="assets/img/hero/hero-float-task.svg" alt="Tasks Completed">
+                    </div>
+
+                    <!-- 4. Hours — mid-right (visual anchor) -->
+                    <div class="hero-float-card float-bob-4 enter-4" style="top: 48%; right: 2%;">
+                        <img src="assets/img/hero/hero-float-time.svg" alt="Hours Saved">
+                    </div>
+
+                    <!-- 5. Follow-ups — lower-right -->
+                    <div class="hero-float-card float-bob-5 enter-5" style="top: 74%; right: 9%;">
+                        <img src="assets/img/hero/hero-float-chat.svg" alt="Client Follow-Ups">
                     </div>
                 </div>
 
-                <div class="absolute w-[130%] h-[130%] bg-brand-purple/10 rounded-full blur-[140px] z-0 -top-[18%] -left-[18%] pointer-events-none"></div>
+                <!-- Background Glow -->
+                <div class="absolute w-[140%] h-[140%] bg-brand-purple/8 rounded-full blur-[160px] z-0 -top-[20%] -left-[20%] pointer-events-none"></div>
             </div>
         </div>
         <div class="hero-bottom-fade"></div>
@@ -2727,7 +2810,7 @@
                     Simple, Transparent <br> Pricing.
                 </h2>
                 <p class="text-xl text-white/50 font-medium max-w-2xl mx-auto leading-relaxed">
-                    One-time fees. Clear tiers for referral volume, coverage, and support — built for serious producers.
+                    No hidden fees. No long-term contracts. Just skilled support at a price that makes sense.
                 </p>
             </div>
 
@@ -2738,17 +2821,22 @@
                 <div class="pricing-card flex flex-col">
                     <div class="mb-8">
                         <h3 class="pricing-plan-name">Starter</h3>
-                        <div class="pricing-amount">$395<span> one-time</span></div>
-                        <p class="text-white/40 font-medium">Exclusive referrals in a focused footprint — ideal for getting started.</p>
+                        <div class="pricing-amount">$395<span>/block</span></div>
+                        <p class="text-white/40 font-medium">Perfect for individuals needing occasional support.</p>
                     </div>
                     
                     <ul class="pricing-feature-list">
-                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span><strong>2–3</strong> exclusive referrals/mo</span></li>
-                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span><strong>2–4</strong> zip codes</span></li>
-                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>BDR-verified leads</span></li>
-                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Email marketing</span></li>
-                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Referral fee structure</span></li>
-                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>CRM add-on available</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span><strong>8 Hours</strong> of VA Support</span></li>
+                        <li><svg class="w-5 h-5 opacity-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d=""></path></svg><span>Hours roll over — unused hours carry forward automatically and never expire.</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Email inbox management</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Calendar & appointment scheduling</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Basic data entry & CRM updates</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Document prep & organization</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Task & project coordination</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Social media scheduling (pre-made)</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Weekly task summary report</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Response time: <strong>24–48 hours</strong></span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>1 dedicated VA</span></li>
                     </ul>
 
                     <a href="#get-started" class="pricing-button">Get Started</a>
@@ -2759,18 +2847,22 @@
                     <div class="pricing-badge">⭐ Most Popular</div>
                     <div class="mb-8">
                         <h3 class="pricing-plan-name">Pro</h3>
-                        <div class="pricing-amount">$695<span> one-time</span></div>
-                        <p class="text-white/40 font-medium">More referrals, wider coverage, and priority support for growing producers.</p>
+                        <div class="pricing-amount">$695<span>/block</span></div>
+                        <p class="text-white/40 font-medium">Our most popular plan for growing businesses.</p>
                     </div>
                     
                     <ul class="pricing-feature-list">
-                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span><strong>3–5</strong> referrals/mo</span></li>
-                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span><strong>5–7</strong> zip codes</span></li>
-                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Scheduled appointments</span></li>
-                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>SEO agent profile</span></li>
-                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Priority support</span></li>
-                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Referral fee structure</span></li>
-                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>CRM add-on available</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span><strong>18 Hours</strong> of VA Support</span></li>
+                        <li><svg class="w-5 h-5 opacity-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d=""></path></svg><span>Hours roll over — unused hours carry forward automatically and never expire.</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span><strong>Everything in Starter, plus:</strong></span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Transaction & workflow support</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Social media content creation</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Client follow-up & email drafting</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Proposal & document writing</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Vendor & third-party coordination</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Database & contact list management</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Response time: <strong>12–24 hours</strong></span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Monthly performance check-in call</span></li>
                     </ul>
 
                     <a href="#get-started" class="pricing-button">Get Started</a>
@@ -2780,17 +2872,22 @@
                 <div class="pricing-card flex flex-col">
                     <div class="mb-8">
                         <h3 class="pricing-plan-name">Ultra</h3>
-                        <div class="pricing-amount">$995<span> one-time</span></div>
-                        <p class="text-white/40 font-medium">Maximum referrals, live transfers, and CRM included for top producers.</p>
+                        <div class="pricing-amount">$995<span>/block</span></div>
+                        <p class="text-white/40 font-medium">Enterprise-level support for high-impact teams.</p>
                     </div>
                     
                     <ul class="pricing-feature-list">
-                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span><strong>4–6</strong> exclusive referrals/mo</span></li>
-                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Zip codes / counties / cities</span></li>
-                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Live transfers</span></li>
-                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>SEO profile</span></li>
-                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Dedicated support manager</span></li>
-                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span><strong>FREE CRM</strong> included</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span><strong>30 Hours</strong> of VA Support</span></li>
+                        <li><svg class="w-5 h-5 opacity-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d=""></path></svg><span>Hours roll over — unused hours carry forward automatically and never expire.</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span><strong>Everything in Pro, plus:</strong></span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Cold calling & outreach support</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Full social media management</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Event & meeting coordination</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Drip campaign setup & management</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Priority task handling</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Response time: <strong>4–8 hours</strong></span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>VA + supervisor oversight</span></li>
+                        <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>Bi-weekly strategy call</span></li>
                     </ul>
 
                     <a href="#get-started" class="pricing-button">Get Started</a>
@@ -2801,7 +2898,7 @@
             <!-- Footer Note -->
             <div class="mt-20 text-center reveal-fade-up">
                 <p class="text-white/40 font-medium tracking-wide max-w-5xl mx-auto leading-relaxed">
-                    Each tier is a <strong class="text-white/55 font-semibold">one-time</strong> fee. Referral ranges and geography are set to your plan; add-ons like CRM may be bundled or available depending on tier. Referral fees and program mechanics are outlined in your agreement — no surprise retainers.
+                    "Convergr plans are structured as prepaid hour blocks, not monthly subscriptions. Your hours are purchased upfront and credited to your account in full. Any unused hours carry forward automatically into the following period and remain available until fully utilized — giving you complete flexibility to engage your VA on your own schedule, at your own pace, without the pressure of a monthly reset."
                 </p>
             </div>
         </div>
@@ -2899,7 +2996,7 @@
                         <span class="font-bold text-white text-lg">What's included in each plan?</span>
                         <span class="faq-icon"><svg class="w-4 h-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 4v12M4 10h12"/></svg></span>
                     </button>
-                    <div class="faq-answer"><div class="faq-answer-inner">Each plan outlines referral volume, geography, lead verification, marketing support, and service tier (including CRM options). See the Pricing section for the full breakdown.</div></div>
+                    <div class="faq-answer"><div class="faq-answer-inner">Each plan outlines hours, task categories, communication channels, and support level. See the Pricing section for a full breakdown.</div></div>
                 </article>
 
                 <article class="faq-card">
@@ -3283,7 +3380,7 @@
             const revealIcons = () => {
                 const delayMs = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 320;
                 window.setTimeout(() => {
-                    homeSection.classList.add('hero-visual-ready');
+                    homeSection.classList.add('hero-icons-ready');
                 }, delayMs);
             };
 

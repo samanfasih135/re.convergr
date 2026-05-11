@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" fill="none">
+  <defs>
+    <linearGradient id="xfer-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#06D6D4"/>
+      <stop offset="100%" stop-color="#0066FF"/>
+    </linearGradient>
+    <filter id="xfer-glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <path d="M68 42 C68 34 74 28 82 28 H118 C126 28 132 34 132 42 V122 C132 130 126 136 118 136 H98 L78 156 V136 H82 C74 136 68 130 68 122 Z" fill="#081520" stroke="url(#xfer-grad)" stroke-width="2.5" filter="url(#xfer-glow)"/>
+  <path d="M92 68 H128 M128 68 L118 58 M128 68 L118 78" stroke="#06D6D4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="100" cy="102" r="10" fill="url(#xfer-grad)" opacity="0.55"/>
+  <text x="100" y="175" text-anchor="middle" font-family="Inter,sans-serif" font-weight="700" font-size="14" fill="#ffffff">📞 Live Transfers</text>
+  <text x="100" y="195" text-anchor="middle" font-family="Inter,sans-serif" font-weight="700" font-size="14" fill="#ffffff">Available</text>
+</svg>

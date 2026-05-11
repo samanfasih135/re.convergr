@@ -407,10 +407,18 @@
         .intake-dual-select {
             display: flex;
             flex-direction: column;
+            min-width: 0;
         }
 
         .intake-dual-select .intake-label {
             min-height: 2.5rem;
+        }
+
+        .intake-agent-type-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem 1rem;
+            align-items: stretch;
         }
 
         .intake-check {
@@ -712,13 +720,9 @@
             border-radius: 0;
             background: transparent;
             box-shadow: none;
-            isolation: isolate;
             border: none;
             transform: translateX(10%);
             animation: hero-panel-float 12s ease-in-out infinite;
-            /* dissolve edge into section */
-            mask-image: radial-gradient(ellipse 142% 116% at 70% 56%, rgba(0,0,0,0.98) 52%, rgba(0,0,0,0.78) 73%, rgba(0,0,0,0.28) 88%, transparent 100%);
-            -webkit-mask-image: radial-gradient(ellipse 142% 116% at 70% 56%, rgba(0,0,0,0.98) 52%, rgba(0,0,0,0.78) 73%, rgba(0,0,0,0.28) 88%, transparent 100%);
         }
 
         .hero-visual-panel::before {
@@ -754,6 +758,7 @@
             z-index: 1;
             transform: scale(1.06);
             transform-origin: center;
+            background: transparent;
             filter: saturate(1.08) contrast(1.05) brightness(1.08);
             mask-image: none;
             -webkit-mask-image: none;
@@ -2199,20 +2204,13 @@
                 <p id="hero-subtitle" class="opacity-0 anim-subtitle text-xl text-gray-400 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
                     Convergr delivers pre-verified, exclusive real estate leads with scheduled virtual appointments directly to you — so every conversation starts with a prospect who is ready to move.
                 </p>
-                <div class="opacity-0 anim-value-props mb-10 flex flex-wrap items-center justify-center lg:justify-start gap-3 text-sm sm:text-base font-semibold tracking-tight text-white">
-                    <span class="px-3 py-1 rounded-full border border-white/15 bg-white/5">🏠 Exclusive Territory Locked</span>
-                    <span class="px-3 py-1 rounded-full border border-white/15 bg-white/5">✅ ISA-Verified Leads</span>
-                    <span class="px-3 py-1 rounded-full border border-white/15 bg-white/5">📞 Live Transfers Available</span>
-                    <span class="px-3 py-1 rounded-full border border-white/15 bg-white/5">📍 Your ZIP Codes Only</span>
-                </div>
-
                 <!-- CTA Buttons -->
                 <div class="opacity-0 anim-cta flex flex-col sm:flex-row items-center lg:items-start space-y-4 sm:space-y-0 sm:space-x-6">
                     <a href="#get-started"
                         class="hero-btn-primary w-full sm:w-auto bg-brand-purple py-5 px-12 rounded-xl text-lg font-black flex items-center justify-center space-x-4 shadow-2xl transition-all text-white">
-                        <span id="hero-cta-text">Get My Leads Now</span>
+                        <span id="hero-cta-text">Get My Leads Now  →</span>
                     </a>
-                    <a href="#services"
+                    <a href="#how-it-works"
                         class="hero-btn-secondary w-full sm:w-auto border border-white/20 py-5 px-12 rounded-xl text-lg font-black flex items-center justify-center space-x-4 hover:bg-white/5 transition-all text-white">
                         <span>See How It Works</span>
                     </a>
@@ -2225,7 +2223,7 @@
                     <div class="hero-visual-panel">
                         <div class="hero-panel-ambient"></div>
                         <!-- Base Image: Right-side cinematic panel -->
-                        <img src="assets/img/re-portal-hero.png" alt="Successful realtor closing a deal" class="hero-base-image">
+                        <img src="assets/img/hero/hero_main.png" alt="Successful realtor closing a deal" class="hero-base-image">
                         <div class="hero-panel-left-fade"></div>
                         <div class="hero-panel-vignette"></div>
                         <div class="hero-panel-blend"></div>
@@ -2267,19 +2265,20 @@
                             </animateMotion>
                         </circle>
 
-                        <!-- Path 5: Follow-Ups (lower-right) -->
-                        <path id="path-5" class="dotted-path line-delay-5" d="M690,454 C632,478 574,470 536,444 C518,432 508,424 500,422" />
-                        <circle r="2.4" class="glow-particle">
-                            <animateMotion dur="9.4s" repeatCount="indefinite" rotate="auto">
-                                <mpath href="#path-5"/>
-                            </animateMotion>
-                        </circle>
                     </svg>
 
-                    <div class="hero-float-card float-bob-1 enter-1 px-4 py-2 rounded-full border border-white/20 bg-black/45 text-xs font-semibold text-white" style="top: 12%; left: 10%;">🏠 Exclusive Territory Locked</div>
-                    <div class="hero-float-card float-bob-2 enter-2 px-4 py-2 rounded-full border border-white/20 bg-black/45 text-xs font-semibold text-white" style="top: 62%; left: 8%;">✅ ISA-Verified Leads</div>
-                    <div class="hero-float-card float-bob-3 enter-3 px-4 py-2 rounded-full border border-white/20 bg-black/45 text-xs font-semibold text-white" style="top: 16%; right: 4%;">📞 Live Transfers Available</div>
-                    <div class="hero-float-card float-bob-4 enter-4 px-4 py-2 rounded-full border border-white/20 bg-black/45 text-xs font-semibold text-white" style="top: 68%; right: 4%;">📍 Your ZIP Codes Only</div>
+                    <div class="hero-float-card float-bob-1 enter-1" style="top: 10%; left: 19%;">
+                        <img src="assets/img/hero/hero-float-territory.svg" alt="🏠 Exclusive Territory Locked" width="200" height="220" loading="lazy" decoding="async">
+                    </div>
+                    <div class="hero-float-card float-bob-2 enter-2" style="top: 56%; left: 16%;">
+                        <img src="assets/img/hero/hero-float-isa.svg" alt="✅ ISA-Verified Leads" width="200" height="220" loading="lazy" decoding="async">
+                    </div>
+                    <div class="hero-float-card float-bob-3 enter-3" style="top: 9%; right: 7%;">
+                        <img src="assets/img/hero/hero-float-transfers.svg" alt="📞 Live Transfers Available" width="200" height="220" loading="lazy" decoding="async">
+                    </div>
+                    <div class="hero-float-card float-bob-4 enter-4" style="top: 48%; right: 2%;">
+                        <img src="assets/img/hero/hero-float-zips.svg" alt="📍 Your ZIP Codes Only" width="200" height="220" loading="lazy" decoding="async">
+                    </div>
                 </div>
 
                 <!-- Background Glow -->
@@ -2301,7 +2300,7 @@
                         
                         <!-- Main Card -->
                         <div class="relative bg-brand-light p-3 lg:p-4 rounded-[2.5rem] shadow-2xl overflow-hidden border border-white/5 backdrop-blur-sm h-full min-h-[560px] lg:min-h-[640px]">
-                            <img src="assets/img/how-it-works-workflow.png" alt="Convergr Workflow" class="w-full h-full object-cover object-center rounded-[2rem] transform group-hover:scale-[1.02] transition duration-700 opacity-95">
+                            <img src="assets/img/how_it_works.png" alt="Convergr Workflow" class="w-full h-full object-cover object-center rounded-[2rem] transform group-hover:scale-[1.02] transition duration-700 opacity-95">
                             
                             <div class="step-orbit-icon step-orbit-1" aria-hidden="true">
                                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2702,7 +2701,7 @@
             <div class="industry-layout-container">
                 <!-- Left Side: Large Cinematic Image -->
                 <div class="industry-image-wrapper group reveal-fade-up">
-                    <img src="assets/img/section-professional-support.png" alt="Real estate agent team reviewing market opportunities" class="reveal-visible">
+                    <img src="assets/img/who%20we%20serve.png" alt="Real estate agent team reviewing market opportunities" class="reveal-visible">
                     <div class="industry-image-glow"></div>
                 </div>
 
@@ -3070,7 +3069,7 @@
                         </div>
                         <div class="intake-dual-select">
                             <p class="intake-label">Agent type *</p>
-                            <div class="flex gap-4 text-sm text-white/85">
+                            <div class="intake-agent-type-row text-sm text-white/85">
                                 <label class="intake-check"><input type="radio" name="agentType" value="Buyer's agent" required> Buyer's agent</label>
                                 <label class="intake-check"><input type="radio" name="agentType" value="Seller's agent" required> Seller's agent</label>
                                 <label class="intake-check"><input type="radio" name="agentType" value="Both" required> Both</label>

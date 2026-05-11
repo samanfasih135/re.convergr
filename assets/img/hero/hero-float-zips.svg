@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" fill="none">
+  <defs>
+    <linearGradient id="zip-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0066FF"/>
+      <stop offset="100%" stop-color="#06D6D4"/>
+    </linearGradient>
+    <filter id="zip-glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <path d="M100 34 L132 66 V110 C132 134 118 148 100 160 C82 148 68 134 68 110 V66 Z" fill="url(#zip-grad)" opacity="0.18" stroke="url(#zip-grad)" stroke-width="2.5" filter="url(#zip-glow)"/>
+  <circle cx="100" cy="88" r="18" fill="#081520" stroke="#06D6D4" stroke-width="2.2"/>
+  <text x="100" y="94" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="13" fill="#06D6D4">ZIP</text>
+  <text x="100" y="175" text-anchor="middle" font-family="Inter,sans-serif" font-weight="700" font-size="14" fill="#ffffff">📍 Your ZIP Codes</text>
+  <text x="100" y="195" text-anchor="middle" font-family="Inter,sans-serif" font-weight="700" font-size="14" fill="#ffffff">Only</text>
+</svg>

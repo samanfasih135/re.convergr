@@ -599,6 +599,13 @@
                 opacity: 1 !important;
                 transform: none !important;
             }
+            .hero-float-bob.float-bob-1,
+            .hero-float-bob.float-bob-2,
+            .hero-float-bob.float-bob-3,
+            .hero-float-bob.float-bob-4,
+            .hero-float-bob.float-bob-5 {
+                animation: none !important;
+            }
         }
 
         /* Hero Visual */
@@ -612,13 +619,12 @@
             position: absolute;
             inset: -16% -8%;
             pointer-events: none;
-            z-index: 1;
+            z-index: 3;
         }
 
         #Home::before {
             background:
-                radial-gradient(42% 52% at 18% 30%, rgba(108, 62, 187, 0.22), transparent 72%),
-                radial-gradient(36% 48% at 78% 68%, rgba(6, 182, 212, 0.16), transparent 74%);
+                radial-gradient(42% 52% at 18% 30%, rgba(108, 62, 187, 0.22), transparent 72%);
             filter: blur(68px);
             animation: hero-aura-shift 16s ease-in-out infinite alternate;
         }
@@ -631,23 +637,46 @@
             animation: hero-light-sweep 12s ease-in-out infinite;
         }
 
+        #Home .hero-scene-bg {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image: url("assets/img/hero_scene.png");
+            background-size: cover;
+            background-position: 72% center;
+            background-repeat: no-repeat;
+            background-color: #070708;
+        }
+
+        @media (max-width: 1023px) {
+            #Home .hero-scene-bg {
+                background-position: 58% center;
+            }
+
+            #Home .hero-bg-base {
+                background:
+                    linear-gradient(180deg, rgba(6, 6, 8, 0.94) 0%, rgba(6, 6, 8, 0.82) 38%, rgba(6, 6, 8, 0.55) 58%, rgba(6, 6, 8, 0.2) 100%),
+                    radial-gradient(120% 95% at 8% 8%, rgba(91, 45, 142, 0.22), transparent 52%);
+            }
+        }
+
         #Home .hero-bg-base {
             position: absolute;
             inset: 0;
-            background: radial-gradient(120% 95% at 8% 8%, rgba(91, 45, 142, 0.2) 0%, transparent 52%),
-                        radial-gradient(100% 90% at 88% 36%, rgba(6, 182, 212, 0.14) 0%, transparent 50%),
-                        linear-gradient(150deg, #0A0A0A 0%, #0A0A0A 52%, #0D0D0D 100%);
-            z-index: 0;
+            background:
+                linear-gradient(95deg, rgba(6, 6, 8, 0.96) 0%, rgba(6, 6, 8, 0.86) 30%, rgba(6, 6, 8, 0.52) 48%, rgba(6, 6, 8, 0.14) 64%, transparent 78%),
+                radial-gradient(120% 95% at 8% 8%, rgba(91, 45, 142, 0.22), transparent 52%);
+            z-index: 1;
         }
 
         #Home .hero-bg-ambient {
             position: absolute;
             inset: -18%;
             pointer-events: none;
-            z-index: 1;
+            z-index: 2;
             background:
-                radial-gradient(38% 46% at 18% 62%, rgba(91, 45, 142, 0.22), transparent 70%),
-                radial-gradient(34% 44% at 78% 40%, rgba(6, 182, 212, 0.16), transparent 72%);
+                radial-gradient(38% 46% at 18% 62%, rgba(91, 45, 142, 0.22), transparent 70%);
             filter: blur(62px);
             animation: hero-ambient-drift 16s ease-in-out infinite alternate;
         }
@@ -655,7 +684,7 @@
         #Home .hero-bg-noise {
             position: absolute;
             inset: 0;
-            z-index: 2;
+            z-index: 4;
             pointer-events: none;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
             opacity: 0.028;
@@ -665,7 +694,7 @@
         #Home .hero-bg-vignette {
             position: absolute;
             inset: 0;
-            z-index: 3;
+            z-index: 5;
             pointer-events: none;
             background: radial-gradient(ellipse at center, transparent 44%, rgba(0, 0, 0, 0.58) 100%);
         }
@@ -676,7 +705,7 @@
             right: 0;
             bottom: -1px;
             height: 150px;
-            z-index: 4;
+            z-index: 6;
             pointer-events: none;
             background: linear-gradient(to bottom, rgba(10, 10, 10, 0) 0%, #0D0D0D 95%);
         }
@@ -747,21 +776,12 @@
             50% { transform: translateX(10%) translateY(-6px); }
         }
 
-        .hero-base-image {
+        .hero-float-anchor {
             width: 100%;
-            max-height: min(66vh, 720px);
-            height: auto;
-            object-fit: contain;
-            object-position: center;
-            display: block;
+            min-height: min(68vh, 760px);
             position: relative;
             z-index: 1;
-            transform: scale(1.06);
-            transform-origin: center;
-            background: transparent;
-            filter: saturate(1.08) contrast(1.05) brightness(1.08);
-            mask-image: none;
-            -webkit-mask-image: none;
+            pointer-events: none;
         }
 
         .hero-panel-left-fade {
@@ -806,9 +826,13 @@
             display: none;
         }
 
-        /* Floating Icon Cards */
+        /* Floating Icon Cards (bottom strip row) */
+        .hero-float-strip {
+            flex-shrink: 0;
+        }
+
         .hero-float-card {
-            position: absolute;
+            position: relative;
             z-index: 30;
             opacity: 0;
             transform: translateY(18px) scale(0.92);
@@ -824,6 +848,7 @@
             align-items: center;
             justify-content: center;
             box-shadow: none;
+            flex: 0 1 auto;
         }
 
         #Home.reveal-visible.hero-icons-ready .hero-float-card {
@@ -831,14 +856,25 @@
             transform: translateY(0) scale(1);
         }
 
+        .hero-float-bob {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .hero-float-card img {
-            width: clamp(81px, 5.85vw, 102px);
+            width: clamp(72px, 11vw, 104px);
             height: auto;
             display: block;
             border-radius: 0;
-            filter: drop-shadow(0 12px 26px rgba(0, 0, 0, 0.52))
-                    drop-shadow(0 0 14px rgba(139, 92, 246, 0.18))
-                    drop-shadow(0 0 10px rgba(6, 182, 212, 0.14));
+            filter: drop-shadow(0 12px 26px rgba(0, 0, 0, 0.55))
+                    drop-shadow(0 0 12px rgba(139, 92, 246, 0.12));
+        }
+
+        @media (min-width: 1024px) {
+            .hero-float-card img {
+                width: clamp(84px, 7vw, 108px);
+            }
         }
 
         #Home .text-cyan {
@@ -920,11 +956,11 @@
             50% { transform: translateY(-6px); }
         }
 
-        .float-bob-1 { animation: hero-bob-1 7.5s ease-in-out infinite; }
-        .float-bob-2 { animation: hero-bob-2 8.4s ease-in-out 0.35s infinite; }
-        .float-bob-3 { animation: hero-bob-3 8.9s ease-in-out 0.9s infinite; }
-        .float-bob-4 { animation: hero-bob-1 8.1s ease-in-out 1.2s infinite; }
-        .float-bob-5 { animation: hero-bob-2 9.2s ease-in-out 0.55s infinite; }
+        .hero-float-bob.float-bob-1 { animation: hero-bob-1 7.5s ease-in-out infinite; }
+        .hero-float-bob.float-bob-2 { animation: hero-bob-2 8.4s ease-in-out 0.35s infinite; }
+        .hero-float-bob.float-bob-3 { animation: hero-bob-3 8.9s ease-in-out 0.9s infinite; }
+        .hero-float-bob.float-bob-4 { animation: hero-bob-1 8.1s ease-in-out 1.2s infinite; }
+        .hero-float-bob.float-bob-5 { animation: hero-bob-2 9.2s ease-in-out 0.55s infinite; }
 
         /* Staggered entrance delays */
         .enter-1 { transition-delay: 0.2s; }
@@ -1135,18 +1171,7 @@
         }
 
         @media (max-width: 1024px) {
-            .hero-float-card { display: none; }
             .hero-svg-overlay { display: none; }
-            .hero-visual-container { width: 100%; max-width: 620px; margin: 0 auto; }
-            .hero-visual-panel { max-height: none; border-radius: 1.6rem; transform: none; animation: none; }
-            .hero-base-image {
-                max-height: none;
-                object-position: center center;
-                transform: none;
-            }
-            .hero-panel-ambient { display: none; }
-            .hero-panel-left-fade,
-            .hero-panel-vignette { display: none; }
         }
 
         /* Logo Marquee */
@@ -2189,15 +2214,18 @@
     </header>
 
     <!-- Hero Section -->
-    <section id="Home" class="reveal-section pt-24 lg:pt-28 pb-10 lg:pb-14 min-h-[calc(92vh-5rem)] overflow-hidden bg-brand-base relative flex items-center">
+    <section id="Home" class="reveal-section pt-24 lg:pt-28 pb-0 min-h-[calc(92vh-5rem)] overflow-hidden bg-brand-base relative flex flex-col">
+        <div class="hero-scene-bg" aria-hidden="true"></div>
         <div class="hero-bg-base"></div>
         <div class="hero-bg-ambient"></div>
         <div class="hero-bg-noise"></div>
         <div class="hero-bg-vignette"></div>
         
-        <div class="container mx-auto px-6 py-0 flex flex-col lg:flex-row items-center gap-10 lg:gap-8 relative z-10">
+        <div class="relative z-10 flex flex-1 flex-col w-full min-h-0">
+        <div class="flex-1 flex flex-col justify-center min-h-0">
+        <div class="container mx-auto px-6 py-0 pb-8 lg:pb-10 flex flex-col lg:flex-row items-center gap-10 lg:gap-8">
             <!-- Left Content: Text & CTA -->
-            <div class="lg:w-1/2 text-center lg:text-left mb-8 lg:mb-0 lg:pr-8">
+            <div class="w-full lg:w-1/2 text-center lg:text-left mb-4 lg:mb-0 lg:pr-8 relative z-10">
                 <h1 id="hero-title" class="opacity-0 anim-title text-6xl lg:text-7xl font-black leading-[1.1] mb-8 tracking-tighter text-white">
                     Stop Chasing. Start <span class="text-cyan swash-underline">Closing.</span>
                 </h1>
@@ -2216,74 +2244,27 @@
                     </a>
                 </div>
             </div>
+        </div>
+        </div>
 
-            <!-- Right Content: Hero Visual -->
-            <div class="lg:w-1/2 flex items-center justify-center lg:justify-end relative lg:pl-4">
-                <div class="hero-visual-container">
-                    <div class="hero-visual-panel">
-                        <div class="hero-panel-ambient"></div>
-                        <!-- Base Image: Right-side cinematic panel -->
-                        <img src="assets/img/hero/hero_main.png" alt="Successful realtor closing a deal" class="hero-base-image">
-                        <div class="hero-panel-left-fade"></div>
-                        <div class="hero-panel-vignette"></div>
-                        <div class="hero-panel-blend"></div>
-                        <div class="hero-panel-edge-haze"></div>
-                        <div class="hero-panel-cutout-shadow"></div>
-                    </div>
-
-                    <!-- SVG Dotted Connection Lines with Moving Glow Particles -->
-                    <svg class="hero-svg-overlay" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid meet">
-                        <!-- Path 1: Appoint (top-left) -->
-                        <path id="path-1" class="dotted-path line-delay-1" d="M282,150 C356,132 424,212 448,294 C464,344 474,374 492,410" />
-                        <circle r="2.4" class="glow-particle">
-                            <animateMotion dur="7.2s" repeatCount="indefinite" rotate="auto">
-                                <mpath href="#path-1"/>
-                            </animateMotion>
-                        </circle>
-
-                        <!-- Path 2: Inbox (mid-left) -->
-                        <path id="path-2" class="dotted-path line-delay-2" d="M250,340 C322,318 396,348 434,400 C454,424 472,436 494,438" />
-                        <circle r="2.4" class="glow-particle">
-                            <animateMotion dur="8.2s" repeatCount="indefinite" rotate="auto">
-                                <mpath href="#path-2"/>
-                            </animateMotion>
-                        </circle>
-
-                        <!-- Path 3: Tasks (top-right) -->
-                        <path id="path-3" class="dotted-path line-delay-3" d="M726,148 C648,132 582,214 554,294 C538,342 524,372 510,410" />
-                        <circle r="2.4" class="glow-particle">
-                            <animateMotion dur="7.8s" repeatCount="indefinite" rotate="auto">
-                                <mpath href="#path-3"/>
-                            </animateMotion>
-                        </circle>
-
-                        <!-- Path 4: Hours (mid-right) -->
-                        <path id="path-4" class="dotted-path line-delay-4" d="M750,340 C674,316 602,348 556,400 C536,422 522,434 506,438" />
-                        <circle r="2.4" class="glow-particle">
-                            <animateMotion dur="8.8s" repeatCount="indefinite" rotate="auto">
-                                <mpath href="#path-4"/>
-                            </animateMotion>
-                        </circle>
-
-                    </svg>
-
-                    <div class="hero-float-card float-bob-1 enter-1" style="top: 10%; left: 19%;">
-                        <img src="assets/img/hero/hero-float-territory.svg" alt="🏠 Exclusive Territory Locked" width="200" height="220" loading="lazy" decoding="async">
-                    </div>
-                    <div class="hero-float-card float-bob-2 enter-2" style="top: 56%; left: 16%;">
-                        <img src="assets/img/hero/hero-float-isa.svg" alt="✅ ISA-Verified Leads" width="200" height="220" loading="lazy" decoding="async">
-                    </div>
-                    <div class="hero-float-card float-bob-3 enter-3" style="top: 9%; right: 7%;">
-                        <img src="assets/img/hero/hero-float-transfers.svg" alt="📞 Live Transfers Available" width="200" height="220" loading="lazy" decoding="async">
-                    </div>
-                    <div class="hero-float-card float-bob-4 enter-4" style="top: 48%; right: 2%;">
-                        <img src="assets/img/hero/hero-float-zips.svg" alt="📍 Your ZIP Codes Only" width="200" height="220" loading="lazy" decoding="async">
-                    </div>
+        <!-- Lead-gen icons: horizontal row along bottom of hero -->
+        <div class="hero-float-strip relative z-20 w-full shrink-0 px-4 sm:px-6 pb-8 lg:pb-10 pt-2 pointer-events-none">
+            <div class="absolute inset-x-0 bottom-0 top-0 bg-gradient-to-t from-black/75 via-black/35 to-transparent pointer-events-none" aria-hidden="true"></div>
+            <div class="relative max-w-6xl mx-auto flex flex-wrap justify-center items-end gap-y-5 gap-x-4 sm:gap-x-6 lg:gap-x-10">
+                <div class="hero-float-card enter-1 pointer-events-auto">
+                    <span class="hero-float-bob float-bob-1"><img src="assets/img/hero/hero-float-territory.svg" alt="Exclusive Territory Locked" width="200" height="220" loading="lazy" decoding="async"></span>
                 </div>
-
-                <!-- Background Glow -->
-                <div class="absolute w-[140%] h-[140%] bg-brand-purple/8 rounded-full blur-[160px] z-0 -top-[20%] -left-[20%] pointer-events-none"></div>
+                <div class="hero-float-card enter-2 pointer-events-auto">
+                    <span class="hero-float-bob float-bob-2"><img src="assets/img/hero/hero-float-isa.svg" alt="ISA-Verified Leads" width="200" height="220" loading="lazy" decoding="async"></span>
+                </div>
+                <div class="hero-float-card enter-3 pointer-events-auto">
+                    <span class="hero-float-bob float-bob-3"><img src="assets/img/hero/hero-float-transfers.svg" alt="Live Transfers Available" width="200" height="220" loading="lazy" decoding="async"></span>
+                </div>
+                <div class="hero-float-card enter-4 pointer-events-auto">
+                    <span class="hero-float-bob float-bob-4"><img src="assets/img/hero/hero-float-zips.svg" alt="Your ZIP Codes Only" width="200" height="220" loading="lazy" decoding="async"></span>
+                </div>
             </div>
+        </div>
         </div>
         <div class="hero-bottom-fade"></div>
     </section>
@@ -2701,7 +2682,7 @@
             <div class="industry-layout-container">
                 <!-- Left Side: Large Cinematic Image -->
                 <div class="industry-image-wrapper group reveal-fade-up">
-                    <img src="assets/img/who%20we%20serve.png" alt="Real estate agent team reviewing market opportunities" class="reveal-visible">
+                    <img src="assets/img/who_we_serve.png" alt="Real estate agent team reviewing market opportunities" class="reveal-visible">
                     <div class="industry-image-glow"></div>
                 </div>
 
@@ -3334,9 +3315,6 @@
             const homeSection = document.getElementById('Home');
             if (!homeSection) return;
 
-            const heroImage = homeSection.querySelector('.hero-base-image');
-            if (!heroImage) return;
-
             const revealIcons = () => {
                 const delayMs = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 320;
                 window.setTimeout(() => {
@@ -3344,13 +3322,13 @@
                 }, delayMs);
             };
 
-            if (heroImage.complete && heroImage.naturalWidth > 0) {
+            const preload = new Image();
+            preload.addEventListener('load', revealIcons, { once: true });
+            preload.addEventListener('error', revealIcons, { once: true });
+            preload.src = 'assets/img/hero_scene.png';
+            if (preload.complete && preload.naturalWidth > 0) {
                 revealIcons();
-                return;
             }
-
-            heroImage.addEventListener('load', revealIcons, { once: true });
-            heroImage.addEventListener('error', revealIcons, { once: true });
         }
 
         document.addEventListener('DOMContentLoaded', () => {

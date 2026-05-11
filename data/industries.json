@@ -1,38 +1,32 @@
 [
     {
-        "name": "Entrepreneurs & Solopreneurs",
-        "icon": "assets/icons/service-customer.svg",
-        "description": "Stop doing $15/hr tasks. Focus on what only you can do.",
-        "bgColor": "bg-brand-light"
+        "name": "Solo Agents",
+        "icon": "🧑‍💼",
+        "description": "Stop relying on sporadic referrals and open houses. Fill your calendar with consistent scheduled virtual appointments."
     },
     {
-        "name": "Law Firms & Legal Professionals",
-        "icon": "assets/icons/service-document.svg",
-        "description": "Document prep, client scheduling, intake coordination — handled professionally.",
-        "bgColor": "bg-brand-light"
+        "name": "Top Producers",
+        "icon": "🏆",
+        "description": "Already closing? Scale with more exclusive territory, live transfers, and appointment volume matched to your capacity."
     },
     {
-        "name": "Coaches & Consultants",
-        "icon": "assets/icons/service-calendar.svg",
-        "description": "Client onboarding, emails, calendar, research — all off your plate.",
-        "bgColor": "bg-brand-light"
+        "name": "Team Leaders",
+        "icon": "🏢",
+        "description": "Keep your agents fed with pre-scheduled virtual appointments so your team stays active and production stays high."
     },
     {
-        "name": "Agency Owners",
-        "icon": "assets/icons/service-lead.svg",
-        "description": "Delegate the ops work. Your team focuses on delivery and growth.",
-        "bgColor": "bg-brand-light"
+        "name": "Relocation Specialists",
+        "icon": "🌎",
+        "description": "We source and schedule across ZIP codes, cities, and counties for multi-market relocation pipelines."
     },
     {
-        "name": "E-commerce Businesses",
-        "icon": "assets/icons/service-crm.svg",
-        "description": "Order tracking, customer support, data entry, supplier comms.",
-        "bgColor": "bg-brand-light"
+        "name": "Investor-Friendly Agents",
+        "icon": "📈",
+        "description": "ISA notes include seller motivation context so you can spot off-market and motivated opportunities faster."
     },
     {
-        "name": "Small Business Owners",
-        "icon": "assets/icons/service-research.svg",
-        "description": "A VA that functions like an in-house admin at a fraction of the cost.",
-        "bgColor": "bg-brand-light"
+        "name": "New to the Market",
+        "icon": "🚀",
+        "description": "Starter gives you exclusive appointments in 2-4 ZIP codes so you can build momentum from day one."
     }
 ]

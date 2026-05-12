@@ -6,7 +6,7 @@
     const ALLOWED_USER = "guest";
     const ALLOWED_PASS = "re123";
     const LOGIN_URL = "/login/";
-    const LOGOUT_REDIRECT_URL = "https://convergr.vercel.app/";
+    const LOGOUT_REDIRECT_URL = "https://convergr.net/";
 
     function getAuth() {
         try {

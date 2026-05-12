@@ -3012,7 +3012,7 @@
 
                 <div class="intake-form-card reveal-stagger">
                     <form id="intake-form" class="grid grid-cols-1 md:grid-cols-2 gap-4" novalidate>
-                        <input id="workload-range-input" name="appointmentsPerMonth" type="hidden" value="2-3 Appts/mo">
+                        <input id="workload-range-input" type="hidden" value="2-3 Appts/mo" aria-hidden="true">
                         <div>
                             <label class="intake-label" for="intake-full-name">Full Name *</label>
                             <input class="intake-input" id="intake-full-name" name="fullName" required>
@@ -3124,6 +3124,11 @@
     </footer>
 
     <script>
+        /** Paste the Web app URL from Apps Script → Deploy → Web app (ends with /exec). See google-apps-script/intake-webapp/Code.gs */
+        const INTAKE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzm3GJG7z5PhTf-2VHfg-MXqXrAUPObvFhGPz5DnOnSEtAVh4LKjir2CHyIvWDdx_dz/exec';
+        /** Optional: set the same value in Apps Script → Project settings → Script properties → INTAKE_SECRET */
+        const INTAKE_SHEETS_SHARED_SECRET = '';
+
         async function loadContent() {
             const version = Date.now();
             try {
@@ -3260,18 +3265,43 @@
                     leadSource: formData.get('leadSource'),
                     selectorChoice: formData.get('appointmentsPerMonth')
                 };
+                if (INTAKE_SHEETS_SHARED_SECRET) {
+                    payload.intakeSecret = INTAKE_SHEETS_SHARED_SECRET;
+                }
 
                 try {
-                    // TODO: Replace with EmailJS / HubSpot / API endpoint integration.
-                    // Intended destination: support@convergr.net
                     sessionStorage.setItem('convergrIntakeDraft', JSON.stringify(payload));
-                    await new Promise((resolve) => setTimeout(resolve, 1250));
+
+                    if (INTAKE_SHEETS_WEB_APP_URL) {
+                        const body = new URLSearchParams();
+                        body.set('payload', JSON.stringify(payload));
+                        const res = await fetch(INTAKE_SHEETS_WEB_APP_URL, {
+                            method: 'POST',
+                            body,
+                            redirect: 'follow'
+                        });
+                        const text = await res.text();
+                        let parsed;
+                        try {
+                            parsed = JSON.parse(text);
+                        } catch {
+                            throw new Error('Unexpected response from server.');
+                        }
+                        if (!parsed.ok) {
+                            throw new Error(parsed.error || 'Submission rejected.');
+                        }
+                    } else {
+                        console.warn('INTAKE_SHEETS_WEB_APP_URL is empty; intake is not saved to Google Sheets.');
+                        await new Promise((resolve) => setTimeout(resolve, 400));
+                    }
 
                     successBox.textContent = "Territory request received. Our team will follow up within 24-48 hours to lock your market.";
                     successBox.classList.remove('hidden');
                     form.reset();
                 } catch (err) {
-                    errorBox.textContent = 'Submission failed. Please try again or email support@convergr.net.';
+                    errorBox.textContent = err && err.message
+                        ? err.message
+                        : 'Submission failed. Please try again or email support@convergr.net.';
                     errorBox.classList.remove('hidden');
                 } finally {
                     submitBtn.disabled = false;

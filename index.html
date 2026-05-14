@@ -367,6 +367,7 @@
             max-width: 100%;
             min-width: 0;
             box-sizing: border-box;
+            overflow: visible;
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
             box-shadow: 0 38px 70px -30px rgba(0, 0, 0, 0.72), 0 0 34px rgba(139, 92, 246, 0.12);
@@ -422,8 +423,19 @@
             outline: none;
         }
 
+        /* Native selects: avoid tight line-height clipping */
         .intake-select {
-            padding-right: 2.1rem;
+            line-height: normal;
+            min-height: 2.875rem;
+            padding: 0.7rem 2.7rem 0.7rem 0.9rem;
+        }
+
+        @media (min-width: 1024px) {
+            .intake-select {
+                min-height: 3rem;
+                padding: 0.72rem 2.95rem 0.72rem 0.95rem;
+                font-size: 0.9375rem;
+            }
         }
 
         .intake-input:focus,
@@ -465,6 +477,71 @@
             display: grid;
             grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
             gap: 0.75rem 0.85rem;
+        }
+
+        .intake-address-block .intake-address-subgrid > * {
+            min-width: 0;
+            max-width: 100%;
+        }
+
+        #intake-form .intake-state-cell {
+            min-width: 0;
+            max-width: 100%;
+            overflow-x: clip;
+        }
+
+        .intake-address-layout {
+            min-width: 0;
+        }
+
+        .intake-address-pair-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.35rem;
+            min-width: 0;
+        }
+
+        @media (min-width: 768px) {
+            .intake-address-pair-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto auto;
+                column-gap: 2rem;
+                row-gap: 0.65rem;
+                align-items: start;
+            }
+
+            .intake-address-billing {
+                grid-column: 1;
+                grid-row: 1;
+            }
+
+            .intake-address-shipping {
+                grid-column: 2;
+                grid-row: 1;
+            }
+
+            .intake-same-billing-wrap {
+                grid-column: 1;
+                grid-row: 2;
+                align-self: start;
+                margin-top: 0.15rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .intake-address-pair-grid {
+                column-gap: 2.25rem;
+            }
+        }
+
+        .intake-same-billing-wrap .intake-same-row {
+            margin: 0;
+        }
+
+        .intake-address-billing,
+        .intake-address-shipping {
+            min-width: 0;
+            max-width: 100%;
         }
 
         .intake-same-row {
@@ -3116,10 +3193,10 @@
                             <label class="intake-label" for="intake-city">City *</label>
                             <input class="intake-input" id="intake-city" name="city" type="text" autocomplete="address-level2" required>
                         </div>
-                        <div>
+                        <div class="intake-state-cell">
                             <label class="intake-label" for="intake-state">State *</label>
                             <select class="intake-select" id="intake-state" name="state" required data-intake-state-select>
-                                <option value="">Select state</option>
+                                <option value=""></option>
                             </select>
                         </div>
 
@@ -3167,62 +3244,66 @@
                         </div>
 
                         <h3 class="intake-section-heading md:col-span-2">Addresses</h3>
-                        <div class="md:col-span-2 grid grid-cols-1 lg:grid-cols-2 gap-7 lg:gap-9 min-w-0">
-                            <div class="intake-address-block">
-                                <p class="intake-label mb-1">Billing Address *</p>
-                                <div>
-                                    <label class="intake-label text-xs font-semibold opacity-80" for="intake-billing-street">Street</label>
-                                    <input class="intake-input" id="intake-billing-street" name="billingStreet" type="text" autocomplete="street-address" required>
+                        <div class="intake-address-layout md:col-span-2">
+                            <div class="intake-address-pair-grid">
+                                <div class="intake-address-block intake-address-billing">
+                                    <p class="intake-label mb-1">Billing Address *</p>
+                                    <div>
+                                        <label class="intake-label text-xs font-semibold opacity-80" for="intake-billing-street">Street</label>
+                                        <input class="intake-input" id="intake-billing-street" name="billingStreet" type="text" autocomplete="street-address" required>
+                                    </div>
+                                    <div class="intake-address-subgrid">
+                                        <div>
+                                            <label class="intake-label text-xs font-semibold opacity-80" for="intake-billing-city">City</label>
+                                            <input class="intake-input" id="intake-billing-city" name="billingCity" type="text" autocomplete="address-level2" required>
+                                        </div>
+                                        <div class="intake-state-cell">
+                                            <label class="intake-label text-xs font-semibold opacity-80" for="intake-billing-state">State</label>
+                                            <select class="intake-select" id="intake-billing-state" name="billingState" autocomplete="address-level1" required data-intake-state-select>
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label class="intake-label text-xs font-semibold opacity-80" for="intake-billing-zip">ZIP</label>
+                                            <input class="intake-input" id="intake-billing-zip" name="billingZip" type="text" inputmode="numeric" autocomplete="postal-code" required>
+                                        </div>
+                                        <div>
+                                            <label class="intake-label text-xs font-semibold opacity-80" for="intake-billing-country">Country</label>
+                                            <input class="intake-input" id="intake-billing-country" name="billingCountry" type="text" autocomplete="country-name" required>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="intake-address-subgrid">
-                                    <div>
-                                        <label class="intake-label text-xs font-semibold opacity-80" for="intake-billing-city">City</label>
-                                        <input class="intake-input" id="intake-billing-city" name="billingCity" type="text" autocomplete="address-level2" required>
-                                    </div>
-                                    <div>
-                                        <label class="intake-label text-xs font-semibold opacity-80" for="intake-billing-state">State</label>
-                                        <select class="intake-select" id="intake-billing-state" name="billingState" autocomplete="address-level1" required data-intake-state-select>
-                                            <option value="">Select state</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label class="intake-label text-xs font-semibold opacity-80" for="intake-billing-zip">ZIP</label>
-                                        <input class="intake-input" id="intake-billing-zip" name="billingZip" type="text" inputmode="numeric" autocomplete="postal-code" required>
-                                    </div>
-                                    <div>
-                                        <label class="intake-label text-xs font-semibold opacity-80" for="intake-billing-country">Country</label>
-                                        <input class="intake-input" id="intake-billing-country" name="billingCountry" type="text" autocomplete="country-name" required>
-                                    </div>
+                                <div class="intake-same-billing-wrap">
+                                    <label class="intake-same-row">
+                                        <input type="checkbox" id="intake-shipping-same-billing" name="shippingSameAsBilling" value="yes">
+                                        <span>Shipping address same as billing</span>
+                                    </label>
                                 </div>
-                            </div>
-                            <div class="intake-address-block">
-                                <p class="intake-label mb-1">Shipping Address *</p>
-                                <label class="intake-same-row">
-                                    <input type="checkbox" id="intake-shipping-same-billing" name="shippingSameAsBilling" value="yes">
-                                    <span>Shipping address same as billing</span>
-                                </label>
-                                <div>
-                                    <label class="intake-label text-xs font-semibold opacity-80" for="intake-shipping-street">Street</label>
-                                    <input class="intake-input" id="intake-shipping-street" name="shippingStreet" type="text" autocomplete="shipping street-address" required>
-                                </div>
-                                <div class="intake-address-subgrid">
+                                <div class="intake-address-block intake-address-shipping">
+                                    <p class="intake-label mb-1">Shipping Address *</p>
                                     <div>
-                                        <label class="intake-label text-xs font-semibold opacity-80" for="intake-shipping-city">City</label>
-                                        <input class="intake-input" id="intake-shipping-city" name="shippingCity" type="text" autocomplete="shipping address-level2" required>
+                                        <label class="intake-label text-xs font-semibold opacity-80" for="intake-shipping-street">Street</label>
+                                        <input class="intake-input" id="intake-shipping-street" name="shippingStreet" type="text" autocomplete="shipping street-address" required>
                                     </div>
-                                    <div>
-                                        <label class="intake-label text-xs font-semibold opacity-80" for="intake-shipping-state">State</label>
-                                        <select class="intake-select" id="intake-shipping-state" name="shippingState" autocomplete="shipping address-level1" required data-intake-state-select>
-                                            <option value="">Select state</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label class="intake-label text-xs font-semibold opacity-80" for="intake-shipping-zip">ZIP</label>
-                                        <input class="intake-input" id="intake-shipping-zip" name="shippingZip" type="text" inputmode="numeric" autocomplete="shipping postal-code" required>
-                                    </div>
-                                    <div>
-                                        <label class="intake-label text-xs font-semibold opacity-80" for="intake-shipping-country">Country</label>
-                                        <input class="intake-input" id="intake-shipping-country" name="shippingCountry" type="text" autocomplete="shipping country-name" required>
+                                    <div class="intake-address-subgrid">
+                                        <div>
+                                            <label class="intake-label text-xs font-semibold opacity-80" for="intake-shipping-city">City</label>
+                                            <input class="intake-input" id="intake-shipping-city" name="shippingCity" type="text" autocomplete="shipping address-level2" required>
+                                        </div>
+                                        <div class="intake-state-cell">
+                                            <label class="intake-label text-xs font-semibold opacity-80" for="intake-shipping-state">State</label>
+                                            <select class="intake-select" id="intake-shipping-state" name="shippingState" autocomplete="shipping address-level1" required data-intake-state-select>
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label class="intake-label text-xs font-semibold opacity-80" for="intake-shipping-zip">ZIP</label>
+                                            <input class="intake-input" id="intake-shipping-zip" name="shippingZip" type="text" inputmode="numeric" autocomplete="shipping postal-code" required>
+                                        </div>
+                                        <div>
+                                            <label class="intake-label text-xs font-semibold opacity-80" for="intake-shipping-country">Country</label>
+                                            <input class="intake-input" id="intake-shipping-country" name="shippingCountry" type="text" autocomplete="shipping country-name" required>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

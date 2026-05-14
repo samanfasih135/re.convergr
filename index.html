@@ -354,8 +354,8 @@
             position: relative;
             z-index: 1;
             display: grid;
-            grid-template-columns: 1fr 1.08fr;
-            gap: 3rem;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+            gap: 2.25rem 2.75rem;
             align-items: start;
         }
 
@@ -363,31 +363,67 @@
             background: rgba(18, 14, 29, 0.76);
             border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 2rem;
-            padding: 1.5rem;
+            padding: 1.35rem 1.15rem 1.6rem;
+            max-width: 100%;
+            min-width: 0;
+            box-sizing: border-box;
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
             box-shadow: 0 38px 70px -30px rgba(0, 0, 0, 0.72), 0 0 34px rgba(139, 92, 246, 0.12);
         }
 
+        @media (min-width: 640px) {
+            .intake-form-card {
+                padding: 1.65rem 1.5rem 1.85rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .intake-form-card {
+                padding: 1.85rem 1.75rem 2rem;
+            }
+        }
+
+        #intake-form {
+            min-width: 0;
+        }
+
+        #intake-form > div,
+        #intake-form > h3 {
+            min-width: 0;
+        }
+
         .intake-label {
             display: block;
             color: rgba(228, 219, 247, 0.88);
-            font-size: 0.88rem;
-            margin-bottom: 0.45rem;
+            font-size: 0.875rem;
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
             font-weight: 600;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .intake-input,
         .intake-select,
         .intake-textarea {
             width: 100%;
+            max-width: 100%;
+            min-width: 0;
+            box-sizing: border-box;
             background: rgba(9, 9, 14, 0.72);
             border: 1px solid rgba(255, 255, 255, 0.14);
             border-radius: 0.95rem;
             color: #fff;
-            padding: 0.9rem 0.95rem;
+            padding: 0.82rem 0.9rem;
+            font-size: 0.95rem;
+            line-height: 1.45;
             transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
             outline: none;
+        }
+
+        .intake-select {
+            padding-right: 2.1rem;
         }
 
         .intake-input:focus,
@@ -398,62 +434,93 @@
             background: rgba(12, 11, 20, 0.84);
         }
 
-        .intake-checkbox-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 0.7rem;
+        .intake-section-heading {
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: rgba(228, 219, 247, 0.95);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            line-height: 1.45;
+            margin: 0.5rem 0 0.35rem;
+            padding: 1.1rem 0 0.15rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
-        .intake-dual-select {
+        .intake-section-heading--lead {
+            border-top: none;
+            padding-top: 0;
+            margin-top: 0;
+        }
+
+        .intake-address-block {
             display: flex;
             flex-direction: column;
+            gap: 0.75rem;
             min-width: 0;
         }
 
-        .intake-dual-select .intake-label {
-            min-height: 2.5rem;
+        .intake-address-block .intake-address-subgrid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 0.75rem 0.85rem;
         }
 
-        .intake-agent-type-row {
+        .intake-same-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.65rem 1rem;
-            align-items: stretch;
+            align-items: flex-start;
+            gap: 0.45rem 0.55rem;
+            font-size: 0.84rem;
+            line-height: 1.45;
+            color: rgba(225, 216, 243, 0.92);
+            margin: 0.2rem 0 0.45rem;
         }
 
-        .intake-check {
-            display: flex;
-            align-items: center;
-            gap: 0.55rem;
-            background: rgba(8, 8, 13, 0.56);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 0.8rem;
-            padding: 0.62rem 0.7rem;
-            color: rgba(225, 216, 243, 0.9);
-            font-size: 0.86rem;
+        .intake-same-row span {
+            flex: 1 1 12rem;
+            min-width: 0;
+        }
+
+        .intake-same-row input {
+            width: 1.05rem;
+            height: 1.05rem;
+            accent-color: #5B2D8E;
+        }
+
+        .intake-input.is-intake-readonly,
+        .intake-select.is-intake-readonly {
+            opacity: 0.62;
+            cursor: not-allowed;
+            background: rgba(12, 12, 18, 0.55);
         }
 
         .intake-submit {
             width: 100%;
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 0.45rem;
             padding: 1.05rem 1.35rem;
             border-radius: 999px;
-            border: 1px solid rgba(184, 144, 248, 0.42);
-            background: linear-gradient(140deg, #0e0d14 0%, #1a1329 48%, #2a1740 100%);
+            border: 1px solid rgba(91, 45, 142, 0.95);
+            background: #5B2D8E;
             color: #fff;
             font-size: 1rem;
             font-weight: 800;
             letter-spacing: 0.02em;
-            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease, border-color 0.25s ease;
         }
 
         .intake-submit:hover {
             transform: translateY(-2px);
-            border-color: rgba(208, 179, 255, 0.7);
-            box-shadow: 0 26px 46px -20px rgba(0, 0, 0, 0.8), 0 0 28px rgba(176, 102, 255, 0.28);
+            background: #6d3ba5;
+            border-color: rgba(184, 144, 248, 0.85);
+            box-shadow: 0 22px 40px -18px rgba(0, 0, 0, 0.75), 0 0 24px rgba(91, 45, 142, 0.45);
         }
 
         .intake-submit[disabled] {
@@ -468,6 +535,9 @@
             color: #d1fadf;
             padding: 0.85rem 0.95rem;
             font-size: 0.9rem;
+            line-height: 1.55;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .intake-error {
@@ -477,15 +547,18 @@
             color: #ffdce4;
             padding: 0.75rem 0.9rem;
             font-size: 0.86rem;
+            line-height: 1.55;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         @media (max-width: 768px) {
             .faq-trigger { padding: 1.25rem 1.1rem; }
             .faq-answer-inner { padding: 0 1.1rem 1.2rem; font-size: 0.95rem; line-height: 1.7; }
             .trust-widget { max-width: 100%; }
-            .intake-shell { grid-template-columns: 1fr; gap: 1.8rem; }
-            .intake-form-card { padding: 1rem; border-radius: 1.35rem; }
-            .intake-checkbox-grid { grid-template-columns: 1fr; }
+            .intake-shell { grid-template-columns: 1fr; gap: 2rem; }
+            .intake-form-card { padding: 1.2rem 1rem 1.45rem; border-radius: 1.35rem; }
+            .intake-address-block .intake-address-subgrid { grid-template-columns: 1fr; }
         }
 
         .swash-underline {
@@ -2994,11 +3067,11 @@
     </section>
 
     <!-- Get Started Intake Section -->
-    <section id="get-started" class="intake-section reveal-section py-36 scroll-mt-24">
+    <section id="get-started" class="intake-section reveal-section py-24 md:py-32 lg:py-36 scroll-mt-24">
         <div class="intake-bg-glow"></div>
-        <div class="container mx-auto px-6 max-w-6xl">
+        <div class="container mx-auto px-4 sm:px-6 max-w-6xl">
             <div class="intake-shell">
-                <div class="reveal-fade-up">
+                <div class="reveal-fade-up min-w-0">
                     <p class="text-[0.72rem] tracking-[0.28em] uppercase font-extrabold text-brand-purpleLight/90 mb-5">Get Started</p>
                     <h2 class="text-5xl lg:text-7xl font-black text-white tracking-[-0.04em] leading-[1.04] mb-6">Claim Your Territory. Start Closing.</h2>
                     <p class="text-lg lg:text-xl text-white/50 leading-relaxed max-w-xl mb-10">Tell us your market and we will lock your ZIP codes before another agent in your area does. Territories fill up — do not wait.</p>
@@ -3010,69 +3083,157 @@
                     </ul>
                 </div>
 
-                <div class="intake-form-card reveal-stagger">
-                    <form id="intake-form" class="grid grid-cols-1 md:grid-cols-2 gap-4" novalidate>
-                        <input id="workload-range-input" type="hidden" value="2-3 Appts/mo" aria-hidden="true">
+                <div class="intake-form-card reveal-stagger min-w-0">
+                    <form id="intake-form" class="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-5 min-w-0" novalidate>
+                        <h3 class="intake-section-heading intake-section-heading--lead md:col-span-2">Personal Information</h3>
                         <div>
-                            <label class="intake-label" for="intake-full-name">Full Name *</label>
-                            <input class="intake-input" id="intake-full-name" name="fullName" required>
+                            <label class="intake-label" for="intake-first-name">First Name *</label>
+                            <input class="intake-input" id="intake-first-name" name="firstName" type="text" autocomplete="given-name" required>
+                        </div>
+                        <div>
+                            <label class="intake-label" for="intake-last-name">Last Name *</label>
+                            <input class="intake-input" id="intake-last-name" name="lastName" type="text" autocomplete="family-name" required>
                         </div>
                         <div>
                             <label class="intake-label" for="intake-email">Email Address *</label>
-                            <input class="intake-input" id="intake-email" name="email" type="email" required>
+                            <input class="intake-input" id="intake-email" name="email" type="email" autocomplete="email" required>
                         </div>
                         <div>
                             <label class="intake-label" for="intake-phone">Phone Number *</label>
-                            <input class="intake-input" id="intake-phone" name="phone" required>
+                            <input class="intake-input" id="intake-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required>
                         </div>
                         <div>
-                            <label class="intake-label" for="intake-company">Brokerage / Company Name *</label>
-                            <input class="intake-input" id="intake-company" name="company" required>
+                            <label class="intake-label" for="intake-mls-id">MLS ID *</label>
+                            <input class="intake-input" id="intake-mls-id" name="mlsId" type="text" required>
                         </div>
                         <div>
-                            <label class="intake-label" for="intake-license">License Number (Optional)</label>
-                            <input class="intake-input" id="intake-license" name="licenseNumber">
+                            <label class="intake-label" for="intake-license">License Number *</label>
+                            <input class="intake-input" id="intake-license" name="licenseNumber" type="text" required>
                         </div>
-                        <div class="md:col-span-2">
-                            <label class="intake-label" for="intake-market">Primary Market / ZIP Codes *</label>
-                            <input class="intake-input" id="intake-market" name="primaryMarket" required>
+
+                        <h3 class="intake-section-heading md:col-span-2">Location Information</h3>
+                        <div>
+                            <label class="intake-label" for="intake-city">City *</label>
+                            <input class="intake-input" id="intake-city" name="city" type="text" autocomplete="address-level2" required>
                         </div>
-                        <div class="md:col-span-2">
-                            <label class="intake-label" for="intake-hours">Appointments per month *</label>
-                            <select class="intake-select" id="intake-hours" name="appointmentsPerMonth" required>
-                                <option value="">Select range</option>
-                                <option>2-3 Appts/mo</option>
-                                <option>3-5 Appts/mo</option>
-                                <option>4-6 Appts/mo</option>
-                                <option>6-10 Appts/mo</option>
-                                <option>10+ Appts/mo</option>
+                        <div>
+                            <label class="intake-label" for="intake-state">State *</label>
+                            <select class="intake-select" id="intake-state" name="state" required data-intake-state-select>
+                                <option value="">Select state</option>
                             </select>
                         </div>
-                        <div class="intake-dual-select">
-                            <p class="intake-label">Agent type *</p>
-                            <div class="intake-agent-type-row text-sm text-white/85">
-                                <label class="intake-check"><input type="radio" name="agentType" value="Buyer's agent" required> Buyer's agent</label>
-                                <label class="intake-check"><input type="radio" name="agentType" value="Seller's agent" required> Seller's agent</label>
-                                <label class="intake-check"><input type="radio" name="agentType" value="Both" required> Both</label>
+
+                        <h3 class="intake-section-heading md:col-span-2">Service Areas</h3>
+                        <div>
+                            <label class="intake-label" for="intake-primary-area">Primary Area *</label>
+                            <input class="intake-input" id="intake-primary-area" name="primaryArea" type="text" placeholder="City, ZIP code, or region" required>
+                        </div>
+                        <div>
+                            <label class="intake-label" for="intake-radius-primary">Servicing radius (primary) *</label>
+                            <select class="intake-select" id="intake-radius-primary" name="servicingRadiusPrimary" required>
+                                <option value="">Select radius</option>
+                                <option>15–30 miles</option>
+                                <option>30–50 miles</option>
+                                <option>50–80 miles</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="intake-label" for="intake-secondary-area">Secondary Area</label>
+                            <input class="intake-input" id="intake-secondary-area" name="secondaryArea" type="text" placeholder="City, ZIP code, or region (optional)">
+                        </div>
+                        <div>
+                            <label class="intake-label" for="intake-radius-secondary">Servicing radius (secondary)</label>
+                            <select class="intake-select" id="intake-radius-secondary" name="servicingRadiusSecondary">
+                                <option value="">Select radius (optional)</option>
+                                <option>15–30 miles</option>
+                                <option>30–50 miles</option>
+                                <option>50–80 miles</option>
+                            </select>
+                        </div>
+
+                        <h3 class="intake-section-heading md:col-span-2">Plan &amp; Assignment</h3>
+                        <div>
+                            <label class="intake-label" for="intake-account-manager">Account Manager</label>
+                            <input class="intake-input" id="intake-account-manager" name="accountManager" type="text" placeholder="Pre-filled when assigned">
+                        </div>
+                        <div>
+                            <label class="intake-label" for="intake-plan">Select Plan *</label>
+                            <select class="intake-select" id="intake-plan" name="plan" required>
+                                <option value="">Select plan</option>
+                                <option>Starter</option>
+                                <option>Pro</option>
+                                <option>Ultra</option>
+                            </select>
+                        </div>
+
+                        <h3 class="intake-section-heading md:col-span-2">Addresses</h3>
+                        <div class="md:col-span-2 grid grid-cols-1 lg:grid-cols-2 gap-7 lg:gap-9 min-w-0">
+                            <div class="intake-address-block">
+                                <p class="intake-label mb-1">Billing Address *</p>
+                                <div>
+                                    <label class="intake-label text-xs font-semibold opacity-80" for="intake-billing-street">Street</label>
+                                    <input class="intake-input" id="intake-billing-street" name="billingStreet" type="text" autocomplete="street-address" required>
+                                </div>
+                                <div class="intake-address-subgrid">
+                                    <div>
+                                        <label class="intake-label text-xs font-semibold opacity-80" for="intake-billing-city">City</label>
+                                        <input class="intake-input" id="intake-billing-city" name="billingCity" type="text" autocomplete="address-level2" required>
+                                    </div>
+                                    <div>
+                                        <label class="intake-label text-xs font-semibold opacity-80" for="intake-billing-state">State</label>
+                                        <select class="intake-select" id="intake-billing-state" name="billingState" autocomplete="address-level1" required data-intake-state-select>
+                                            <option value="">Select state</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="intake-label text-xs font-semibold opacity-80" for="intake-billing-zip">ZIP</label>
+                                        <input class="intake-input" id="intake-billing-zip" name="billingZip" type="text" inputmode="numeric" autocomplete="postal-code" required>
+                                    </div>
+                                    <div>
+                                        <label class="intake-label text-xs font-semibold opacity-80" for="intake-billing-country">Country</label>
+                                        <input class="intake-input" id="intake-billing-country" name="billingCountry" type="text" autocomplete="country-name" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="intake-address-block">
+                                <p class="intake-label mb-1">Shipping Address *</p>
+                                <label class="intake-same-row">
+                                    <input type="checkbox" id="intake-shipping-same-billing" name="shippingSameAsBilling" value="yes">
+                                    <span>Shipping address same as billing</span>
+                                </label>
+                                <div>
+                                    <label class="intake-label text-xs font-semibold opacity-80" for="intake-shipping-street">Street</label>
+                                    <input class="intake-input" id="intake-shipping-street" name="shippingStreet" type="text" autocomplete="shipping street-address" required>
+                                </div>
+                                <div class="intake-address-subgrid">
+                                    <div>
+                                        <label class="intake-label text-xs font-semibold opacity-80" for="intake-shipping-city">City</label>
+                                        <input class="intake-input" id="intake-shipping-city" name="shippingCity" type="text" autocomplete="shipping address-level2" required>
+                                    </div>
+                                    <div>
+                                        <label class="intake-label text-xs font-semibold opacity-80" for="intake-shipping-state">State</label>
+                                        <select class="intake-select" id="intake-shipping-state" name="shippingState" autocomplete="shipping address-level1" required data-intake-state-select>
+                                            <option value="">Select state</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="intake-label text-xs font-semibold opacity-80" for="intake-shipping-zip">ZIP</label>
+                                        <input class="intake-input" id="intake-shipping-zip" name="shippingZip" type="text" inputmode="numeric" autocomplete="shipping postal-code" required>
+                                    </div>
+                                    <div>
+                                        <label class="intake-label text-xs font-semibold opacity-80" for="intake-shipping-country">Country</label>
+                                        <input class="intake-input" id="intake-shipping-country" name="shippingCountry" type="text" autocomplete="shipping country-name" required>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="intake-dual-select">
-                            <label class="intake-label" for="intake-source">How did you hear about us?</label>
-                            <select class="intake-select" id="intake-source" name="leadSource">
-                                <option value="">Select one</option>
-                                <option>Google</option>
-                                <option>Referral</option>
-                                <option>Social Media</option>
-                                <option>Email</option>
-                                <option>Other</option>
-                            </select>
-                        </div>
+
                         <div class="md:col-span-2">
                             <div id="intake-error" class="intake-error hidden"></div>
                             <div id="intake-success" class="intake-success hidden"></div>
                         </div>
-                        <div class="md:col-span-2 mt-1">
-                            <button id="intake-submit" type="submit" class="intake-submit">Claim My Territory →</button>
+                        <div class="md:col-span-2 mt-4 pt-1 flex justify-center min-w-0">
+                            <button id="intake-submit" type="submit" class="intake-submit">Complete My Onboarding →</button>
                         </div>
                     </form>
                 </div>
@@ -3125,7 +3286,7 @@
 
     <script>
         /** Paste the Web app URL from Apps Script → Deploy → Web app (ends with /exec). See google-apps-script/intake-webapp/Code.gs */
-        const INTAKE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzm3GJG7z5PhTf-2VHfg-MXqXrAUPObvFhGPz5DnOnSEtAVh4LKjir2CHyIvWDdx_dz/exec';
+        const INTAKE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbx_U9OBwzy3SJIoOGq0q823Vfo7qLPCfpN-Oc0NLSYQGGz9aHWIkHlfhAuYSvmMvqGy/exec';
         /** Optional: set the same value in Apps Script → Project settings → Script properties → INTAKE_SECRET */
         const INTAKE_SHEETS_SHARED_SECRET = '';
 
@@ -3156,34 +3317,192 @@
 
         let selectedWorkloadRange = '2-3 Appts/mo';
 
-        function mapMonthlyRangeToFormOption(monthlyRange) {
-            switch (monthlyRange) {
-                case '2-3 Appts/mo':
-                case '3-5 Appts/mo':
-                case '4-6 Appts/mo':
-                case '6-10 Appts/mo':
-                case '10+ Appts/mo':
-                    return monthlyRange;
-                default:
-                    return '';
+        const US_STATES_FOR_INTAKE = [
+            ['AL', 'Alabama'], ['AK', 'Alaska'], ['AZ', 'Arizona'], ['AR', 'Arkansas'], ['CA', 'California'],
+            ['CO', 'Colorado'], ['CT', 'Connecticut'], ['DE', 'Delaware'], ['FL', 'Florida'], ['GA', 'Georgia'],
+            ['HI', 'Hawaii'], ['ID', 'Idaho'], ['IL', 'Illinois'], ['IN', 'Indiana'], ['IA', 'Iowa'],
+            ['KS', 'Kansas'], ['KY', 'Kentucky'], ['LA', 'Louisiana'], ['ME', 'Maine'], ['MD', 'Maryland'],
+            ['MA', 'Massachusetts'], ['MI', 'Michigan'], ['MN', 'Minnesota'], ['MS', 'Mississippi'], ['MO', 'Missouri'],
+            ['MT', 'Montana'], ['NE', 'Nebraska'], ['NV', 'Nevada'], ['NH', 'New Hampshire'], ['NJ', 'New Jersey'],
+            ['NM', 'New Mexico'], ['NY', 'New York'], ['NC', 'North Carolina'], ['ND', 'North Dakota'], ['OH', 'Ohio'],
+            ['OK', 'Oklahoma'], ['OR', 'Oregon'], ['PA', 'Pennsylvania'], ['RI', 'Rhode Island'], ['SC', 'South Carolina'],
+            ['SD', 'South Dakota'], ['TN', 'Tennessee'], ['TX', 'Texas'], ['UT', 'Utah'], ['VT', 'Vermont'],
+            ['VA', 'Virginia'], ['WA', 'Washington'], ['WV', 'West Virginia'], ['WI', 'Wisconsin'], ['WY', 'Wyoming']
+        ].sort((a, b) => a[1].localeCompare(b[1]));
+
+        function populateIntakeStateSelects() {
+            document.querySelectorAll('[data-intake-state-select]').forEach((select) => {
+                const placeholder = select.querySelector('option');
+                select.innerHTML = '';
+                if (placeholder) select.appendChild(placeholder);
+                US_STATES_FOR_INTAKE.forEach(([code, name]) => {
+                    const opt = document.createElement('option');
+                    opt.value = code;
+                    opt.textContent = name;
+                    select.appendChild(opt);
+                });
+            });
+        }
+
+        function applyIntakeAccountManagerFromQuery() {
+            const el = document.getElementById('intake-account-manager');
+            if (!el || String(el.value || '').trim()) return;
+            try {
+                const params = new URLSearchParams(window.location.search);
+                const raw = params.get('accountManager') || params.get('am') || '';
+                if (!raw) return;
+                el.value = decodeURIComponent(raw.replace(/\+/g, ' ')).trim();
+            } catch (_) {
+                /* ignore malformed query */
             }
         }
 
-        function syncAppointmentsDropdownFromPill(monthlyRange) {
-            const appointmentsSelect = document.getElementById('intake-hours');
-            if (!appointmentsSelect) return;
+        function restoreIntakeShippingInteraction() {
+            const checkbox = document.getElementById('intake-shipping-same-billing');
+            ['intake-shipping-street', 'intake-shipping-city', 'intake-shipping-state', 'intake-shipping-zip', 'intake-shipping-country'].forEach((id) => {
+                const node = document.getElementById(id);
+                if (!node) return;
+                node.disabled = false;
+                node.readOnly = false;
+                node.classList.remove('is-intake-readonly');
+            });
+            if (checkbox) checkbox.checked = false;
+        }
 
-            const mappedValue = mapMonthlyRangeToFormOption(monthlyRange);
-            if (!mappedValue) return;
+        function setupShippingSameAsBilling() {
+            const checkbox = document.getElementById('intake-shipping-same-billing');
+            if (!checkbox) return;
 
-            appointmentsSelect.value = mappedValue;
+            const billing = {
+                street: document.getElementById('intake-billing-street'),
+                city: document.getElementById('intake-billing-city'),
+                state: document.getElementById('intake-billing-state'),
+                zip: document.getElementById('intake-billing-zip'),
+                country: document.getElementById('intake-billing-country')
+            };
+            const shipping = {
+                street: document.getElementById('intake-shipping-street'),
+                city: document.getElementById('intake-shipping-city'),
+                state: document.getElementById('intake-shipping-state'),
+                zip: document.getElementById('intake-shipping-zip'),
+                country: document.getElementById('intake-shipping-country')
+            };
+
+            function readBilling() {
+                return {
+                    street: billing.street ? billing.street.value : '',
+                    city: billing.city ? billing.city.value : '',
+                    state: billing.state ? billing.state.value : '',
+                    zip: billing.zip ? billing.zip.value : '',
+                    country: billing.country ? billing.country.value : ''
+                };
+            }
+
+            function applyMirrorFromBilling() {
+                const v = readBilling();
+                if (shipping.street) shipping.street.value = v.street;
+                if (shipping.city) shipping.city.value = v.city;
+                if (shipping.state) shipping.state.value = v.state;
+                if (shipping.zip) shipping.zip.value = v.zip;
+                if (shipping.country) shipping.country.value = v.country;
+            }
+
+            function clearShippingValues() {
+                if (shipping.street) shipping.street.value = '';
+                if (shipping.city) shipping.city.value = '';
+                if (shipping.state) shipping.state.value = '';
+                if (shipping.zip) shipping.zip.value = '';
+                if (shipping.country) shipping.country.value = '';
+            }
+
+            function setShippingLocked(locked) {
+                Object.values(shipping).forEach((node) => {
+                    if (!node) return;
+                    node.classList.toggle('is-intake-readonly', locked);
+                    if (node.tagName === 'SELECT') {
+                        node.disabled = locked;
+                    } else {
+                        node.readOnly = locked;
+                    }
+                });
+            }
+
+            checkbox.addEventListener('change', () => {
+                if (checkbox.checked) {
+                    applyMirrorFromBilling();
+                    setShippingLocked(true);
+                } else {
+                    clearShippingValues();
+                    setShippingLocked(false);
+                }
+            });
+
+            Object.values(billing).forEach((node) => {
+                if (!node) return;
+                node.addEventListener('input', () => {
+                    if (checkbox.checked) applyMirrorFromBilling();
+                });
+                node.addEventListener('change', () => {
+                    if (checkbox.checked) applyMirrorFromBilling();
+                });
+            });
+        }
+
+        function buildIntakePayload(form) {
+            const formData = new FormData(form);
+            const sameEl = document.getElementById('intake-shipping-same-billing');
+            const shippingSame = !!(sameEl && sameEl.checked);
+
+            const billingStreet = formData.get('billingStreet');
+            const billingCity = formData.get('billingCity');
+            const billingState = formData.get('billingState');
+            const billingZip = formData.get('billingZip');
+            const billingCountry = formData.get('billingCountry');
+
+            let shippingStreet = formData.get('shippingStreet');
+            let shippingCity = formData.get('shippingCity');
+            let shippingState = formData.get('shippingState');
+            let shippingZip = formData.get('shippingZip');
+            let shippingCountry = formData.get('shippingCountry');
+
+            if (shippingSame) {
+                shippingStreet = billingStreet;
+                shippingCity = billingCity;
+                shippingState = billingState;
+                shippingZip = billingZip;
+                shippingCountry = billingCountry;
+            }
+
+            return {
+                firstName: formData.get('firstName'),
+                lastName: formData.get('lastName'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                mlsId: formData.get('mlsId'),
+                licenseNumber: formData.get('licenseNumber'),
+                city: formData.get('city'),
+                state: formData.get('state'),
+                primaryArea: formData.get('primaryArea'),
+                servicingRadiusPrimary: formData.get('servicingRadiusPrimary'),
+                secondaryArea: formData.get('secondaryArea'),
+                servicingRadiusSecondary: formData.get('servicingRadiusSecondary'),
+                accountManager: formData.get('accountManager'),
+                plan: formData.get('plan'),
+                billingStreet,
+                billingCity,
+                billingState,
+                billingZip,
+                billingCountry,
+                shippingStreet,
+                shippingCity,
+                shippingState,
+                shippingZip,
+                shippingCountry,
+                shippingSameAsBilling: shippingSame ? 'yes' : 'no'
+            };
         }
 
         function navigateToIntakeWithPrefill() {
-            const workloadInput = document.getElementById('workload-range-input');
-            if (workloadInput) {
-                workloadInput.value = selectedWorkloadRange;
-            }
             sessionStorage.setItem('selectedWorkloadRange', selectedWorkloadRange);
 
             const target = document.querySelector('#get-started');
@@ -3200,14 +3519,11 @@
         }
 
         function selectHoursPremium(btn, value, options = {}) {
-            document.querySelectorAll('.selector-pill').forEach(b => {
+            document.querySelectorAll('.selector-pill').forEach((b) => {
                 b.classList.remove('active');
             });
             btn.classList.add('active');
             selectedWorkloadRange = value;
-            syncAppointmentsDropdownFromPill(value);
-            const workloadInput = document.getElementById('workload-range-input');
-            if (workloadInput) workloadInput.value = value;
             console.log('Selected support level:', value);
             if (!options.skipNavigate) {
                 navigateToIntakeWithPrefill();
@@ -3231,6 +3547,10 @@
         function setupIntakeForm() {
             const form = document.getElementById('intake-form');
             if (!form) return;
+            populateIntakeStateSelects();
+            applyIntakeAccountManagerFromQuery();
+            setupShippingSameAsBilling();
+
             const submitBtn = document.getElementById('intake-submit');
             const errorBox = document.getElementById('intake-error');
             const successBox = document.getElementById('intake-success');
@@ -3250,21 +3570,9 @@
                 }
 
                 submitBtn.disabled = true;
-                submitBtn.textContent = 'Claiming Territory...';
+                submitBtn.textContent = 'Submitting...';
 
-                const formData = new FormData(form);
-                const payload = {
-                    fullName: formData.get('fullName'),
-                    email: formData.get('email'),
-                    phone: formData.get('phone'),
-                    company: formData.get('company'),
-                    licenseNumber: formData.get('licenseNumber'),
-                    primaryMarket: formData.get('primaryMarket'),
-                    appointmentsPerMonth: formData.get('appointmentsPerMonth'),
-                    agentType: formData.get('agentType'),
-                    leadSource: formData.get('leadSource'),
-                    selectorChoice: formData.get('appointmentsPerMonth')
-                };
+                const payload = buildIntakePayload(form);
                 if (INTAKE_SHEETS_SHARED_SECRET) {
                     payload.intakeSecret = INTAKE_SHEETS_SHARED_SECRET;
                 }
@@ -3295,9 +3603,10 @@
                         await new Promise((resolve) => setTimeout(resolve, 400));
                     }
 
-                    successBox.textContent = "Territory request received. Our team will follow up within 24-48 hours to lock your market.";
+                    successBox.textContent = 'Onboarding received. We will follow up within 24–48 hours to finish your setup.';
                     successBox.classList.remove('hidden');
                     form.reset();
+                    restoreIntakeShippingInteraction();
                 } catch (err) {
                     errorBox.textContent = err && err.message
                         ? err.message
@@ -3305,7 +3614,7 @@
                     errorBox.classList.remove('hidden');
                 } finally {
                     submitBtn.disabled = false;
-                    submitBtn.textContent = 'Claim My Territory →';
+                    submitBtn.textContent = 'Complete My Onboarding →';
                 }
             });
         }
